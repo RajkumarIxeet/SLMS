@@ -1,0 +1,23 @@
+//
+//  Comments.h
+//  sLMS
+//
+//  Created by Mayank on 21/07/15.
+//  Copyright (c) 2015 Mayank. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface Comments : NSObject
+
+@property (nonatomic,strong) NSNumber * likeCounts;
+@property (nonatomic,strong) NSNumber * commentCounts;
+@property (nonatomic,strong) NSNumber* shareCounts;
+@property (nonatomic,strong) NSString* commentId;
+@property (nonatomic,strong) NSString* parentCommentId;
+@property (nonatomic,strong) NSString* commentBy;
+@property (nonatomic,strong) NSString* commentByImage;
+@property (nonatomic,strong) NSString* commentTxt;
+@property (nonatomic,strong) NSString* commentDate;
+
+@end
