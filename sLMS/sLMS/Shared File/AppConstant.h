@@ -71,5 +71,12 @@ typedef NS_ENUM(NSInteger, AppDropdownType){
     TITLE_DATA,
     COURSE_DATA
 };
-
+typedef enum ScrollDirection {
+    ScrollDirectionNone,
+    ScrollDirectionRight,
+    ScrollDirectionLeft,
+    ScrollDirectionUp,
+    ScrollDirectionDown,
+    ScrollDirectionCrazy,
+} ScrollDirection;
 #endif

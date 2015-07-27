@@ -121,9 +121,9 @@
                 NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
                 for (NSDictionary *dicComment in [dicContent objectForKey:@"commentList"]) {
                     Comments *comment= [[Comments alloc]init];
-                    comment.likeCounts=[dicComment objectForKey:@"likeCounts"];
-                    comment.shareCounts=[dicComment objectForKey:@"shareCounts"];
-                    comment.commentCounts=[dicComment objectForKey:@"commentCounts"];
+                    comment.likeCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"likeCounts"]];
+                    comment.shareCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"shareCounts"]];
+                    comment.commentCounts=[NSString stringWithFormat:@"%@",[dicComment objectForKey:@"commentCounts"]];
                     comment.commentId=[dicComment objectForKey:@"commentId"];
                     
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];

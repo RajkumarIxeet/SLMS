@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2EF06FBC-E433-4595-93FD-7E17EF9A322D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>sLMS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>D16305A7D5D1F260606C571DD3FF62BFBED603FF</key>
 		<string>https://github.com/Mayankixeet/SaleLMS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Code/sLMS/sLMS.xcodeproj/project.xcworkspace</string>
+	<string>Code/sLMS/sLMS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>D16305A7D5D1F260606C571DD3FF62BFBED603FF</key>

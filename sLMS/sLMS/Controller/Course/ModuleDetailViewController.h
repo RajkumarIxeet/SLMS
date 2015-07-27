@@ -10,6 +10,7 @@
 #import "Courses.h"
 #import "Assignment.h"
 #import "Comments.h"
+#import "ScrollViewContainer.h"
 
 @interface ModuleDetailViewController : ViewController<UIScrollViewDelegate>{
 IBOutlet UITableView *tblViewContent;
@@ -26,6 +27,7 @@ IBOutlet UITableView *tblViewAssignment;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet ScrollViewContainer *scollViewContainer;
 
 - (IBAction)btnAssignmentClick:(id)sender;
 - (IBAction)btnCourseClick:(id)sender;
