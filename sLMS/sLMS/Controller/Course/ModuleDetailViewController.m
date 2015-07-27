@@ -17,7 +17,8 @@
 
 @property (nonatomic, strong) NSMutableArray *pageViews;
 @property (nonatomic, strong) NSArray *pageImages;
-
+//somewhere in the header
+@property (nonatomic, assign) CGFloat lastContentOffset;
 - (void)loadVisiblePages;
 - (void)loadPage:(NSInteger)page;
 - (void)purgePage:(NSInteger)page;
@@ -25,7 +26,7 @@
 @end
 
 @implementation ModuleDetailViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar;
+@synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar,scollViewContainer;
 @synthesize scrollView = _scrollView;
 @synthesize pageControl = _pageControl;
 @synthesize pageViews = _pageViews;
@@ -41,7 +42,7 @@
     Courses *course=[[Courses alloc]init];
     course.courseId=@"1";
     self.selectedCourse=course;
-
+  self.scrollView.clipsToBounds=NO;
     Module *module=[[Module alloc]init];
     module.moduleId=@"1";
     self.selectedModule=module;
@@ -133,7 +134,7 @@
             [self.pageViews addObject:[NSNull null]];
         }
         CGSize pagesScrollViewSize = self.scrollView.frame.size;
-        self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height);
+        self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
         
         // Load the initial set of pages that are on screen
         [self loadVisiblePages];
@@ -179,6 +180,7 @@
     for (NSInteger i=lastPage+1; i< [contentList count]; i++) {
         [self purgePage:i];
     }
+    self.lastContentOffset = self.scrollView.contentOffset.y;
 }
 
 - (void)loadPage:(NSInteger)page {
@@ -194,7 +196,7 @@
         CGRect frame = self.scrollView.bounds;
         frame.origin.x = frame.size.width * page;
         frame.origin.y = 0.0f;
-        frame = CGRectInset(frame, 10.0f, 0.0f);
+        frame = CGRectInset(frame, 5.0f, 0.0f);
         Resourse *resource=[contentList objectAtIndex:page];
         CustomContentView *customView= [[CustomContentView alloc]init];
         customView.lblAutherName.text=resource.authorName;
@@ -205,10 +207,43 @@
         [customView.btnComment setTitle:resource.commentCounts forState:UIControlStateNormal];
         [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
 
+        // set comment for the content
+        // check if comment is available
+        if([resource.comments  count]>0)
+        {
+            Comments *objComment=[resource.comments objectAtIndex:0];
+            [customView.imgViewCmtBy setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
+//            NSURL *imageURL = [NSURL URLWithString:objComment.commentByImage];
+//            
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+//                
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    // Update the UI
+//                    customView.imgViewCmtBy.image = [UIImage imageWithData:imageData];
+//                });
+//            });
         
+            customView.lblCmtBy.text=  objComment.commentBy;
+            customView.lblCmtTime.text= objComment.commentDate;
+            [customView.btnLikeCMT setTitle:objComment.likeCounts forState:UIControlStateNormal];
+            [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
+            [customView.btnCommentCMT setTitle:objComment.commentCounts forState:UIControlStateNormal];
+            customView.txtCmtView.text= objComment.commentDate;
+        }
+        else{
+            [customView.imgViewCmtBy setHidden:YES];
+            //[customView.imgViewCmtBy setImage:[UIImage imageWithData:[NSData ns] ]];
+           [ customView.lblCmtBy setHidden:YES];
+            [customView.lblCmtTime setHidden:YES];
+            [customView.btnLikeCMT setHidden:YES];
+            [customView.btnShareCMT   setHidden:YES];
+            [customView.btnCommentCMT setHidden:YES];
+            [customView.txtCmtView setHidden:YES];
+        }
         
-        
-        customView.contentMode = UIViewContentModeScaleAspectFit;
+        customView.clipsToBounds=YES    ;
+       customView.contentMode = UIViewContentModeScaleAspectFit;
         customView.frame = frame;
         [self.scrollView addSubview:customView];
         [self.pageViews replaceObjectAtIndex:page withObject:customView];
@@ -229,5 +264,36 @@
         [self.pageViews replaceObjectAtIndex:page withObject:[NSNull null]];
     }
 }
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    ScrollDirection scrollDirection;
+    if (self.lastContentOffset > self.scrollView.contentOffset.y+5)
+    {
+        scrollDirection = ScrollDirectionDown;
 
+    
+    self.lastContentOffset = scrollView.contentOffset.y;
+    
+    // get current page;
+    NSInteger currentpage=  self.pageControl.currentPage;
+    // get the current Content
+    Resourse *resourse=[contentList objectAtIndex:currentpage];
+       // CATransition *animation = [CATransition animation];
+//        animation.type = kCATransitionFade;
+//        animation.duration = 0.0;
+//        [scrollView.layer addAnimation:animation forKey:nil];
+//        
+//        scrollView.hidden = YES;
+        [UIView transitionWithView:scrollView
+                          duration:0.4
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:NULL
+                        completion:NULL];
+        scrollView.hidden=YES;
+        //button.layer.shouldRasterize = YES;
+    }else{
+     self.lastContentOffset = scrollView.contentOffset.y;
+    
+    }
+}
 @end

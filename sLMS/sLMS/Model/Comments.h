@@ -10,9 +10,9 @@
 
 @interface Comments : NSObject
 
-@property (nonatomic,strong) NSNumber * likeCounts;
-@property (nonatomic,strong) NSNumber * commentCounts;
-@property (nonatomic,strong) NSNumber* shareCounts;
+@property (nonatomic,strong) NSString * likeCounts;
+@property (nonatomic,strong) NSString * commentCounts;
+@property (nonatomic,strong) NSString* shareCounts;
 @property (nonatomic,strong) NSString* commentId;
 @property (nonatomic,strong) NSString* parentCommentId;
 @property (nonatomic,strong) NSString* commentBy;
