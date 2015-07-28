@@ -22,6 +22,8 @@
 {    
     UIToolbar *toolbar = [[UIToolbar alloc] init];
     [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    toolbar.barTintColor=[UIColor colorWithRed:186.0/255 green:0.0/255 blue:2.0/255 alpha:1.0];
+     toolbar.backgroundColor=[UIColor colorWithRed:186.0/255 green:0.0/255 blue:2.0/255 alpha:1.0];
     [toolbar sizeToFit];
     
     UIFont *font = [UIFont boldSystemFontOfSize:14.0f];
@@ -35,7 +37,7 @@
     UISegmentedControl *tabNavigation = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Previous", @"Next", nil]];
     //tabNavigation.segmentedControlStyle = UISegmentedControlStyleBar;
     tabNavigation.tintColor=[UIColor whiteColor];
-    
+   // tabNavigation.backgroundColor=[UIColor colorWithRed:186.0 green:0.0 blue:2.0 alpha:1.0];
     [tabNavigation setEnabled:prevEnabled forSegmentAtIndex:0];
     [tabNavigation setEnabled:nextEnabled forSegmentAtIndex:1];
     tabNavigation.momentary = YES;

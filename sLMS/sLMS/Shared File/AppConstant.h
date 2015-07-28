@@ -15,7 +15,7 @@
 #define USER_REGISTER_URL APP_URL@"SLMS/rest/user/register"
 #define USER_LOGIN_URL APP_URL@"SLMS/rest/user/login"
 #define USER_LOGUT_URL APP_URL@"SLMS/rest/user/logout"
-#define USER_FORGETPASSWORD_URL(username) [NSString stringWithFormat:APP_URL@"SLMS/rest/user /forgetPwd/userId/%@",username]
+#define USER_FORGETPASSWORD_URL(username) [NSString stringWithFormat:APP_URL@"SLMS/rest/user/forgetPwd/userId/%@",username]
 
 #define USER_REGISTER_URL APP_URL@"SLMS/rest/user/register"
 #define USER_SET_FB_URL(userName,fbId) [NSString stringWithFormat:APP_URL@"SLMS/rest/user/setFBId/userName/%@/userFbId/%@",userName,fbId]
@@ -31,12 +31,15 @@
 #define key_UserId @"UserId"
 #define key_UserName @"UserName"
 #define key_UserEmail @"UserEmail"
+#define key_FBUSERID @"FBUSERID"
 //App Delegate Reference
 #define appDelegate (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
 //server Respond Key
 #define key_severRespond_Status @"status"
 #define key_severRespond_StatusMessage @"statusMessage"
+#define REGISTER_SUCCESS_MSG @"Thank you for registering with SLMS, your registration is pending for approval from school admin. You will be notified in email if you are approved."
+#define FORGET_SUCCESS_MSG(useremail)[NSString stringWithFormat:@"Your password is sent to %@, please check SPAM folder if not received in inbox.",useremail]
 
 // Error Msg
 #define ERROR_DEFAULT_MSG @"There seems to be a problem connecting with server. Please check your network connection."
@@ -55,8 +58,10 @@
 #define MISSING_CNF_PASSWORD_NOT_MATCH @"Your new password and confirm password do not match."
 #define MISSING_SCHOOL @"School name is not selected."
 #define MISSING_CLASS @" Class is not selected."
+#define MISSING_TITLE @" Title is not selected."
 #define MISSING_HOME @"Home room is not selected."
-#define MISSING_ADMIN_EMAIL @" School email seems to be incorrect, Enter a valid email id  including '@' and '.' "
+#define MISSING_ADMIN_EMAIL @" School email fields can't be empty."
+#define MISSING_ADMIN_VLID_EMAIL @" School email seems to be incorrect, Enter a valid email id  including '@' and '.' "
 
 
 // Success Message Alert Title

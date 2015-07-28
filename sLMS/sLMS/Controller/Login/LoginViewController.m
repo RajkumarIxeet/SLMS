@@ -32,6 +32,18 @@
         FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
         [self.navigationController pushViewController:viewController animated:YES];
     }
+    UIColor *color = [UIColor whiteColor];
+    txtUsername.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Email"
+     attributes:@{NSForegroundColorAttributeName:color}];
+
+  
+    txtPassword.attributedPlaceholder =
+    [[NSAttributedString alloc]
+     initWithString:@"Password"
+     attributes:@{NSForegroundColorAttributeName:color}];
+
     customKeyboard = [[CustomKeyboard alloc] init];
     customKeyboard.delegate = self;
     
@@ -55,13 +67,13 @@
 -(void)setDataOnView{
     
     //Set Login Detail
-    BOOL rememberMe=[[AppGlobal getValueInDefault:key_rememberMe] boolValue];
-    if (rememberMe) {  //Save Login Detail In user default
-        NSString *loginID=[AppGlobal getValueInDefault:key_loginId];
-        NSString *loginPassword=[AppGlobal getValueInDefault:key_loginPassword];
-        [self.txtUsername setText:loginID];
-        [self.txtPassword setText:loginPassword];
-    }
+//    BOOL rememberMe=[[AppGlobal getValueInDefault:key_rememberMe] boolValue];
+//    if (rememberMe) {  //Save Login Detail In user default
+//        NSString *loginID=[AppGlobal getValueInDefault:key_loginId];
+//        NSString *loginPassword=[AppGlobal getValueInDefault:key_loginPassword];
+//        [self.txtUsername setText:loginID];
+//        [self.txtPassword setText:loginPassword];
+//    }
     
     
     
@@ -138,7 +150,7 @@
         [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
         [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
         [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
-        [self loginSucessFullWithFB];
+        [self loginSucessFullWithFB:userid];
         
         //Hide Indicator
         [appDelegate hideSpinner];
@@ -160,10 +172,10 @@
     //    self.lblEmail.text = [user objectForKey:@"email"];
 }
 
--(void)loginSucessFullWithFB{
+-(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
     
-    
+    [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
     FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
@@ -180,11 +192,11 @@
 
 -(IBAction)btnRememberClick:(id)sender{
     
-    if ([btnRemember isSelected]) {
-        [btnRemember setSelected:NO];
-    }else{
-        [btnRemember setSelected:YES];
-    }
+//    if ([btnRemember isSelected]) {
+//        [btnRemember setSelected:NO];
+//    }else{
+//        [btnRemember setSelected:YES];
+//    }
 }
 
 
@@ -195,7 +207,10 @@
     
     if ([loginID length] <= 0) {
         [AppGlobal showAlertWithMessage:MISSING_LOGIN_ID title:@""];
-    }else if ([password length] <= 0){
+    }else if ( [AppGlobal validateEmailWithString:loginID]) {
+        [AppGlobal showAlertWithMessage:MISSING_VALID_EMAIL_ID title:@""];
+    }
+    else if ([password length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_PASSWORD title:@""];
     }
     else{
@@ -208,8 +223,8 @@
         [[appDelegate _engine] loginWithUserName:loginID password:password  rememberMe:[btnRemember isSelected]
                                          success:^(UserDetail *userDetail) {
                                              [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-                                             [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-                                             [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+//                                             [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
+//                                             [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
                                              [self loginSucessFull];
                                              
                                              //Hide Indicator

@@ -8,7 +8,7 @@
 
 #import "ForgetPasswordViewController.h"
 #import "FeedViewController.h"
-
+#import "RegisterationViewController.h"
 @interface ForgetPasswordViewController ()
 
 @end
@@ -47,7 +47,10 @@
     NSString *loginID=[[txtUsername text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([loginID length] <= 0) {
-        [AppGlobal showAlertWithMessage:MISSING_EMAIL_ID title:@""];
+        [AppGlobal showAlertWithMessage:MISSING_FORGET_EMAIL title:@""];
+    }
+   else if ([AppGlobal validateEmailWithString:loginID]) {
+        [AppGlobal showAlertWithMessage:MISSING_VALID_EMAIL_ID title:@""];
     }
     else{
         [txtUsername resignFirstResponder];
@@ -58,9 +61,12 @@
         
         [[appDelegate _engine] ForgetPasswordWithUserName:loginID success:^(BOOL logoutValue) {
            
-                                             
+            [AppGlobal showAlertWithMessage:FORGET_SUCCESS_MSG(loginID) title:@""];
                                              //Hide Indicator
+            
                                              [appDelegate hideSpinner];
+            LoginViewController *loginview=[[LoginViewController alloc]init];
+            [self.navigationController pushViewController:loginview animated:YES];
                                          }
                                          failure:^(NSError *error) {
                                              //Hide Indicator
@@ -78,7 +84,9 @@
     [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 - (IBAction)btnLoginClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES ];
+    RegisterationViewController *viewController= [[RegisterationViewController alloc]initWithNibName:@"RegisterationViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+
 
 }
 #pragma --
@@ -177,7 +185,7 @@
     
     [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
         
-        [self loginSucessFullWithFB];
+        [self loginSucessFullWithFB:userid];
         
         //Hide Indicator
         [appDelegate hideSpinner];
@@ -207,10 +215,10 @@
     [self toggleHiddenState:YES];
 }
 
--(void)loginSucessFullWithFB{
+-(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
     
-    
+    [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
     FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
