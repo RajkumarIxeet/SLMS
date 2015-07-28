@@ -137,6 +137,8 @@
 		A8B272211B5CE70600B3CDE7 /* img_search-boxn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B272201B5CE70600B3CDE7 /* img_search-boxn@3x.png */; };
 		A8B272251B5D05E800B3CDE7 /* ModuleDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B272231B5D05E800B3CDE7 /* ModuleDetailViewController.m */; };
 		A8B272261B5D05E800B3CDE7 /* ModuleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B272241B5D05E800B3CDE7 /* ModuleDetailViewController.xib */; };
+		A8B376301B66663800783C7E /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B3762E1B66663800783C7E /* MoreViewController.m */; };
+		A8B376311B66663800783C7E /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B3762F1B66663800783C7E /* MoreViewController.xib */; };
 		A8CB0A2A1B4D2CEF0091A70C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CB0A281B4D2CEF0091A70C /* HomeViewController.m */; };
 		A8CB0A2B1B4D2CEF0091A70C /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8CB0A291B4D2CEF0091A70C /* HomeViewController.xib */; };
 		A8CECCE31B590D2600D7A7A2 /* Courses.m in Sources */ = {isa = PBXBuildFile; fileRef = A8CECCE21B590D2600D7A7A2 /* Courses.m */; };
@@ -379,6 +381,9 @@
 		A8B272221B5D05E800B3CDE7 /* ModuleDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleDetailViewController.h; sourceTree = "<group>"; };
 		A8B272231B5D05E800B3CDE7 /* ModuleDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleDetailViewController.m; sourceTree = "<group>"; };
 		A8B272241B5D05E800B3CDE7 /* ModuleDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModuleDetailViewController.xib; sourceTree = "<group>"; };
+		A8B3762D1B66663800783C7E /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoreViewController.h; path = Controller/More/MoreViewController.h; sourceTree = "<group>"; };
+		A8B3762E1B66663800783C7E /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoreViewController.m; path = Controller/More/MoreViewController.m; sourceTree = "<group>"; };
+		A8B3762F1B66663800783C7E /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MoreViewController.xib; path = Controller/More/MoreViewController.xib; sourceTree = "<group>"; };
 		A8CB0A271B4D2CEF0091A70C /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Controller/Home/HomeViewController.h; sourceTree = "<group>"; };
 		A8CB0A281B4D2CEF0091A70C /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Controller/Home/HomeViewController.m; sourceTree = "<group>"; };
 		A8CB0A291B4D2CEF0091A70C /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = Controller/Home/HomeViewController.xib; sourceTree = "<group>"; };
@@ -752,6 +757,7 @@
 				A88AB0C41B4BA6780011D32B /* Feed */,
 				A88AB0B81B4BA61C0011D32B /* Login */,
 				A8CB0A2C1B4D2CF70091A70C /* Home */,
+				A8B376321B66663F00783C7E /* More */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -927,6 +933,16 @@
 			);
 			name = Course;
 			path = Resources/Course;
+			sourceTree = "<group>";
+		};
+		A8B376321B66663F00783C7E /* More */ = {
+			isa = PBXGroup;
+			children = (
+				A8B3762D1B66663800783C7E /* MoreViewController.h */,
+				A8B3762E1B66663800783C7E /* MoreViewController.m */,
+				A8B3762F1B66663800783C7E /* MoreViewController.xib */,
+			);
+			name = More;
 			sourceTree = "<group>";
 		};
 		A8CB0A2C1B4D2CF70091A70C /* Home */ = {
@@ -1116,6 +1132,7 @@
 				A86B2CB81B53BE83004392FD /* login_red@3x.png in Resources */,
 				A86B2C8C1B537FFF004392FD /* bg_home@3x.png in Resources */,
 				A84E72331B578E230097D0AD /* icn_back-header@2x.png in Resources */,
+				A8B376311B66663800783C7E /* MoreViewController.xib in Resources */,
 				A8B2721D1B5CC09500B3CDE7 /* progress_vertical_line@2x.png in Resources */,
 				A86B2C951B538082004392FD /* icn_menu@2x.png in Resources */,
 				A86B2CBB1B53CBCE004392FD /* login_white@2x.png in Resources */,
@@ -1193,6 +1210,7 @@
 				A85551291B5E32B200A153F9 /* ALView+PureLayout.m in Sources */,
 				A88AB15A1B4BBA590011D32B /* UIAlertView+AFNetworking.m in Sources */,
 				A88AB0371B4B96CB0011D32B /* ViewController.m in Sources */,
+				A8B376301B66663800783C7E /* MoreViewController.m in Sources */,
 				A88AB0C81B4BA6780011D32B /* FeedViewController.m in Sources */,
 				A88AB0AA1B4BA4CC0011D32B /* AssignmentHandler.m in Sources */,
 				A88AB0D31B4BA6F10011D32B /* AssignmentViewController.m in Sources */,

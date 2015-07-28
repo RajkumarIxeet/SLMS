@@ -67,5 +67,7 @@
 + (void)ShowHidePickeratWindow:(UIView *)viewFromWindow fromWindow:(UIView *)viewAtWindow withVisibility:(BOOL)bIsPickerHidden ;
 //genrate thumbnail for image
 +(UIImage*)generateThumbnail:(NSString *)url;
+// check the valid email
++ (BOOL)validateEmailWithString:(NSString*)email;
 
 @end

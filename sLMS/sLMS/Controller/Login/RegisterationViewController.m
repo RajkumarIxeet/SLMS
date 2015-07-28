@@ -49,7 +49,7 @@
     self.btnFacebook.delegate = self;
     self.btnFacebook.readPermissions = @[@"public_profile", @"email"];
     [self changeFrameAndBackgroundImg];
-    selectedTitle=@"Mr.";
+   
     [self fetchedMasterData];
     // set default  title
 //    NSDictionary
@@ -100,15 +100,23 @@
     
    
     if ([usrDetail.userFirstName length] <= 0){
-        [AppGlobal showAlertWithMessage:MISSING_FIRST_NAME title:@""];
+        [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
+    } else if ([usrDetail.title length] <= 0){
+        [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
     }
     else if ([usrDetail.userLastName length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_LAST_NAME title:@""];
     }else if ([usrDetail.userEmail length] <= 0) {
         [AppGlobal showAlertWithMessage:MISSING_EMAIL_ID title:@""];
-    }else if ([usrDetail.userPassword length] <= 0){
+    }
+    else if ([AppGlobal validateEmailWithString:usrDetail.userEmail]){
+        [AppGlobal showAlertWithMessage:MISSING_VALID_EMAIL_ID title:@""];
+    }
+    else if ([usrDetail.userPassword length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_PASSWORD title:@""];
     }
+    
+   
     else if(![self isPasswordValid:usrDetail.userPassword])
     {
         
@@ -124,6 +132,9 @@
     }
     else if ([usrDetail.adminEmailId length] <= 0){
             [AppGlobal showAlertWithMessage:MISSING_ADMIN_EMAIL title:@""];
+    }
+    else if ([AppGlobal validateEmailWithString:usrDetail.adminEmailId]){
+        [AppGlobal showAlertWithMessage:MISSING_ADMIN_VLID_EMAIL title:@""];
     }
     else if ([usrDetail.className length] <= 0){
             [AppGlobal showAlertWithMessage:MISSING_CLASS title:@""];
@@ -147,6 +158,7 @@
                                              //Hide Indicator
                                              [appDelegate hideSpinner];
             //navigate to feed view Controller
+            [AppGlobal showAlertWithMessage:REGISTER_SUCCESS_MSG title:@""];
             
             FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
             [self.navigationController pushViewController:viewController animated:YES];
@@ -295,9 +307,9 @@
     
     [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
         [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
-        [self loginSucessFullWithFB];
+//        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
+//        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+        [self loginSucessFullWithFB:userid];
         
         //Hide Indicator
         [appDelegate hideSpinner];
@@ -320,10 +332,10 @@
     //    self.lblEmail.text = [user objectForKey:@"email"];
 }
 
--(void)loginSucessFullWithFB{
+-(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
     
-    
+    [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
     FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
@@ -453,6 +465,12 @@
     NSInteger nextTag = activeTextField.tag -1;
     
     UITextField *nextResponder = (UITextField*) [self.view  viewWithTag:nextTag];
+    if([txtAdminEmail isEqual:activeTextField]){
+        
+        [self setPositionOfLoginBaseViewWhenEndEditing];
+        
+    }
+
     
     while(!nextResponder.enabled)
     {

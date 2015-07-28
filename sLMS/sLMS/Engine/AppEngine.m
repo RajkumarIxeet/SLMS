@@ -23,7 +23,7 @@
     
     LoginHandler *login=[[LoginHandler alloc] init];
     // convert to AES 256 Exncryption
-    NSString  *encpassword=  [password AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
+    NSString  *encpassword=password;//=  [password AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
     //  NSString  *decpassword=  [encpassword AES256DecryptWithKey:@"m@zd@10017017Int33r@IT"];
     [login loginWithUserName:userName password:encpassword  success:^(UserDetail *userDetail){
         
@@ -81,7 +81,7 @@
 -(void)registerWithUserDetail:(UserDetail*)user success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
     
     LoginHandler *login=[[LoginHandler alloc] init];
-    user.userPassword=  [user.userPassword AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
+ //   user.userPassword=  [user.userPassword AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
     [login registerWithUserDetail:user  success:^(UserDetail *userDetail){
         
        
