@@ -15,6 +15,6 @@
 @property (nonatomic,strong) NSString* assignmentStatus;
 @property (nonatomic,strong) NSString* assignmentSubmittedDate;
 @property (nonatomic,strong) NSString* assignmentSubmittedBy;
-@property (nonatomic,strong) NSMutableArray* attachedResource;
+@property (nonatomic,strong) Resourse* attachedResource;
 
 @end

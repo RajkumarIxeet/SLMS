@@ -14,7 +14,7 @@
 
 @interface ModuleDetailViewController : ViewController<UIScrollViewDelegate>{
 IBOutlet UITableView *tblViewContent;
-IBOutlet UITableView *tblViewAssignment;
+
 }
 @property (strong, nonatomic) IBOutlet UIButton *btnUpdates;
 @property (strong, nonatomic) IBOutlet UIButton *btnAssignment;

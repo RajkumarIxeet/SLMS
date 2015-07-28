@@ -408,5 +408,22 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return ![emailTest evaluateWithObject:email];
 }
++(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring
+{
+    //Calculate the expected size based on the font and linebreak mode of your label
+    CGSize maximumLabelSize = CGSizeMake(296,9999);
+
+    CGSize expectedLabelSize = [labelstring sizeWithFont:[UIFont fontWithName:@"HelveticaNeue" size:12] constrainedToSize:maximumLabelSize
+                                           lineBreakMode:NSLineBreakByCharWrapping];
+   // CGSize size = [labelstring sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue" size:12]}];
+    
+    // Values are fractional -- you should take the ceilf to get equivalent values
+ //   CGSize adjustedSize = CGSizeMake(ceilf(281.0f), ceilf(size.height));
+    //adjust the label the the new height.
+    //CGRect newFrame = yourLabel.frame;
+   // newFrame.size.height = expectedLabelSize.height;
+   // yourLabel.frame = newFrame;
+    return expectedLabelSize;
+}
 @end
 

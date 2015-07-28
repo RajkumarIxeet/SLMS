@@ -9,5 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface ContentCellTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIImageView *imgContent;
+@property (strong, nonatomic) IBOutlet UILabel *lblAutherName;
+@property (strong, nonatomic) IBOutlet UILabel *lblStartedon;
+@property (strong, nonatomic) IBOutlet UILabel *lblCompletedon;
+
+
+
+@property (strong, nonatomic) IBOutlet UIButton *btnLike;
+@property (strong, nonatomic) IBOutlet UIButton *btnShare;
+@property (strong, nonatomic) IBOutlet UIButton *btnComment;
 
 @end

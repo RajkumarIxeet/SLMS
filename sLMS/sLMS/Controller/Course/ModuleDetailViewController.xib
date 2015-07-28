@@ -13,6 +13,7 @@
                 <outlet property="btnUpdates" destination="bfp-ex-svt" id="62C-lf-wkv"/>
                 <outlet property="scollViewContainer" destination="9hJ-X8-CQn" id="V20-YT-iN4"/>
                 <outlet property="scrollView" destination="fYG-xR-6Tp" id="3BH-Mf-e6D"/>
+                <outlet property="tblViewContent" destination="lr9-Wg-5YW" id="Ypy-bU-a5I"/>
                 <outlet property="txtSearchBar" destination="VhF-ro-RoI" id="nv5-BQ-1zK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -66,6 +67,14 @@
                         </mask>
                     </variation>
                 </view>
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lr9-Wg-5YW" userLabel="tblViewContent">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="CXW-jB-KDm"/>
+                        <outlet property="delegate" destination="-1" id="gCC-Mv-enh"/>
+                    </connections>
+                </tableView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J4G-30-MhE" userLabel="imgHeader">
                     <rect key="frame" x="170" y="-134" width="400" height="72"/>
                     <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -83,6 +92,13 @@
                         </mask>
                     </variation>
                 </imageView>
+                <searchBar contentMode="redraw" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ro-RoI">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Byr-VH-qGA"/>
+                    </connections>
+                </searchBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="715-Q0-aYD" userLabel="TabView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
@@ -324,10 +340,6 @@
                         </mask>
                     </variation>
                 </view>
-                <searchBar contentMode="redraw" placeholder="Search" backgroundImage="img_search-boxn.png" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-ro-RoI">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KH9-aq-b0g" userLabel="btnLogout">
                     <rect key="frame" x="486" y="-103" width="84" height="30"/>
                     <constraints>
@@ -353,17 +365,22 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VhF-ro-RoI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="1Mj-16-VOb"/>
+                <constraint firstItem="715-Q0-aYD" firstAttribute="top" secondItem="lr9-Wg-5YW" secondAttribute="bottom" constant="-2" id="238-LH-cGb"/>
                 <constraint firstItem="9hJ-X8-CQn" firstAttribute="top" secondItem="J4G-30-MhE" secondAttribute="bottom" constant="-2" id="4V7-LO-yNZ"/>
                 <constraint firstItem="J4G-30-MhE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9US-OA-eHj"/>
                 <constraint firstAttribute="trailing" secondItem="715-Q0-aYD" secondAttribute="trailing" id="Aoe-v3-Tco"/>
                 <constraint firstAttribute="trailing" secondItem="J4G-30-MhE" secondAttribute="trailing" id="EEV-oa-CKE">
                     <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
                 </constraint>
+                <constraint firstItem="lr9-Wg-5YW" firstAttribute="top" secondItem="J4G-30-MhE" secondAttribute="bottom" constant="-3" id="EvJ-ac-zYX"/>
                 <constraint firstItem="xne-zy-o5M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="I3J-w7-lvH"/>
+                <constraint firstAttribute="trailing" secondItem="lr9-Wg-5YW" secondAttribute="trailing" id="NVo-em-fko"/>
                 <constraint firstItem="KH9-aq-b0g" firstAttribute="leading" secondItem="VhF-ro-RoI" secondAttribute="trailing" constant="20" id="Z1l-Ka-7mS"/>
                 <constraint firstAttribute="trailing" secondItem="xne-zy-o5M" secondAttribute="trailing" id="b8X-3m-2jB"/>
                 <constraint firstItem="715-Q0-aYD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bEk-Wp-raM"/>
-                <constraint firstAttribute="trailing" secondItem="KH9-aq-b0g" secondAttribute="trailing" constant="27" id="bak-9R-lvn"/>
+                <constraint firstAttribute="trailing" secondItem="KH9-aq-b0g" secondAttribute="trailing" constant="27" id="bak-9R-lvn">
+                    <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                </constraint>
                 <constraint firstItem="xne-zy-o5M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="c5g-Y8-CSZ"/>
                 <constraint firstItem="VhF-ro-RoI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="fmt-Jc-RzR"/>
                 <constraint firstAttribute="trailing" secondItem="9hJ-X8-CQn" secondAttribute="trailing" id="j26-Bl-7tv"/>
@@ -373,6 +390,7 @@
                 <constraint firstItem="715-Q0-aYD" firstAttribute="top" secondItem="fYG-xR-6Tp" secondAttribute="bottom" constant="-3" id="jW9-sY-6gp"/>
                 <constraint firstItem="9hJ-X8-CQn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nqX-4u-SUs"/>
                 <constraint firstItem="KH9-aq-b0g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="31" id="owv-GO-7C0"/>
+                <constraint firstItem="lr9-Wg-5YW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qTL-27-Z43"/>
                 <constraint firstItem="J4G-30-MhE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qhx-Rz-Xnf"/>
                 <constraint firstAttribute="trailing" secondItem="VhF-ro-RoI" secondAttribute="trailing" constant="69" id="rWe-5A-5Yp"/>
                 <constraint firstAttribute="bottom" secondItem="715-Q0-aYD" secondAttribute="bottom" id="sbI-ae-Po3"/>
@@ -385,9 +403,10 @@
                 <mask key="subviews">
                     <exclude reference="xne-zy-o5M"/>
                     <exclude reference="9hJ-X8-CQn"/>
+                    <exclude reference="lr9-Wg-5YW"/>
                     <exclude reference="J4G-30-MhE"/>
-                    <exclude reference="715-Q0-aYD"/>
                     <exclude reference="VhF-ro-RoI"/>
+                    <exclude reference="715-Q0-aYD"/>
                     <exclude reference="KH9-aq-b0g"/>
                 </mask>
                 <mask key="constraints">
@@ -404,12 +423,16 @@
                     <exclude reference="1Mj-16-VOb"/>
                     <exclude reference="fmt-Jc-RzR"/>
                     <exclude reference="rWe-5A-5Yp"/>
+                    <exclude reference="EvJ-ac-zYX"/>
+                    <exclude reference="NVo-em-fko"/>
+                    <exclude reference="qTL-27-Z43"/>
                     <exclude reference="4V7-LO-yNZ"/>
                     <exclude reference="j26-Bl-7tv"/>
                     <exclude reference="nqX-4u-SUs"/>
                     <exclude reference="Z1l-Ka-7mS"/>
                     <exclude reference="bak-9R-lvn"/>
                     <exclude reference="owv-GO-7C0"/>
+                    <exclude reference="238-LH-cGb"/>
                     <exclude reference="Aoe-v3-Tco"/>
                     <exclude reference="bEk-Wp-raM"/>
                     <exclude reference="jW9-sY-6gp"/>
@@ -421,9 +444,10 @@
                 <mask key="subviews">
                     <include reference="xne-zy-o5M"/>
                     <include reference="9hJ-X8-CQn"/>
+                    <include reference="lr9-Wg-5YW"/>
                     <include reference="J4G-30-MhE"/>
-                    <include reference="715-Q0-aYD"/>
                     <include reference="VhF-ro-RoI"/>
+                    <include reference="715-Q0-aYD"/>
                     <include reference="KH9-aq-b0g"/>
                 </mask>
                 <mask key="constraints">
@@ -440,12 +464,16 @@
                     <include reference="1Mj-16-VOb"/>
                     <include reference="fmt-Jc-RzR"/>
                     <include reference="rWe-5A-5Yp"/>
+                    <include reference="EvJ-ac-zYX"/>
+                    <include reference="NVo-em-fko"/>
+                    <include reference="qTL-27-Z43"/>
                     <include reference="4V7-LO-yNZ"/>
                     <include reference="j26-Bl-7tv"/>
                     <include reference="nqX-4u-SUs"/>
                     <include reference="Z1l-Ka-7mS"/>
                     <include reference="bak-9R-lvn"/>
                     <include reference="owv-GO-7C0"/>
+                    <include reference="238-LH-cGb"/>
                     <include reference="Aoe-v3-Tco"/>
                     <include reference="bEk-Wp-raM"/>
                     <include reference="jW9-sY-6gp"/>
@@ -453,7 +481,7 @@
                     <include reference="wy5-BH-IZk"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="-150" y="-1264"/>
+            <point key="canvasLocation" x="-154" y="-1459"/>
         </view>
     </objects>
     <resources>

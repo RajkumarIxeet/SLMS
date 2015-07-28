@@ -17,8 +17,8 @@
 @synthesize _homeViewController,_navigationController_Login;
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-//    [self.navigationController pushViewController:viewController animated:YES];
+    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
     // Do any additional setup after loading the view from its nib.
 //        FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
 //        loginButton.center = self.view.center;

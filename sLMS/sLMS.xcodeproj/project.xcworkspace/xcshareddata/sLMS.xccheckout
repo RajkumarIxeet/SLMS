@@ -10,22 +10,26 @@
 	<string>sLMS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>451CA1AD33B8E88C0813057BBA45E1567A7E14FC</key>
+		<string>https://github.com/ixeet/SLMS.git</string>
 		<key>D16305A7D5D1F260606C571DD3FF62BFBED603FF</key>
 		<string>https://github.com/Mayankixeet/SaleLMS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Code/sLMS/sLMS.xcodeproj</string>
+	<string>sLMS/sLMS.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>451CA1AD33B8E88C0813057BBA45E1567A7E14FC</key>
+		<string>../../..</string>
 		<key>D16305A7D5D1F260606C571DD3FF62BFBED603FF</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Mayankixeet/SaleLMS.git</string>
+	<string>https://github.com/ixeet/SLMS.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D16305A7D5D1F260606C571DD3FF62BFBED603FF</string>
+	<string>451CA1AD33B8E88C0813057BBA45E1567A7E14FC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -34,7 +38,15 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>D16305A7D5D1F260606C571DD3FF62BFBED603FF</string>
 			<key>IDESourceControlWCCName</key>
-			<string>SaleLMS</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>451CA1AD33B8E88C0813057BBA45E1567A7E14FC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SLMS</string>
 		</dict>
 	</array>
 </dict>

@@ -129,7 +129,8 @@
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
                     comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
-                    comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
+                 //   comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
+                    comment.commentTxt=@"nxlsjldjfldksjflkdsjflkdsjflkdsjlkfjdslkfjdskljfjdslkfjdlskjfldksjflkcnvmvncm,vn,cmnv,mfdnlkfejldkfdskfl;dksf;ldkf;ldksl;fkds;lfkds;lfkl;dskf;ldskf;ldskf;ldskfl;dskfl;dskf;lkdsl;fkds;lfkds;lkds;lfkds;lfkds;lfkdl;skflkf;ldskfl;dskfl;dskf;ldskf;ldskl;fksdl;fkdsl;fkdsl;fkl;dskf;ldskf;ldskfl;dskf;dskf;ldsm vlkfefe vjef fkfnednnc nlkenfejnflkewfnlknkewlewjwnoewflkwnflkewnfklenlkewfnlkewnflkewfnwelkfnwelkfnewlfnwelkfnwlekfnlkwefnlkwefnlkewnflkwnflkwnflkwnflkwlwnflewnflewnflkwneklfnweklnweflkwenlkwfeklweklklklwemdlmdmkkdmmkdmlmeffm";
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
                     [arrayComments addObject:comment];
                 }
@@ -151,28 +152,32 @@
                 [resourceList addObject:resource];
             }
             //call Block function
-           
-            for (NSDictionary *dicAssign in [responseDic objectForKey:@"resourceList"]) {
-                Assignment  *assignment= [[Assignment   alloc]init];
-                assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
-                assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
-                assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
-                assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
+      
+        
+        
+            for (NSDictionary *dicAssign in [responseDic objectForKey:@"assignmentList"]) {
                 
-                assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
                 
-                NSMutableArray * arrayRelatedResource= [[NSMutableArray alloc]init];
-                for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResource"]) {
+                for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
+                    Assignment  *assignment= [[Assignment   alloc]init];
+                    assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
+                    assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
+                    assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
+                    assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
+                    
+                    assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
+                    
                     Resourse *resource= [[Resourse alloc]init];
                     resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                     resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
-                    resource.startedOn=[dicRelatedResource objectForKey:@"uploadedDate"];
-                    [arrayRelatedResource addObject:resource];
+                    resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    assignment.attachedResource=resource;
+                    [assignmentList addObject:assignment];
                 }
                 
-                assignment.attachedResource=arrayRelatedResource;
-                [assignmentList addObject:assignment];
+               
+                
             }
             NSMutableDictionary *moduleDetail=[[NSMutableDictionary alloc]init ];
             [moduleDetail setObject:resourceList forKey:@"resourceList"];

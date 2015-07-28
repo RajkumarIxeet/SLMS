@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="775" id="KGk-i7-Jjw" customClass="ContentCellTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1139" id="KGk-i7-Jjw" customClass="ContentCellTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -148,6 +148,7 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6ds-O4-byB" userLabel="imgContent">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="250" id="Fag-Q2-6Xx"/>
                         </constraints>
@@ -199,7 +200,8 @@
                                 <exclude reference="epf-2x-e33"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
+                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                            <rect key="frame" x="0.0" y="405" width="322" height="1"/>
                             <mask key="constraints">
                                 <include reference="epf-2x-e33"/>
                             </mask>
@@ -383,7 +385,16 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="213" y="-118.5"/>
+            <connections>
+                <outlet property="btnComment" destination="Qgp-Xi-jqF" id="Ddg-eA-giQ"/>
+                <outlet property="btnLike" destination="PLW-aw-qA5" id="8gW-a5-yqS"/>
+                <outlet property="btnShare" destination="ymS-Yx-irx" id="sgW-2P-ocv"/>
+                <outlet property="imgContent" destination="6ds-O4-byB" id="ED3-DG-TM7"/>
+                <outlet property="lblAutherName" destination="mXR-ZL-VDz" id="b8M-8b-HYU"/>
+                <outlet property="lblCompletedon" destination="UC7-MH-UCY" id="2E9-tG-xvM"/>
+                <outlet property="lblStartedon" destination="QeS-lx-aDO" id="rR3-I6-8EY"/>
+            </connections>
+            <point key="canvasLocation" x="213" y="-151"/>
         </tableViewCell>
     </objects>
     <resources>

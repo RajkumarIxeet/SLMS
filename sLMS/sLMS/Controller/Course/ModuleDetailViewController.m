@@ -8,10 +8,17 @@
 
 #import "ModuleDetailViewController.h"
 #import "CustomContentView.h"
+#import "ContentCellTableViewCell.h"
+#import "AssignmentTableViewCell.h"
+#import "CommentTableViewCell.h"
 @interface ModuleDetailViewController ()
 {
     NSMutableArray *contentList;
     NSMutableArray *assignmentList;
+    Resourse *selectedResource;
+    BOOL IsCommentExpended;
+    BOOL IsAsignmentExpended;
+    BOOL IsRelatedConentExpended;
    
 }
 
@@ -107,7 +114,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Clicked");
-   // [self getModuleDetail:searchBar.text];
+  [self getModuleDetail:searchBar.text];
     // [self searchTableList];
 }
 #pragma mark Course Private functions
@@ -277,7 +284,7 @@
     // get current page;
     NSInteger currentpage=  self.pageControl.currentPage;
     // get the current Content
-    Resourse *resourse=[contentList objectAtIndex:currentpage];
+   selectedResource=[contentList objectAtIndex:currentpage];
        // CATransition *animation = [CATransition animation];
 //        animation.type = kCATransitionFade;
 //        animation.duration = 0.0;
@@ -290,10 +297,311 @@
                         animations:NULL
                         completion:NULL];
         scrollView.hidden=YES;
+        [tblViewContent reloadData];
+        tblViewContent.hidden =NO;
         //button.layer.shouldRasterize = YES;
     }else{
      self.lastContentOffset = scrollView.contentOffset.y;
     
     }
 }
+#pragma mark - Table view data source
+
+//- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+//    [super setEditing:editing animated:animated];
+//    [self.tableView setEditing:editing animated:animated];
+//    [self.tableView reloadData];
+//}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    NSLog(@"You are in: %s", __FUNCTION__);
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    if(selectedResource==nil)
+        return 0;
+    if(section==0)
+        return 1;
+    else if(section==1 && IsCommentExpended)
+    {
+        return [selectedResource.comments count];
+    }
+    else if(section==1 && !IsCommentExpended)
+   {
+       if ([selectedResource.comments count]>3) {
+           return 3;
+       }else{
+        return [selectedResource.comments count];
+       }
+   }
+   else if(section==2 && IsRelatedConentExpended)
+   {
+       return [selectedResource.relatedResources count];
+   }
+   else if(section==2 && !IsRelatedConentExpended)
+   {
+       if ([selectedResource.relatedResources count]>3) {
+           return 3;
+       }else{
+           return [selectedResource.relatedResources count];
+       }
+   }
+   else if(section==3 && IsAsignmentExpended)
+   {
+       return [assignmentList count];
+   }
+   else if(section==3 && !IsAsignmentExpended)
+   {
+       if ([assignmentList count]>3) {
+           return 3;
+       }else{
+           return [assignmentList count];
+       }
+   }
+    return 0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//#import "ContentCellTableViewCell.h"
+//#import "AssignmentTableViewCell.h"
+//#import "CommentTableViewCell.h"
+    
+    if(indexPath.section==0)
+    {
+        static NSString *identifier = @"ContentCellTableViewCell";
+        ContentCellTableViewCell *cell = (ContentCellTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
+            
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+            [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        }
+
+        cell.lblAutherName.text=selectedResource.authorName;
+        cell.lblStartedon.text=selectedResource.startedOn;
+        cell.lblCompletedon.text=selectedResource.completedOn;
+        [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
+        [cell.btnShare    setTitle:selectedResource.shareCounts forState:UIControlStateNormal];
+        [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
+      //  [cell.imgContent setImage:[AppGlobal generateThumbnail:selectedResource.resourceUrl]];
+        
+        return cell;
+    }else if(indexPath.section==1){
+        static NSString *identifier = @"CommentTableViewCell";
+        CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
+            
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+            [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        }
+        Comments *comment= [selectedResource.comments objectAtIndex:indexPath.row];
+        
+        //[cell.imgCMT setImage:[AppGlobal generateThumbnail:comment.commentByImage]];
+        cell.lblCmtBy.text= comment.commentBy;
+        cell.lblCmtDate.text=comment.commentDate;
+        cell.lblCmtText.text=comment.commentTxt;
+//        if(indexPath.row/2==0){
+//            cell.lblCmtText.text=@"nxlsjldjfldksjflkdsjfl";
+//        }
+        [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+        [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
+        if(indexPath.row!=([selectedResource.comments count]-1))
+        {
+            cell.btnMore.hidden=YES;
+            cell.imgDevider.hidden=YES;
+        }
+        return cell;
+        
+    }
+    else if(indexPath.section==2){
+        static NSString *identifier = @"AssignmentTableViewCell";
+        AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
+            
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+            [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        }
+        Resourse *resource= [selectedResource.relatedResources objectAtIndex:indexPath.row];
+        
+       // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
+        cell.lblContentName.text= resource.resourceDesc;
+        cell.lblContentby.text=resource.authorName;
+       // cell.lblSubmittedDate.text=resource.uploadedDate;
+        cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@",resource.uploadedDate ];
+        if(indexPath.row!=([selectedResource.relatedResources count]-1))
+        {
+            cell.btnMore.hidden=YES;
+            cell.imgDevider.hidden=YES;
+        }
+        return cell;
+        
+    }
+    else{
+        static NSString *identifier = @"AssignmentTableViewCell";
+        AssignmentTableViewCell *cell = (AssignmentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil) {
+            // Load the top-level objects from the custom cell XIB.
+            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:identifier owner:self options:nil];
+            
+            // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+            cell = [topLevelObjects objectAtIndex:0];
+            [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        }
+        Assignment *assignment= [assignmentList objectAtIndex:indexPath.row];
+        Resourse *resource=assignment.attachedResource;
+       // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
+        cell.lblContentName.text= assignment.assignmentName;
+        cell.lblContentby.text=assignment.assignmentSubmittedBy;
+        cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@",assignment.assignmentSubmittedDate ];
+        if(indexPath.row!=([assignmentList count]-1))
+        {
+            cell.btnMore.hidden=YES;
+            cell.imgDevider.hidden=YES;
+        }
+        return cell;
+    }
+
+}
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{//    BOOL isChild =
+//    currentExpandedIndex > -1
+//    && indexPath.row > currentExpandedIndex
+//    && indexPath.row <= currentExpandedIndex + [[moduleArray objectAtIndex:currentExpandedIndex] count];
+//    
+//    if (isChild) {
+//        NSLog(@"A child was tapped, do what you will with it");
+//        return;
+//    }
+//    
+//    [tableViewCourse beginUpdates];
+//    
+//    if (currentExpandedIndex == indexPath.row) {
+//        [self collapseSubItemsAtIndex:currentExpandedIndex];
+//        currentExpandedIndex = -1;
+//    }
+//    else {
+//        
+//        BOOL shouldCollapse = currentExpandedIndex > -1;
+//        
+//        if (shouldCollapse) {
+//            [self collapseSubItemsAtIndex:currentExpandedIndex];
+//        }
+//        
+//        currentExpandedIndex = (shouldCollapse && indexPath.row > currentExpandedIndex) ? indexPath.row - [[moduleArray objectAtIndex:currentExpandedIndex] count] : indexPath.row;
+//        
+//        [self expandItemAtIndex:currentExpandedIndex];
+//    }
+
+    
+    
+//    [tableViewCourse endUpdates];
+    
+}
+
+//- (void)expandItemAtIndex:(int)index {
+//    
+//    NSMutableArray *indexPaths = [NSMutableArray new];
+//    //    [indexPaths addObject:[NSIndexPath indexPathForRow:currentExpandedIndex++ inSection:0]];
+//    //    [tableViewCourse deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//    //    [tableViewCourse insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//    
+//    
+//    NSArray *currentSubItems = [moduleArray objectAtIndex:index];
+//    int insertPos = index + 1;
+//    for (int i = 0; i < [currentSubItems count]; i++) {
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:insertPos++ inSection:0]];
+//    }
+//    [tableViewCourse insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//    [tableViewCourse scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    
+//}
+//
+//- (void)collapseSubItemsAtIndex:(int)index {
+//    NSMutableArray *indexPaths = [NSMutableArray new];
+//    for (int i = index + 1; i <= index + [[moduleArray objectAtIndex:index] count]; i++) {
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+//    }
+//    [tableViewCourse deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+//    
+//}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(selectedResource==nil)
+        return 0;
+    if(indexPath.section==0)
+        return 409.0f;
+    else if(indexPath.section==1 && selectedResource.comments>0)
+    {
+        Comments *cmt=selectedResource.comments[indexPath.row];
+        CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
+        float height=0.0f;
+        if(indexPath.row==([selectedResource.comments count]-1))
+            {
+                height=43.0f;
+            }
+        if(labelSize.height>39)
+                return   height=height+90+labelSize.height;
+            else
+                return  height=height+90;
+    }
+    else if(indexPath.section==2 )
+    {
+        float height=0.0f;
+        if(indexPath.row==([selectedResource.relatedResources count]-1))
+        {
+            height=40.0f;
+        }
+       
+        return  height=height+96.0f;
+    
+    }
+    
+    else if(indexPath.section==3)
+    {
+        
+        float height=0.0f;
+        if(indexPath.row==([assignmentList count]-1))
+        {
+            height=40.0f;
+        }
+        
+        return  height=height+96.0f;
+
+    }
+    return 44.0f;
+}
+
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    //    NSLog(@"You are in: %s", __FUNCTION__);
+//    //    if (indexPath.row % 2 == 0) //if the row is odd number row
+//    //    {
+//    //        cell.backgroundColor = [UIColor blackColor];
+//    //        cell.textLabel.textColor = [UIColor whiteColor];
+//    //    }
+//    //    else
+//    //    {
+//    //        cell.backgroundColor = [UIColor blackColor];
+//    //    }
+//}
+
 @end
