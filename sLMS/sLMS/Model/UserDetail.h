@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserDetail : NSObject
+@interface UserDetails : NSObject
 @property (nonatomic,strong) NSNumber* userId;
 @property (nonatomic,strong) NSString* title;
 @property (nonatomic,strong) NSString* username;
@@ -17,7 +17,7 @@
 @property (nonatomic,strong) NSString* userRole;
 @property (nonatomic,strong) NSString* userEmail;
 @property (nonatomic,strong) NSString* userPassword;
-@property (nonatomic,strong) NSString* userFBEmail;
+@property (nonatomic,strong) NSString* userFBID;
 @property (nonatomic,strong) NSString* schoolId;
 @property (nonatomic,strong) NSString* schoolName;
 
@@ -28,6 +28,5 @@
 @property (nonatomic,strong) NSString* adminEmailId;
 @property (nonatomic,strong) NSString* homeRoomId;
 @property (nonatomic,strong) NSString* homeRoomName;
-
 @end
 

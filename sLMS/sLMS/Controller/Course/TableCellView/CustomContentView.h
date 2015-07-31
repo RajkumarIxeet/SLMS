@@ -25,6 +25,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnComment;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLikeCMT;
-@property (strong, nonatomic) IBOutlet UIButton *btnShareCMT;
+//@property (strong, nonatomic) IBOutlet UIButton *btnShareCMT;
 @property (strong, nonatomic) IBOutlet UIButton *btnCommentCMT;
 @end

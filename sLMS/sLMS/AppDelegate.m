@@ -183,8 +183,10 @@
         spinnerView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         spinnerView.backgroundColor = [UIColor clearColor];
         
+        
         UIImageView *img=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loadingBG.png"]];
         img.frame=CGRectMake((spinnerView.frame.size.width - 164)/2,(spinnerView.frame.size.height - 114)/2, 164, 114);
+        
         [spinnerView addSubview:img];
         
         activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((spinnerView.frame.size.width - 30)/2, img.frame.origin.y + 25 , 30, 30)];

@@ -72,6 +72,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - table cell Action
+
+- (IBAction)btnMoreCommentClick:(id)sender {
+    IsCommentExpended=YES;
+    IsRelatedConentExpended=NO;
+    IsAsignmentExpended=NO;
+    [tblViewContent reloadData];
+    
+}
+- (IBAction)btnMoreRelatedVideoClick:(id)sender {
+    IsRelatedConentExpended=YES;
+    IsCommentExpended=NO;
+    IsAsignmentExpended=NO;
+    [tblViewContent reloadData];
+}
+- (IBAction)btnMoreAssignmentClick:(id)sender {
+    IsAsignmentExpended=YES;
+    IsRelatedConentExpended=NO;
+    IsCommentExpended=NO;
+    [tblViewContent reloadData];
+   
+}
+
+
+
 #pragma mark - tab bar Action
 - (IBAction)btnAssignmentClick:(id)sender {
 }
@@ -120,7 +145,7 @@
 #pragma mark Course Private functions
 -(void) getModuleDetail:(NSString *) txtSearch
 {
-    NSString *userid=[NSString  stringWithFormat:@"%@",[AppGlobal getValueInDefault:key_UserId]];
+    NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance ].userDetail.userId];
     userid=@"1";
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
@@ -210,7 +235,7 @@
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
         [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateNormal];
-        [customView.btnShare    setTitle:resource.shareCounts forState:UIControlStateNormal];
+       // [customView.btnShare    setTitle:resource.shareCounts forState:UIControlStateNormal];
         [customView.btnComment setTitle:resource.commentCounts forState:UIControlStateNormal];
         [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
 
@@ -234,7 +259,7 @@
             customView.lblCmtBy.text=  objComment.commentBy;
             customView.lblCmtTime.text= objComment.commentDate;
             [customView.btnLikeCMT setTitle:objComment.likeCounts forState:UIControlStateNormal];
-            [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
+           // [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
             [customView.btnCommentCMT setTitle:objComment.commentCounts forState:UIControlStateNormal];
             customView.txtCmtView.text= objComment.commentDate;
         }
@@ -244,7 +269,7 @@
            [ customView.lblCmtBy setHidden:YES];
             [customView.lblCmtTime setHidden:YES];
             [customView.btnLikeCMT setHidden:YES];
-            [customView.btnShareCMT   setHidden:YES];
+         //   [customView.btnShareCMT   setHidden:YES];
             [customView.btnCommentCMT setHidden:YES];
             [customView.txtCmtView setHidden:YES];
         }
@@ -273,6 +298,8 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    if(scrollView.tag==10)
+        return ;
     ScrollDirection scrollDirection;
     if (self.lastContentOffset > self.scrollView.contentOffset.y+5)
     {
@@ -388,7 +415,7 @@
         cell.lblStartedon.text=selectedResource.startedOn;
         cell.lblCompletedon.text=selectedResource.completedOn;
         [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
-        [cell.btnShare    setTitle:selectedResource.shareCounts forState:UIControlStateNormal];
+       // [cell.btnShare    setTitle:selectedResource.shareCounts forState:UIControlStateNormal];
         [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
       //  [cell.imgContent setImage:[AppGlobal generateThumbnail:selectedResource.resourceUrl]];
         
@@ -419,6 +446,15 @@
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
+            cell.lblRelatedVideo.hidden =YES;
+        }else{
+            if([selectedResource.comments count]>3)
+            {
+            [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+            }else{
+                cell.btnMore.hidden=YES;
+            }
         }
         return cell;
         
@@ -445,7 +481,17 @@
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
+             cell.lblAssignment.hidden=YES;
+        }else{
+            if([selectedResource.relatedResources count]>3)
+            {
+                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+            }else{
+                cell.btnMore.hidden=YES;
+            }
         }
+
         return cell;
         
     }
@@ -470,6 +516,15 @@
         {
             cell.btnMore.hidden=YES;
             cell.imgDevider.hidden=YES;
+            cell.lblAssignment.hidden=YES;
+        }else{
+            if([assignmentList count]>3)
+            {
+                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[assignmentList count ]-3]  forState:UIControlStateNormal];
+            }else{
+                cell.btnMore.hidden=YES;
+            }
         }
         return cell;
     }
@@ -548,7 +603,7 @@
     if(selectedResource==nil)
         return 0;
     if(indexPath.section==0)
-        return 409.0f;
+        return 460.0f;
     else if(indexPath.section==1 && selectedResource.comments>0)
     {
         Comments *cmt=selectedResource.comments[indexPath.row];
@@ -556,19 +611,19 @@
         float height=0.0f;
         if(indexPath.row==([selectedResource.comments count]-1))
             {
-                height=43.0f;
+                height=80.0f;
             }
         if(labelSize.height>39)
-                return   height=height+90+labelSize.height;
+                return   height=height+80+labelSize.height;
             else
-                return  height=height+90;
+                return  height=height+80;
     }
     else if(indexPath.section==2 )
     {
         float height=0.0f;
         if(indexPath.row==([selectedResource.relatedResources count]-1))
         {
-            height=40.0f;
+            height=75.0f;
         }
        
         return  height=height+96.0f;
@@ -577,12 +632,12 @@
     
     else if(indexPath.section==3)
     {
-        
+//        
         float height=0.0f;
-        if(indexPath.row==([assignmentList count]-1))
-        {
-            height=40.0f;
-        }
+//        if(indexPath.row==([assignmentList count]-1))
+//        {
+//            height=40.0f;
+//        }
         
         return  height=height+96.0f;
 

@@ -21,6 +21,7 @@
 
 
 
+- (IBAction)btnMenuClick:(id)sender;
 
 - (IBAction)btnAssignmentClick:(id)sender;
 - (IBAction)btnCourseClick:(id)sender;

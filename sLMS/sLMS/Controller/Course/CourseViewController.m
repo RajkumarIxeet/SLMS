@@ -12,6 +12,7 @@
 #import "Courses.h"
 #import "Module.h"
 #import "ModuleDetailViewController.h"
+#import "ProfileViewController.h"
 @interface CourseViewController ()
 {
     NSMutableArray *coursesList;
@@ -27,18 +28,21 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // [self  getCourses:@""];
+        
         // Custom initialization
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self  getCourses:@""];
+    btnCourses.selected=YES;
+
     // Do any additional setup after loading the view from its nib.
 //    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
 //    [self.navigationController pushViewController:module animated:YES];
-    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
-    [self.navigationController pushViewController:module animated:YES];
+//    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
+//    [self.navigationController pushViewController:module animated:YES];
 //    [txtSearchBar setBackgroundColor:[UIColor clearColor]];
 //    [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
 //    UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
@@ -88,6 +92,11 @@
 //    return items;
 //}
 #pragma mark - tab bar Action
+- (IBAction)btnMenuClick:(id)sender {
+    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
+    [self.navigationController pushViewController:profileViewController animated:YES];
+}
+
 - (IBAction)btnAssignmentClick:(id)sender {
 }
 
@@ -125,10 +134,13 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel clicked");
+    [searchBar resignFirstResponder];
+    
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Clicked");
+    [searchBar resignFirstResponder];
     [self getCourses:searchBar.text];
    // [self searchTableList];
 }
@@ -136,8 +148,8 @@
 #pragma mark Course Private functions
 -(void) getCourses:(NSString *) txtSearch
 {
-   NSString *userid=[NSString  stringWithFormat:@"%@",[AppGlobal getValueInDefault:key_UserId]];
-    userid=@"1";
+   NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance].userDetail.userId];
+    
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     

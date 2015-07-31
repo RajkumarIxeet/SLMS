@@ -12,6 +12,7 @@
 #import "ForgetPasswordViewController.h"
 #import "RegisterationViewController.h"
 #import "FeedViewController.h"
+#import "CourseViewController.h"
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
     //keyboard
@@ -27,9 +28,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
-    if([AppGlobal getValueInDefault:key_UserId ]!=nil)
+    if([AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
-        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+//        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+
+        CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+
         [self.navigationController pushViewController:viewController animated:YES];
     }
     UIColor *color = [UIColor whiteColor];
@@ -135,49 +139,51 @@
 }
 
 
--(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-    
-    NSLog(@"%@", user);
-    //if user is already sign in Then validate with server.
-    
-    // get user id
-    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
-    
-    //Show Indicator
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-    
-    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-        [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
-        [self loginSucessFullWithFB:userid];
-        
-        //Hide Indicator
-        [appDelegate hideSpinner];
-    }
-                                     failure:^(NSError *error) {
-                                         //Hide Indicator
-                                         [appDelegate hideSpinner];
-                                         NSLog(@"failure JsonData %@",[error description]);
-                                         [self loginError:error];
-                                         [self loginViewShowingLoggedOutUser:loginView];
-
-                                     }];
-    
-    
-    // if user valid then navigate to main screen.
-    
-    //    self.profilePicture.profileID = user.id;
-    //    self.lblUsername.text = user.name;
-    //    self.lblEmail.text = [user objectForKey:@"email"];
-}
-
+//-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
+//    
+//    NSLog(@"%@", user);
+//    //if user is already sign in Then validate with server.
+//    
+//    // get user id
+//    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
+//    
+//    //Show Indicator
+//    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+//    
+//    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+//        [AppSingleton sharedInstance].userDetail=userDetail;
+//        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+//        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
+//        [self loginSucessFullWithFB:userid];
+//        
+//        //Hide Indicator
+//        [appDelegate hideSpinner];
+//    }
+//                                     failure:^(NSError *error) {
+//                                         //Hide Indicator
+//                                         [appDelegate hideSpinner];
+//                                         NSLog(@"failure JsonData %@",[error description]);
+//                                         [self loginError:error];
+//                                         [self loginViewShowingLoggedOutUser:loginView];
+//
+//                                     }];
+//    
+//    
+//    // if user valid then navigate to main screen.
+//    
+//    //    self.profilePicture.profileID = user.id;
+//    //    self.lblUsername.text = user.name;
+//    //    self.lblEmail.text = [user objectForKey:@"email"];
+//}
+//
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
-    
+   
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+    CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+
+//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
@@ -221,10 +227,10 @@
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
         
         [[appDelegate _engine] loginWithUserName:loginID password:password  rememberMe:[btnRemember isSelected]
-                                         success:^(UserDetail *userDetail) {
-                                             [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-//                                             [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-//                                             [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+                                         success:^(UserDetails *userDetail) {
+                                             [AppSingleton sharedInstance].userDetail=userDetail;
+                                             [AppSingleton sharedInstance].isUserLoggedIn=YES;
+                                             [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
                                              [self loginSucessFull];
                                              
                                              //Hide Indicator
@@ -263,7 +269,9 @@
     [txtUsername setText:@""];
     [txtPassword setText:@""];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+    CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+
+//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

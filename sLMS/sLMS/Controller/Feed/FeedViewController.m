@@ -55,7 +55,7 @@
 - (IBAction)btnLogout:(id)sender {
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    [AppGlobal setValueInDefault:key_UserId value:nil ];
+   
 }
 //- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
 //    UIViewController *vc = tabBarController.selectedViewController;

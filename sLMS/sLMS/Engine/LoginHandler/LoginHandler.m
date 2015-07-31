@@ -12,7 +12,7 @@
 
 
 //User Login
--(void)loginWithUserName:(NSString*)userName password:(NSString*)password  success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+-(void)loginWithUserName:(NSString*)userName password:(NSString*)password  success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     
     
     NSDictionary *parameters = @{@"userName":userName,
@@ -31,8 +31,10 @@
         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
             
             //Create Global User Detail Data Model
+           // NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:responseDic];
+            [AppGlobal  writeUserDataOnFile:responseDic];
             
-            UserDetail  *userDetail= [[UserDetail alloc]init];
+            UserDetails  *userDetail= [[UserDetails alloc]init];
             userDetail.userId= [responseDic objectForKey:@"userId"];
             userDetail.title=[responseDic objectForKey:@"title"];
             userDetail.username=[responseDic objectForKey:@"userName"];
@@ -45,7 +47,9 @@
             userDetail.homeRoomName=[responseDic objectForKey:@"homeRoomName"];
             userDetail.schoolId=[responseDic objectForKey:@"schoolId"];
             userDetail.schoolName=[responseDic objectForKey:@"schoolName"];
+            userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
             userDetail.address=[responseDic objectForKey:@"address"];
+            userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
             //call Block function
             success(userDetail);
         }
@@ -68,7 +72,7 @@
 //User Logout
 -(void)logout:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure{
     
-    UserDetail *userDetail= [[UserDetail alloc]init];
+    UserDetails *userDetail= [[UserDetails alloc]init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -141,7 +145,7 @@
 
 
 //User Register
- -(void)registerWithUserDetail:(UserDetail*)user success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+ -(void)registerWithUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
          user.address=@"";
          
          NSDictionary *parameters = @{@"userName":user.userEmail,@"firstName":user.userFirstName,@"lastName":user.userLastName,@"emailId":user.userEmail,@"adminEmailId":user.adminEmailId,@"schoolId":user.schoolId,@"schoolName":user.schoolName,@"address":user.address,@"classId":user.classId,@"className":user.className,@"homeRoomId":user.homeRoomId,@"homeRoomName":user.homeRoomName,@"title":user.title,@"userPassword":user.userPassword};
@@ -158,6 +162,8 @@
              if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
                  
                  //Create new  User Detail Data Model
+                // NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:responseDic];
+                 [AppGlobal  writeUserDataOnFile:responseDic];
                  
                  user.userId= [responseDic objectForKey:@"userId"];
                                  //call Block function
@@ -181,7 +187,7 @@
      }
 //User Validation From FB
 
--(void)FBloginWithUserID:(NSString*)userid  success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+-(void)FBloginWithUserID:(NSString*)userid  success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     
 //    UserDetail *userDetail= [[UserDetail alloc]init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -200,9 +206,14 @@
         //Success Full Login
         if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
             
+            // set the drop down master data;
+//            NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:responseDic];
+//            [AppGlobal  setDropdownList:USER_DATA andData:userData];
+            [AppGlobal  writeUserDataOnFile:responseDic];
+            
             //Create Global User Detail Data Model
             
-            UserDetail  *userDetail= [[UserDetail alloc]init];
+            UserDetails  *userDetail= [[UserDetails alloc]init];
             userDetail.userId= [responseDic objectForKey:@"userId"];
             userDetail.title=[responseDic objectForKey:@"title"];
             userDetail.username=[responseDic objectForKey:@"userName"];
@@ -216,6 +227,8 @@
             userDetail.schoolId=[responseDic objectForKey:@"schoolId"];
             userDetail.schoolName=[responseDic objectForKey:@"schoolName"];
             userDetail.address=[responseDic objectForKey:@"address"];
+            userDetail.adminEmailId=[responseDic objectForKey:@"adminEmail"];
+            userDetail.userFBID=[responseDic objectForKey:@"userFbId"];
             //call Block function
             success(userDetail);
         }
@@ -236,7 +249,7 @@
 
 -(void)SetFBloginWithUserID:(NSString*)username FBID:(NSString*)fbid success:(void (^)(bool status))success  failure:(void (^)(NSError *error))failure{
     
-    UserDetail *userDetail= [[UserDetail alloc]init];
+    UserDetails *userDetail= [[UserDetails alloc]init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];

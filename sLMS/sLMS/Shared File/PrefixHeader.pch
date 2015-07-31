@@ -20,4 +20,5 @@
 #import "UserDetail.h"
 #import "Response.h"
 #import "PureLayout.h"
+#import "AppSingleton.h"
 #endif

@@ -18,21 +18,21 @@
 
 
 //User Login with credentials (user id and password)
--(void)loginWithUserName:(NSString*)userName password:(NSString*)password rememberMe:(BOOL)rememberMe success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+-(void)loginWithUserName:(NSString*)userName password:(NSString*)password rememberMe:(BOOL)rememberMe success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     
     
     LoginHandler *login=[[LoginHandler alloc] init];
     // convert to AES 256 Exncryption
     NSString  *encpassword=password;//=  [password AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
     //  NSString  *decpassword=  [encpassword AES256DecryptWithKey:@"m@zd@10017017Int33r@IT"];
-    [login loginWithUserName:userName password:encpassword  success:^(UserDetail *userDetail){
+    [login loginWithUserName:userName password:encpassword  success:^(UserDetails *userDetail){
         
-        if (rememberMe) {  //Save Login Detail In user default
-            [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:YES]];
-        }
-        else{//Remove Login Detail In user default
-            [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
-        }
+//        if (rememberMe) {  //Save Login Detail In user default
+//            [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:YES]];
+//        }
+//        else{//Remove Login Detail In user default
+           // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+       // }
         
         [AppGlobal setValueInDefault:key_loginId value:userName];
         [AppGlobal setValueInDefault:key_loginPassword value:password];
@@ -40,7 +40,7 @@
         success(userDetail);
         
     }failure:^(NSError *error){
-        [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+       // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
         failure(error);
     }];
 }
@@ -78,33 +78,33 @@
 
 
 //User Register
--(void)registerWithUserDetail:(UserDetail*)user success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+-(void)registerWithUserDetail:(UserDetails*)user success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     
     LoginHandler *login=[[LoginHandler alloc] init];
  //   user.userPassword=  [user.userPassword AES256EncryptWithKey:@"m@zd@10017017Int33r@IT"];
-    [login registerWithUserDetail:user  success:^(UserDetail *userDetail){
+    [login registerWithUserDetail:user  success:^(UserDetails *userDetail){
         
        
         
         success(userDetail);
         
     }failure:^(NSError *error){
-        [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+       // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
         failure(error);
     }];
 }
 //FB Varification by Server
--(void)FBloginWithUserID:(NSString*)userid success:(void (^)(UserDetail *userDetail))success  failure:(void (^)(NSError *error))failure{
+-(void)FBloginWithUserID:(NSString*)userid success:(void (^)(UserDetails *userDetail))success  failure:(void (^)(NSError *error))failure{
     
     LoginHandler *login=[[LoginHandler alloc] init];
-    [login FBloginWithUserID:userid  success:^(UserDetail *userDetail){
+    [login FBloginWithUserID:userid  success:^(UserDetails *userDetail){
         
         
         
         success(userDetail);
         
     }failure:^(NSError *error){
-        [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+        //[AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
         failure(error);
     }];
 }
@@ -118,7 +118,7 @@
         success(status);
         
     }failure:^(NSError *error){
-        [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
+       // [AppGlobal setValueInDefault:key_rememberMe value:[NSNumber numberWithBool:NO]];
         failure(error);
     }];
 

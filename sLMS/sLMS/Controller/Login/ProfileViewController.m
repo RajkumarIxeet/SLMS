@@ -1,22 +1,37 @@
 //
-//  MoreViewController.m
+//  ProfileViewController.m
 //  sLMS
 //
-//  Created by Mayank on 27/07/15.
+//  Created by Mayank on 30/07/15.
 //  Copyright (c) 2015 Mayank. All rights reserved.
 //
 
-#import "MoreViewController.h"
-
-@interface MoreViewController ()
+#import "ProfileViewController.h"
+#import "LoginViewController.h"
+#import "CourseViewController.h"
+@interface ProfileViewController ()
 
 @end
 
-@implementation MoreViewController
-
+@implementation ProfileViewController
+@synthesize lblClass,lblEmail,lblFirstName,lblLastName,lblHomeRoom,lblSchoolAdminEmail,lblSchoolName,btnLogout,fbview;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self toggleHiddenState:YES];
+    // self.lblLoginStatus.text = @"";
+   
+    if(  [AppSingleton sharedInstance].isUserFBLoggedIn ==YES)
+    {
+        self.fbview.hidden=YES;
+      
+    }else{
+        self.fbview.hidden=NO;
+        self.fbview.delegate = self;
+        self.fbview.readPermissions = @[@"public_profile", @"email"];
+        [self changeFrameAndBackgroundImg];
+    }
+    [self setUserProfile];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,72 +48,63 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)btnFBClick:(id)sender {
-    
-    // get user id
-    NSString *username=  [AppGlobal getValueInDefault:key_UserId];
-    
-    //Show Indicator
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-    [[appDelegate _engine] SetFBloginWithUserID:username FBID:[AppGlobal getValueInDefault:key_FBUSERID]  success:^(bool status){
-        
-        
-    }failure:^(NSError *error){
-      
-        
-    }];
-    
-    
-}
-
-- (IBAction)btnLogoutClick:(id)sender {
-}
-
 -(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
     
     NSLog(@"%@", user);
     //if user is already sign in Then validate with server.
     
     // get user id
-    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
-    
+    NSString *fbuserid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
+    //set user Profile
     //Show Indicator
+    NSString *username=[AppSingleton sharedInstance].userDetail.userEmail;
+   
+    
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-        [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
-        [self loginSucessFullWithFB:userid];
-        _fbview.hidden=YES;
-        _btnFB.hidden=NO;
+    [[appDelegate _engine] SetFBloginWithUserID:username FBID:fbuserid success:^(bool status) {
+        self.fbview.hidden=YES;
+        [self loginSucessFullWithFB:fbuserid];
         //Hide Indicator
         [appDelegate hideSpinner];
-    }
-                                     failure:^(NSError *error) {
+
+
+    } failure:^(NSError *error) {
                                          //Hide Indicator
                                          [appDelegate hideSpinner];
                                          NSLog(@"failure JsonData %@",[error description]);
-                                         [self loginError:error];
                                          [self loginViewShowingLoggedOutUser:loginView];
-                                         _fbview.hidden=NO;
-                                         _btnFB.hidden=YES;
+                                         
+                                         [self loginError:error];
+                                         
                                      }];
     
-    
-    // if user valid then navigate to main screen.
-    
-    //    self.profilePicture.profileID = user.id;
-    //    self.lblUsername.text = user.name;
-    //    self.lblEmail.text = [user objectForKey:@"email"];
 }
-
+-(void)setUserProfile {
+   // UserDetails *user=[AppGlobal readUserDetail];
+    UserDetails *user=[AppSingleton sharedInstance].userDetail;
+    
+    lblFirstName.text=user.userFirstName;
+    lblLastName.text=user.userLastName;
+    lblEmail.text=user.userEmail;
+    lblSchoolName.text=user.schoolName;
+    lblSchoolAdminEmail.text=user.adminEmailId;
+    lblClass.text=user.className;
+    lblHomeRoom.text=user.homeRoomName;
+    if(user.userFBID==nil)
+    {
+        //need to validate
+        fbview.hidden=NO;
+    }else{
+    //FB allready validated
+        fbview.hidden=YES;
+    }
+    }
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
     
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
-
+    
 }
 -(void)loginError:(NSError*)error{
     
@@ -126,7 +132,7 @@
     
     //  _btnFacebook.frame = CGRectMake(0, _btnFacebook.frame.origin.y+14, _btnFacebook.frame.size.width, 120);
     //  _btnFacebook.frame = CGRectMake(320/2 - 93/2, self.view.frame.size.height -200, 93, 40);
-    for (id loginObject in _fbview.subviews)
+    for (id loginObject in fbview.subviews)
     {
         if ([loginObject isKindOfClass:[UIButton class]])
         {
@@ -155,5 +161,35 @@
     [FBSession.activeSession close];
     [FBSession setActiveSession:nil];
     [self toggleHiddenState:YES];
+}
+- (IBAction)btnLogoutClick:(id)sender {
+    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
+    {
+        [self loginViewShowingLoggedOutUser:fbview];
+    }
+    [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+    [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    LoginViewController *viewCont= [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:viewCont animated:YES];
+  
+}
+- (IBAction)btnAssignmentClick:(id)sender {
+}
+
+- (IBAction)btnCourseClick:(id)sender {
+       CourseViewController *courseView= [[CourseViewController alloc]init];
+       [self.navigationController pushViewController:courseView animated:YES];
+    //    //    [self.navigationController pushViewController:module animated:YES];
+//    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
+//    [self.navigationController pushViewController:module animated:YES];
+    
+}
+
+- (IBAction)btnNotificationClick:(id)sender {
+}
+
+- (IBAction)btnUpdateClick:(id)sender {
+}
+- (IBAction)btnMoreClick:(id)sender {
 }
 @end

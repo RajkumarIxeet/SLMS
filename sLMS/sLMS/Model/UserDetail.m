@@ -8,6 +8,8 @@
 
 #import "UserDetail.h"
 
-@implementation UserDetail
-@synthesize userId,username,userFirstName,userLastName,userRole,userEmail,userFBEmail,userPassword,schoolId,schoolName,className,classId,homeRoomId,homeRoomName,address,adminEmailId,title;
+@implementation UserDetails
+@synthesize userId,username,userFirstName,userLastName,userRole,userEmail,userFBID,userPassword,schoolId,schoolName,className,classId,homeRoomId,homeRoomName,address,adminEmailId,title;
+
+
 @end

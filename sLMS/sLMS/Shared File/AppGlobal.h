@@ -71,5 +71,6 @@
 + (BOOL)validateEmailWithString:(NSString*)email;
 //calculate the size
 +(CGSize)getTheExpectedSizeOfLabel:(NSString*) labelstring ;
-
++(void)writeUserDataOnFile:(NSDictionary *)arrayData;
++(UserDetails*)readUserDetail;
 @end

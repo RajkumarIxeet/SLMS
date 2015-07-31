@@ -327,7 +327,7 @@
                         <action selector="btnLogout:" destination="-1" eventType="touchUpInside" id="vmJ-QF-nDH"/>
                     </connections>
                 </button>
-                <searchBar contentMode="redraw" placeholder="Search" backgroundImage="258EBB69-3AFD-4F84-876A-1A7819E407C3" translatesAutoresizingMaskIntoConstraints="NO" id="5Zr-Lg-ccF">
+                <searchBar contentMode="redraw" placeholder="Search" backgroundImage="4B2D63D9-4D69-46A7-BAAC-EB2C8C44C596" translatesAutoresizingMaskIntoConstraints="NO" id="5Zr-Lg-ccF">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
@@ -418,7 +418,7 @@
         </view>
     </objects>
     <resources>
-        <image name="258EBB69-3AFD-4F84-876A-1A7819E407C3" width="230" height="44">
+        <image name="4B2D63D9-4D69-46A7-BAAC-EB2C8C44C596" width="230" height="44">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

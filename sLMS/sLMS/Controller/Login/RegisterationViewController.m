@@ -10,7 +10,7 @@
 #import "CustomKeyboard.h"
 #import "UserDetail.h"
 #import "FeedViewController.h"
-
+#import "CourseViewController.h"
 @interface RegisterationViewController () <CustomKeyboardDelegate>
 {
     //keyboard
@@ -36,9 +36,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
-    if([AppGlobal getValueInDefault:key_UserId ]!=nil)
+    if([AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
-        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+//        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+        CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+
         [self.navigationController pushViewController:viewController animated:YES];
     }
     customKeyboard = [[CustomKeyboard alloc] init];
@@ -79,7 +81,7 @@
 
 
 - (IBAction)btnSubmitClick:(id)sender {
-    UserDetail *usrDetail= [[UserDetail alloc]init];
+    UserDetails *usrDetail= [[UserDetails alloc]init];
     
    usrDetail.userEmail=[[txtEmail text] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -98,11 +100,11 @@
     usrDetail.homeRoomId=selectedRoomId;
     usrDetail.adminEmailId=txtAdminEmail.text;
     
-   
-    if ([usrDetail.userFirstName length] <= 0){
+    if ([usrDetail.title length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
-    } else if ([usrDetail.title length] <= 0){
-        [AppGlobal showAlertWithMessage:MISSING_TITLE title:@""];
+    }
+   else if ([usrDetail.userFirstName length] <= 0){
+        [AppGlobal showAlertWithMessage:MISSING_FIRST_NAME title:@""];
     }
     else if ([usrDetail.userLastName length] <= 0){
         [AppGlobal showAlertWithMessage:MISSING_LAST_NAME title:@""];
@@ -150,18 +152,20 @@
         //Show Indicator
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
         
-        [[appDelegate _engine] registerWithUserDetail:usrDetail  success:^(UserDetail *userDetail) {
+        [[appDelegate _engine] registerWithUserDetail:usrDetail  success:^(UserDetails *userDetail) {
                                              
-            [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-            [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-            [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+        
+
                                              //Hide Indicator
                                              [appDelegate hideSpinner];
             //navigate to feed view Controller
             [AppGlobal showAlertWithMessage:REGISTER_SUCCESS_MSG title:@""];
-            
-            FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-            [self.navigationController pushViewController:viewController animated:YES];
+            LoginViewController *loginViewController= [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil];
+            [self.navigationController pushViewController:loginViewController animated:YES];
+//            FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+//            CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+//
+//            [self.navigationController pushViewController:viewController animated:YES];
                                          }
                                          failure:^(NSError *error) {
                                              //Hide Indicator
@@ -294,50 +298,53 @@
 }
 
 
--(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-    
-    NSLog(@"%@", user);
-    //if user is already sign in Then validate with server.
-    
-    // get user id
-    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
-    
-    //Show Indicator
-    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-    
-    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-        [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-//        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-//        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
-        [self loginSucessFullWithFB:userid];
-        
-        //Hide Indicator
-        [appDelegate hideSpinner];
-    }
-                                     failure:^(NSError *error) {
-                                         //Hide Indicator
-                                         [appDelegate hideSpinner];
-                                         NSLog(@"failure JsonData %@",[error description]);
-                                         [self loginViewShowingLoggedOutUser:loginView];
-
-                                         [self loginError:error];
-                                         
-                                     }];
-    
-    
-    // if user valid then navigate to main screen.
-    
-    //    self.profilePicture.profileID = user.id;
-    //    self.lblUsername.text = user.name;
-    //    self.lblEmail.text = [user objectForKey:@"email"];
-}
+//-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
+//    
+//    NSLog(@"%@", user);
+//    //if user is already sign in Then validate with server.
+//    
+//    // get user id
+//    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
+//    
+//    //Show Indicator
+//    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+//    
+//    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+//        [AppSingleton sharedInstance].userDetail=userDetail;
+//        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+//        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
+//
+//        [self loginSucessFullWithFB:userid];
+//        
+//        //Hide Indicator
+//        [appDelegate hideSpinner];
+//    }
+//                                     failure:^(NSError *error) {
+//                                         //Hide Indicator
+//                                         [appDelegate hideSpinner];
+//                                         NSLog(@"failure JsonData %@",[error description]);
+//                                         [self loginViewShowingLoggedOutUser:loginView];
+//
+//                                         [self loginError:error];
+//                                         
+//                                     }];
+//    
+//    
+//    // if user valid then navigate to main screen.
+//    
+//    //    self.profilePicture.profileID = user.id;
+//    //    self.lblUsername.text = user.name;
+//    //    self.lblEmail.text = [user objectForKey:@"email"];
+//}
 
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
     
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
+    CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
+
+//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
@@ -529,7 +536,8 @@
         return [arrayAllData count];
         
     }break;
-        
+    
+    break;
     default:
         [NSException raise:NSGenericException format:@"Unexpected FormatType."];
         
@@ -612,7 +620,7 @@
                 return [responseDic objectForKey:@"Title"];
                 break;
             }
-
+           
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
     }

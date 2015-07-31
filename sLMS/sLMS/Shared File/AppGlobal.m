@@ -144,7 +144,67 @@
     [stream write:data.bytes maxLength:data.length];
     [stream close];
     stream = nil;
+  
     
+}
++(void)writeUserDataOnFile:(NSDictionary *)arrayData
+{
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0],@"userProfile" ];
+    
+    NSData  *data=[NSJSONSerialization dataWithJSONObject:arrayData options:0 error:nil];
+    NSOutputStream *stream = [[NSOutputStream alloc] initToFileAtPath:filePath append:NO];
+    [stream open];
+    [stream write:data.bytes maxLength:data.length];
+    [stream close];
+    stream = nil;
+
+    
+}
++(UserDetails *)readUserDetail
+{
+    
+    NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *filePath =  [NSString stringWithFormat:@"%@/%@.txt",[arr objectAtIndex:0 ],@"userProfile"];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary *favArray = [NSJSONSerialization JSONObjectWithData:fileData options:NSJSONReadingMutableContainers error:nil];
+   return  [self getUserDetailObject:favArray];
+  
+}
++(UserDetails *)getUserDetailObject:(NSDictionary *)responseDic
+{
+    NSLog(@"%@",[responseDic valueForKey:@"firstName"]);
+//    UserDetail  *userDetail= [[UserDetail alloc]init];
+//    userDetail.userId= [responseDic valueForKey:@"userId"];
+//    userDetail.title=[responseDic valueForKey:@"title"];
+//    userDetail.username=[responseDic valueForKey:@"userName"];
+//    userDetail.userFirstName=[responseDic valueForKey:@"firstName"];
+//    userDetail.userLastName=[responseDic valueForKey:@"lastName"];
+//    userDetail.userEmail=[responseDic valueForKey:@"emailId"];
+//    userDetail.classId= [responseDic valueForKey:@"classId"];
+//    userDetail.className=[responseDic valueForKey:@"className"];
+//    userDetail.homeRoomId= [responseDic valueForKey:@"homeRoomId"];
+//    userDetail.homeRoomName=[responseDic valueForKey:@"homeRoomName"];
+//    userDetail.schoolId=[responseDic valueForKey:@"schoolId"];
+//    userDetail.schoolName=[responseDic valueForKey:@"schoolName"];
+//    userDetail.address=[responseDic valueForKey:@"address"];
+//    userDetail.userFBID=[responseDic valueForKey:@"userfbid"];
+    UserDetails  *user= [[UserDetails alloc]init];
+    user.userId= [responseDic objectForKey:@"userId"];
+    user.title=[responseDic objectForKey:@"title"];
+    user.username=[responseDic objectForKey:@"userName"];
+    user.userFirstName=[responseDic objectForKey:@"firstName"];
+    user.userLastName=[responseDic objectForKey:@"lastName"];
+    user.userEmail=[responseDic objectForKey:@"emailId"];
+    user.classId= [responseDic objectForKey:@"classId"];
+    user.className=[responseDic objectForKey:@"className"];
+    user.homeRoomId= [responseDic objectForKey:@"homeRoomId"];
+    user.homeRoomName=[responseDic objectForKey:@"homeRoomName"];
+    user.schoolId=[responseDic objectForKey:@"schoolId"];
+    user.schoolName=[responseDic objectForKey:@"schoolName"];
+    user.address=[responseDic objectForKey:@"address"];
+  
+    return user;
 }
 //
 //Manage Get/ Set Drop Down List
@@ -155,6 +215,7 @@
     
     
     switch(dropdownName) {
+      
         case SCHOOL_DATA:{
             
             NSArray *arr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -212,6 +273,7 @@
         case COURSE_DATA:
             fileName = @"CourseList";
             break;
+        
 
         default:
             [NSException raise:NSGenericException format:@"Unexpected FormatType."];
