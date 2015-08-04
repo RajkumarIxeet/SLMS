@@ -39,19 +39,6 @@
     btnCourses.selected=YES;
 
     // Do any additional setup after loading the view from its nib.
-//    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
-//    [self.navigationController pushViewController:module animated:YES];
-//    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
-//    [self.navigationController pushViewController:module animated:YES];
-//    [txtSearchBar setBackgroundColor:[UIColor clearColor]];
-//    [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
-//    UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
-//    [txfSearchField setBackgroundColor:[UIColor clearColor]];
-//    //[txfSearchField setLeftView:UITextFieldViewModeNever];
-//    [txfSearchField setBorderStyle:UITextBorderStyleNone];
-//    [txfSearchField setTextColor:[UIColor whiteColor]];
-    //  [txfSearchField setFont:(UIFont fontWithName:@"Heal" size:<#(CGFloat)#>)]
-    //topItems = [[NSArray alloc] initWithArray:[self topLevelItems]];
    
     
 }
@@ -231,17 +218,10 @@
         CGFloat stepSize = 0.01f;
       
         NSCalendar* calendar = [NSCalendar currentCalendar];
-      //  NSDate *dt=[NSDateFormatter date] course.startedOn;
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-        [dateFormat setLocale:[NSLocale currentLocale]];
-        [dateFormat setDateFormat:@"yyyy-MM-dd"];
-        [dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
         
-        NSDate *date = [dateFormat dateFromString: course.startedOn];
+        NSDate *date = [AppGlobal convertStringDateToNSDate: course.startedOn];
         
-       // NSDate *currentDate = [NSDate dt];
-//        NSDateComponents* components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:dt]; // Get necessary date components
+ 
 
         NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  date]; // Get necessary date components
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -272,13 +252,14 @@
         
          CGFloat stepSize = 0.01f;
         // Convert string to date object
-        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-        [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
-        [dateFormat setLocale:[NSLocale currentLocale]];
-        [dateFormat setDateFormat:@"yyyy-MM-dd"];
-        [dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
+//        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//        [dateFormat setTimeZone:[NSTimeZone systemTimeZone]];
+//        [dateFormat setLocale:[NSLocale currentLocale]];
+//       [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.S"];
+//        [dateFormat setFormatterBehavior:NSDateFormatterBehaviorDefault];
         
-        NSDate *date = [dateFormat dateFromString: module.startedOn];
+       
+        NSDate *date = [AppGlobal convertStringDateToNSDate: module.startedOn];
         
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  date]; // Get necessary date components
@@ -313,6 +294,14 @@
     && indexPath.row <= currentExpandedIndex + [[moduleArray objectAtIndex:currentExpandedIndex] count];
 
     if (isChild) {
+         Courses *course=      coursesList[currentExpandedIndex];
+        Module *module=      course.moduleList[indexPath.row-currentExpandedIndex-1];
+        
+    ModuleDetailViewController *moduleview= [[ModuleDetailViewController alloc]init];
+    moduleview.selectedCourse=course;
+    moduleview.selectedModule=module;
+    [self.navigationController pushViewController:moduleview animated:YES];
+
     NSLog(@"A child was tapped, do what you will with it");
     return;
     }

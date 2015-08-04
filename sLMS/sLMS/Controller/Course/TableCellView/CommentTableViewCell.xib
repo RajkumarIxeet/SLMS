@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0aN-f4-vI8" userLabel="imgCmtBy">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0aN-f4-vI8" userLabel="imgCmtBy">
                         <rect key="frame" x="15" y="8" width="30" height="30"/>
                         <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -34,7 +34,7 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urH-QY-Byu" userLabel="lblCmtby">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urH-QY-Byu" userLabel="lblCmtby">
                         <rect key="frame" x="56" y="8" width="109" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="gfX-1c-BSs"/>
@@ -53,7 +53,7 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuy-42-Oea" userLabel="lblCmtDate">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuy-42-Oea" userLabel="lblCmtDate">
                         <rect key="frame" x="168" y="8" width="102" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="23T-i0-mQu"/>
@@ -75,7 +75,7 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF9-K0-drP" userLabel="lblCmtText">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mF9-K0-drP" userLabel="lblCmtText">
                         <rect key="frame" x="56" y="30" width="249" height="52"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
@@ -83,7 +83,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-NV-lwD" userLabel="btnLike">
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rc9-NV-lwD" userLabel="btnLike">
                         <rect key="frame" x="203" y="90" width="34" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="feW-4f-0qa"/>
@@ -104,7 +104,7 @@
                             </mask>
                         </variation>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgS-EM-T3v" userLabel="btnComment">
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DgS-EM-T3v" userLabel="btnComment">
                         <rect key="frame" x="271" y="90" width="34" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="8yA-PM-iml"/>
@@ -125,7 +125,7 @@
                             </mask>
                         </variation>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOV-88-Rkq" userLabel="imgHalfDevider">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOV-88-Rkq" userLabel="imgHalfDevider">
                         <rect key="frame" x="56" y="118" width="266" height="1"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -142,7 +142,7 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tBM-bH-MgC" userLabel="imgDevider">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tBM-bH-MgC" userLabel="imgDevider">
                         <rect key="frame" x="-1" y="165" width="324" height="1"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -159,7 +159,7 @@
                             </mask>
                         </variation>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5G-Ti-fad">
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5G-Ti-fad">
                         <rect key="frame" x="116" y="129" width="88" height="28"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="28" id="FyW-Ye-NWo"/>
@@ -240,6 +240,9 @@
                         <exclude reference="oES-EN-JZw"/>
                     </mask>
                     <mask key="constraints">
+                        <exclude reference="C7b-2h-zTm"/>
+                        <exclude reference="Ggx-so-bdc"/>
+                        <exclude reference="euz-XQ-ke1"/>
                         <exclude reference="JTk-sG-yoc"/>
                         <exclude reference="hWi-m5-Ecb"/>
                         <exclude reference="Tct-xZ-fEy"/>
@@ -260,9 +263,6 @@
                         <exclude reference="csA-vr-tNy"/>
                         <exclude reference="dmJ-ip-ULg"/>
                         <exclude reference="iVh-XU-CtY"/>
-                        <exclude reference="C7b-2h-zTm"/>
-                        <exclude reference="Ggx-so-bdc"/>
-                        <exclude reference="euz-XQ-ke1"/>
                         <exclude reference="SBJ-ry-nUP"/>
                         <exclude reference="TK2-1A-dkw"/>
                         <exclude reference="P5o-4C-dyV"/>
@@ -277,6 +277,9 @@
                         <include reference="oES-EN-JZw"/>
                     </mask>
                     <mask key="constraints">
+                        <include reference="C7b-2h-zTm"/>
+                        <include reference="Ggx-so-bdc"/>
+                        <include reference="euz-XQ-ke1"/>
                         <include reference="JTk-sG-yoc"/>
                         <include reference="hWi-m5-Ecb"/>
                         <include reference="Tct-xZ-fEy"/>
@@ -297,9 +300,6 @@
                         <include reference="csA-vr-tNy"/>
                         <include reference="dmJ-ip-ULg"/>
                         <include reference="iVh-XU-CtY"/>
-                        <include reference="C7b-2h-zTm"/>
-                        <include reference="Ggx-so-bdc"/>
-                        <include reference="euz-XQ-ke1"/>
                         <include reference="SBJ-ry-nUP"/>
                         <include reference="TK2-1A-dkw"/>
                         <include reference="P5o-4C-dyV"/>

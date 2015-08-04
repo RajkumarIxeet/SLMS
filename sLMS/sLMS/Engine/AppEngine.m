@@ -156,5 +156,52 @@
         failure(error);
     }];
 }
+#pragma Comment and Like on Resource
+//Comment and Like on Resource
+-(void)setCommentOnResource:(NSString*)resourceId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    CourseHandler *course=[[ CourseHandler alloc] init];
+    [course setCommentOnResource:resourceId AndCommentText:txtComment success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+}
+-(void)setLikeOnResource:(NSString*)resourceId success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    CourseHandler *course=[[ CourseHandler alloc] init];
+    [course setLikeOnResource:resourceId success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+
+}
+
+#pragma Comment and Like on Comment
+//Comment and Like on Comment
+-(void)setCommentOnComment:(NSString*)commentId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    CourseHandler *course=[[ CourseHandler alloc] init];
+    [course setCommentOnComment:commentId AndCommentText:txtComment success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+    } failure:^(NSError *error){
+        failure(error);
+    }];
+}
+-(void)setLikeOnComment:(NSString*)commentId  success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    CourseHandler *course=[[ CourseHandler alloc] init];
+    [course setLikeOnComment:commentId  success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+}
 
 @end

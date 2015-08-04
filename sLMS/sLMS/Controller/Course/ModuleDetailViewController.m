@@ -11,6 +11,7 @@
 #import "ContentCellTableViewCell.h"
 #import "AssignmentTableViewCell.h"
 #import "CommentTableViewCell.h"
+#import "AppEngine.h"
 @interface ModuleDetailViewController ()
 {
     NSMutableArray *contentList;
@@ -19,13 +20,19 @@
     BOOL IsCommentExpended;
     BOOL IsAsignmentExpended;
     BOOL IsRelatedConentExpended;
+    CGRect frame;
+    ActionOn    actionOn;
+    NSString    *selectedResourceId,*selectedCommentId;
+    NSString    *searchText;
    
 }
+
 
 @property (nonatomic, strong) NSMutableArray *pageViews;
 @property (nonatomic, strong) NSArray *pageImages;
 //somewhere in the header
 @property (nonatomic, assign) CGFloat lastContentOffset;
+@property (nonatomic, assign) CGFloat lastContentOffsetOfTable;
 - (void)loadVisiblePages;
 - (void)loadPage:(NSInteger)page;
 - (void)purgePage:(NSInteger)page;
@@ -38,7 +45,7 @@
 @synthesize pageControl = _pageControl;
 @synthesize pageViews = _pageViews;
 @synthesize pageImages = _pageImages;
-
+@synthesize step,title,txtViewCMT;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -46,14 +53,16 @@
     
     
     // Set up the array to hold the views for each page
-    Courses *course=[[Courses alloc]init];
-    course.courseId=@"1";
-    self.selectedCourse=course;
+   
   self.scrollView.clipsToBounds=NO;
-    Module *module=[[Module alloc]init];
-    module.moduleId=@"1";
-    self.selectedModule=module;
-    [self getModuleDetail:@""];
+      [self getModuleDetail:@""];
+    
+    CGRect frame1 = self.cmtview.frame;
+    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+     frame=frame1;
+    self.cmtview.frame=frame1;
+    [self.view addSubview:self.cmtview];
+    btnCourses.selected=YES;
 
 }
 
@@ -62,7 +71,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    /* Listen for keyboard */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    step=0;
+   self.lastContentOffsetOfTable=tblViewContent.contentOffset.y;;
 
+}
+
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    /* remove for keyboard */
+    [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillShowNotification object:nil];
+   
+    [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
+ 
+}
 /*
 #pragma mark - Navigation
 
@@ -94,10 +121,81 @@
     [tblViewContent reloadData];
    
 }
+#pragma mark - Comment and like on Resource
 
+- (IBAction)btnCommentOnResourceClick:(id)sender {
+    UIButton *btn=(UIButton *)sender;
+    selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    actionOn=Resource;
+    [txtViewCMT becomeFirstResponder];
+    
 
+}
+- (IBAction)btnLikeOnResourceClick:(id)sender {
+    // call the service
+    UIButton *btn=(UIButton *)sender;
+    selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+
+        [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    
+        [[appDelegate _engine] setLikeOnResource:selectedResourceId  success:^(BOOL success) {
+    
+    
+           
+
+            //Hide Indicator
+            [appDelegate hideSpinner];
+            [self getModuleDetail:searchText];
+        }
+                                            failure:^(NSError *error) {
+                                                //Hide Indicator
+                                                [appDelegate hideSpinner];
+                                                NSLog(@"failure JsonData %@",[error description]);
+                                                 [self loginError:error];
+                                                
+    
+                                            }];
+}
+- (IBAction)btnShareOnResourceClick:(id)sender {
+}
+#pragma mark - Reply and like on Comment
+
+- (IBAction)btnReplyOnCommentClick:(id)sender {
+    UIButton *btn=(UIButton *)sender;
+    selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    actionOn=Comment;
+    [txtViewCMT becomeFirstResponder];
+
+}
+- (IBAction)btnLikeOnCommentClick:(id)sender {
+    UIButton *btn=(UIButton *)sender;
+    selectedCommentId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
+    
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    
+    [[appDelegate _engine] setLikeOnComment:selectedCommentId success:^(BOOL success) {
+       //Hide Indicator
+        
+        [appDelegate hideSpinner];
+           [self getModuleDetail:searchText];
+    }
+                                     failure:^(NSError *error) {
+                                         //Hide Indicator
+                                         [appDelegate hideSpinner];
+                                         NSLog(@"failure JsonData %@",[error description]);
+                                      
+                                         [self loginError:error];
+                                     }];
+
+}
 
 #pragma mark - tab bar Action
+- (IBAction)btnBackClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)btnAssignmentClick:(id)sender {
 }
 
@@ -110,6 +208,65 @@
 - (IBAction)btnUpdateClick:(id)sender {
 }
 - (IBAction)btnMoreClick:(id)sender {
+}
+
+- (IBAction)btnCommentDone:(id)sender {
+    [txtViewCMT resignFirstResponder];
+    step=0;
+    // call the service
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    if (actionOn==Resource) {
+        [[appDelegate _engine] setCommentOnResource:selectedResourceId AndCommentText:txtViewCMT.text success:^(BOOL success) {
+            
+            
+            // [self loginSucessFullWithFB];
+            
+            //Hide Indicator
+            [appDelegate hideSpinner];
+            
+            [self getModuleDetail:searchText];
+        }
+                                            failure:^(NSError *error) {
+                                                //Hide Indicator
+                                                [appDelegate hideSpinner];
+                                                NSLog(@"failure JsonData %@",[error description]);
+                                                [self loginError:error];
+                                                
+                                            }];
+
+    }else{
+        [[appDelegate _engine] setCommentOnComment:selectedCommentId AndCommentText:txtViewCMT.text success:^(BOOL success) {
+            
+            
+            // [self loginSucessFullWithFB];
+            
+            //Hide Indicator
+            [appDelegate hideSpinner];
+        }
+                                            failure:^(NSError *error) {
+                                                //Hide Indicator
+                                                [appDelegate hideSpinner];
+                                                NSLog(@"failure JsonData %@",[error description]);
+                                                [self loginError:error];
+                                                
+                                            }];
+
+    }
+    txtViewCMT.text=@"";
+    CGRect frame1 = self.cmtview.frame;
+    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    frame=frame1;
+   
+}
+
+- (IBAction)btnCommentCancle:(id)sender {
+     [txtViewCMT resignFirstResponder];
+    txtViewCMT.text=@"";
+    CGRect frame1 = self.cmtview.frame;
+    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    frame=frame1;
+
+    step=0;
 }
 #pragma mark - UISearchBar Delegate Method
 
@@ -139,6 +296,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Search Clicked");
+    searchText=searchBar.text;
   [self getModuleDetail:searchBar.text];
     // [self searchTableList];
 }
@@ -146,7 +304,7 @@
 -(void) getModuleDetail:(NSString *) txtSearch
 {
     NSString *userid=[NSString  stringWithFormat:@"%@",[AppSingleton sharedInstance ].userDetail.userId];
-    userid=@"1";
+   // userid=@"1";
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
@@ -180,12 +338,16 @@
                                    //Hide Indicator
                                    [appDelegate hideSpinner];
                                    NSLog(@"failure JsonData %@",[error description]);
-                                   //                                         [self loginError:error];
+                                   [self loginError:error];
                                    //                                         [self loginViewShowingLoggedOutUser:loginView];
                                    
                                }];
     
     
+}
+-(void)loginError:(NSError*)error{
+    
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
 }
 
 #pragma mark -
@@ -213,7 +375,8 @@
         [self purgePage:i];
     }
     self.lastContentOffset = self.scrollView.contentOffset.y;
-}
+    [self.scollViewContainer bringSubviewToFront: self.scrollView];
+    }
 
 - (void)loadPage:(NSInteger)page {
     if (page < 0 || page >= [contentList count]) {
@@ -232,13 +395,33 @@
         Resourse *resource=[contentList objectAtIndex:page];
         CustomContentView *customView= [[CustomContentView alloc]init];
         customView.lblAutherName.text=resource.authorName;
+        NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:resource.startedOn];
+        NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:resource.completedOn];
+        if(dateSatrtedOn!=nil)
+        {
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
+        
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+        resource.startedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
+        
+        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+        monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+        resource.completedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
+        }
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
         [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateNormal];
        // [customView.btnShare    setTitle:resource.shareCounts forState:UIControlStateNormal];
         [customView.btnComment setTitle:resource.commentCounts forState:UIControlStateNormal];
         [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
-
+       
+        [customView.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        [customView.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        customView.btnComment.tag=[resource.resourceId integerValue];
+        customView.btnLike.tag=[resource.resourceId integerValue];
         // set comment for the content
         // check if comment is available
         if([resource.comments  count]>0)
@@ -262,6 +445,14 @@
            // [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
             [customView.btnCommentCMT setTitle:objComment.commentCounts forState:UIControlStateNormal];
             customView.txtCmtView.text= objComment.commentDate;
+           
+            customView.btnCommentCMT.tag=[objComment.commentId integerValue];
+            customView.btnLike.tag=[objComment.commentId integerValue];
+            
+            //set action for reply and like on comment
+       
+            [customView.btnCommentCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+            [customView.btnLikeCMT addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
             [customView.imgViewCmtBy setHidden:YES];
@@ -298,9 +489,10 @@
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if(scrollView.tag==10)
-        return ;
+  
+    
     ScrollDirection scrollDirection;
+    if( scrollView.tag==20){
     if (self.lastContentOffset > self.scrollView.contentOffset.y+5)
     {
         scrollDirection = ScrollDirectionDown;
@@ -323,14 +515,51 @@
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:NULL
                         completion:NULL];
-        scrollView.hidden=YES;
+        self.scrollView.hidden=YES;
         [tblViewContent reloadData];
         tblViewContent.hidden =NO;
         //button.layer.shouldRasterize = YES;
-    }else{
+    }else {
      self.lastContentOffset = scrollView.contentOffset.y;
     
     }
+    }else if( scrollView.tag==10){
+            if (self.lastContentOffsetOfTable <-10)
+            {
+                scrollDirection = ScrollDirectionDown;
+                
+                
+                self.lastContentOffsetOfTable = scrollView.contentOffset.y;
+                
+                [UIView transitionWithView:scrollView
+                                  duration:0.4
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:NULL
+                                completion:NULL];
+                 self.scrollView.hidden=NO;
+               // [tblViewContent reloadData];
+                
+                tblViewContent.hidden =YES;
+                NSInteger pageCount = [contentList count];
+                
+                // Set up the page control
+                self.pageControl.currentPage = 0;
+                self.pageControl.numberOfPages = pageCount;
+                // Set up the content size of the scroll view
+                // Set up the array to hold the views for each page
+                self.pageViews = [[NSMutableArray alloc] init];
+                for (NSInteger i = 0; i < pageCount; ++i) {
+                    [self.pageViews addObject:[NSNull null]];
+                }
+                CGSize pagesScrollViewSize = self.scrollView.frame.size;
+                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
+                [self loadVisiblePages];
+                //button.layer.shouldRasterize = YES;
+            }else {
+                self.lastContentOffsetOfTable = scrollView.contentOffset.y;
+                
+            }
+        }
 }
 #pragma mark - Table view data source
 
@@ -412,9 +641,34 @@
         }
 
         cell.lblAutherName.text=selectedResource.authorName;
+        
+//        NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:selectedResource.startedOn];
+//        NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:selectedResource.completedOn];
+//
+//        NSCalendar* calendar = [NSCalendar currentCalendar];
+//        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
+//        
+//        
+//        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+//        selectedResource.startedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
         cell.lblStartedon.text=selectedResource.startedOn;
-        cell.lblCompletedon.text=selectedResource.completedOn;
+       
+        
+//        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
+//        monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+//        selectedResource.completedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
+       cell.lblCompletedon.text=selectedResource.completedOn;
+        
         [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
+        cell.btnComment.tag=[selectedResource.resourceId integerValue];
+        cell.btnLike.tag=[selectedResource.resourceId integerValue];
+        cell.btnShare.tag=[selectedResource.resourceId integerValue];
+//set action for comment and like on resource
+        [cell.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnShare addTarget:self action:@selector(btnShareOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        
        // [cell.btnShare    setTitle:selectedResource.shareCounts forState:UIControlStateNormal];
         [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
       //  [cell.imgContent setImage:[AppGlobal generateThumbnail:selectedResource.resourceUrl]];
@@ -442,6 +696,15 @@
 //        }
         [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
         [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
+      
+        cell.btnCMT.tag=[comment.commentId integerValue];
+        cell.btnLike.tag=[selectedResource.resourceId integerValue];
+       
+        //set action for reply and like on comment
+        [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         if(indexPath.row!=([selectedResource.comments count]-1))
         {
             cell.btnMore.hidden=YES;
@@ -451,7 +714,7 @@
             if([selectedResource.comments count]>3)
             {
             [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+            [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
             }else{
                 cell.btnMore.hidden=YES;
             }
@@ -476,6 +739,17 @@
         cell.lblContentName.text= resource.resourceDesc;
         cell.lblContentby.text=resource.authorName;
        // cell.lblSubmittedDate.text=resource.uploadedDate;
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:resource.uploadedDate];
+        if(submittedDate!=nil){
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+        
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+        resource.uploadedDate=[NSString stringWithFormat:@"%@ %d",monthName,components.day];
+        }
+        
         cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@",resource.uploadedDate ];
         if(indexPath.row!=([selectedResource.relatedResources count]-1))
         {
@@ -486,7 +760,7 @@
             if([selectedResource.relatedResources count]>3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%lu More",[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
             }else{
                 cell.btnMore.hidden=YES;
             }
@@ -511,6 +785,18 @@
        // [cell.imgContentURL setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
         cell.lblContentName.text= assignment.assignmentName;
         cell.lblContentby.text=assignment.assignmentSubmittedBy;
+        
+        NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
+       if(submittedDate!=nil){
+        NSCalendar* calendar = [NSCalendar currentCalendar];
+        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
+        
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
+      assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %d",monthName,components.day];
+       }
+        
         cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@",assignment.assignmentSubmittedDate ];
         if(indexPath.row!=([assignmentList count]-1))
         {
@@ -658,5 +944,105 @@
 //    //        cell.backgroundColor = [UIColor blackColor];
 //    //    }
 //}
+#pragma mark - Keyboard notification
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    //    CGRect frame1 = self.cmtview.frame;
+    //    frame1=CGRectMake(0, 400, 320, 40);
+    //
+    //    self.cmtview.frame=frame1;
+    /* Move the toolbar to above the keyboard */
+    //    [UIView beginAnimations:nil context:NULL];
+    //    [UIView setAnimationDuration:0.0];
+    CGRect frame1 = self.cmtview.frame;
+    frame1.size.width=keyboardFrameBeginRect.size.width;
+    frame1.origin.y = self.view.frame.size.height- (keyboardFrameBeginRect.size.height+39);
+    //     frame1.origin.y = self.view.frame.size.height -310;
+    //  frame1.origin.y = self.view.frame.size.height -258;
+    self.cmtview.frame = frame1;
+     frame=frame1;
+    [self.view bringSubviewToFront: self.cmtview];
+    //271-
+    
+    //  [UIView commitAnimations];
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    // [keyboardToolbar setItems:cmtview animated:YES];
+    /* Move the toolbar back to bottom of the screen */
+    //    [UIView beginAnimations:nil context:NULL];
+    //    [UIView setAnimationDuration:0.3];
+        CGRect frame1 = self.cmtview.frame;
+        frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+        self.cmtview.frame = frame1;
+     frame=frame1;
+    //
+    //    [UIView commitAnimations];
+}
+#pragma uitextview deligate and datasource
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    //txtview.inputAccessoryView=commentView;
+    return YES;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    
+}
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    // CGRect frameRect;
+    NSString *str=textView.text;
+    
+    //    NSUInteger count = 0,
+    NSUInteger length = [str length];
+    
+    NSRange range1= [str rangeOfString:@"\n" options:NSBackwardsSearch];
+    if((range1.length+range1.location==length)&&[text isEqualToString:@""])
+    {
+        frame=CGRectMake(frame.origin.x, frame.origin.y+30, frame.size.width, frame.size.height-30);
+        
+        step=step-1;
+    }
+    
+    if([text isEqualToString:@"\n"]&& step<2)
+    {
+        frame=CGRectMake(frame.origin.x, frame.origin.y-30, frame.size.width, frame.size.height+30);
+        
+        step=step+1;
+        
+    }
+    //    CGRect frame1 = frame;
+    //    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
+    
+    self.cmtview.frame=frame;
+    
+    
+    return YES;
+}
+- (void)textViewDidChange:(UITextView *)textView{
+    
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    
+}
 
 @end

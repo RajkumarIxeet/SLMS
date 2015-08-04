@@ -33,7 +33,7 @@
 +(NSString*)nsdateConvertToStringWithFormate:(NSString *)Formate date:(NSDate*)date;
 
 //string date cinver to nsdate
-+(NSDate*)convertStringDateToNSDate:(NSString*)CustomeFormate withNSDate:(NSString*)str_date;
++(NSDate*)convertStringDateToNSDate:(NSString*)str_date;
 
 
 //read the File Data

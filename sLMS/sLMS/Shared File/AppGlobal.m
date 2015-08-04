@@ -114,10 +114,10 @@
 }
 
 //string date cinver to nsdate
-+(NSDate*)convertStringDateToNSDate:(NSString*)CustomeFormate withNSDate:(NSString*)str_date{
++(NSDate*)convertStringDateToNSDate:(NSString*)str_date{
     
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
-    [format setDateFormat:CustomeFormate];
+    [format setDateFormat:key_Custom_DateFormate];
     NSTimeZone* localTimeZone = [NSTimeZone localTimeZone];
     format.timeZone=localTimeZone;
     NSDate *date=[format dateFromString:str_date];

@@ -116,7 +116,7 @@
                 resource.startedOn=[dicContent objectForKey:@"startedOn"];
                 resource.completedOn=[dicContent objectForKey:@"completedOn"];
                 resource.authorName=[dicContent objectForKey:@"authorName"];
-                
+                   resource.authorImage=[dicContent objectForKey:@"authorImg"];
                 
                 NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
                 for (NSDictionary *dicComment in [dicContent objectForKey:@"commentList"]) {
@@ -129,8 +129,8 @@
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
                     comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
-                 //   comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
-                    comment.commentTxt=@"nxlsjldjfldksjflkdsjflkdsjflkdsjlkfjdslkfjdskljfjdslkfjdlskjfldksjflkcnvmvncm,vn,cmnv,mfdnlkfejldkfdskfl;dksf;ldkf;ldksl;fkds;lfkds;lfkl;dskf;ldskf;ldskf;ldskfl;dskfl;dskf;lkdsl;fkds;lfkds;lkds;lfkds;lfkds;lfkdl;skflkf;ldskfl;dskfl;dskf;ldskf;ldskl;fksdl;fkdsl;fkdsl;fkl;dskf;ldskf;ldskfl;dskf;dskf;ldsm vlkfefe vjef fkfnednnc nlkenfejnflkewfnlknkewlewjwnoewflkwnflkewnfklenlkewfnlkewnflkewfnwelkfnwelkfnewlfnwelkfnwlekfnlkwefnlkwefnlkewnflkwnflkwnflkwnflkwlwnflewnflewnflkwneklfnweklnweflkwenlkwfeklweklklklwemdlmdmkkdmmkdmlmeffm";
+                  comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
+                   
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
                     [arrayComments addObject:comment];
                 }
@@ -143,8 +143,8 @@
                     Resourse *resource= [[Resourse alloc]init];
                     resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
-                    resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
-                    resource.startedOn=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
+                    resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
                     [arrayRelatedResource addObject:resource];
                 }
                 
@@ -190,6 +190,153 @@
 //            //call Block function
 //            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
 //        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+#pragma Comment and Like on Resource
+//Comment and Like on Resource
+-(void)setCommentOnResource:(NSString*)resourceId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userName":[AppSingleton sharedInstance].userDetail.userEmail,@"resourceId":resourceId,@"commentText":txtComment                                 };
+   
+    [manager POST:CMT_ON_RESOURCE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+-(void)setLikeOnResource:(NSString*)resourceId  success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSString *useremail=[AppSingleton sharedInstance].userDetail.userEmail;
+     [manager GET:LIKE_ON_RESOURCE_URL(useremail,resourceId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+
+#pragma Comment and Like on Comment
+//Comment and Like on Comment
+-(void)setCommentOnComment:(NSString*)commentId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure
+{
+AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+manager.requestSerializer = [AFJSONRequestSerializer serializer];
+manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+    NSDictionary *parameters = @{@"userName":[AppSingleton sharedInstance].userDetail.userEmail,@"commentId":commentId,@"commentText":txtComment                                 };
+
+
+[manager POST:CMT_ON_RESOURCE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    
+    
+    
+    NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+    //Success Full Logout
+    if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+        
+        //call Block function
+        success(YES);
+    }
+    else {
+        //call Block function
+        failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+    }
+    
+    
+    
+    
+} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    
+    failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+    
+}];
+
+}
+
+-(void)setLikeOnComment:(NSString*)commentId  success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSString *useremail=[AppSingleton sharedInstance].userDetail.userEmail;
+    [manager GET:LIKE_ON_CMT_URL(useremail, commentId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

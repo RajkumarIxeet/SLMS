@@ -22,6 +22,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLike;
 @property (strong, nonatomic) IBOutlet UIButton *btnShare;
+@property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 @property (strong, nonatomic) IBOutlet UIButton *btnComment;
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLikeCMT;

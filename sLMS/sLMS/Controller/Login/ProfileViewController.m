@@ -179,10 +179,7 @@
 - (IBAction)btnCourseClick:(id)sender {
        CourseViewController *courseView= [[CourseViewController alloc]init];
        [self.navigationController pushViewController:courseView animated:YES];
-    //    //    [self.navigationController pushViewController:module animated:YES];
-//    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
-//    [self.navigationController pushViewController:module animated:YES];
-    
+     
 }
 
 - (IBAction)btnNotificationClick:(id)sender {

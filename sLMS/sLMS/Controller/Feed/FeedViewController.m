@@ -11,7 +11,6 @@
 #import "CourseViewController.h"
 #import "FeedViewController.h"
 #import "AssignmentViewController.h"
-#import "ModuleDetailViewController.h"
 @interface FeedViewController ()
 
 @end
@@ -70,11 +69,9 @@
 }
 
 - (IBAction)btnCourseClick:(id)sender {
-//    CourseViewController *courseView= [[CourseViewController alloc]init];
-//    [self.navigationController pushViewController:courseView animated:YES];
-//    //    [self.navigationController pushViewController:module animated:YES];
-    ModuleDetailViewController *module= [[ModuleDetailViewController alloc]init];
-    [self.navigationController pushViewController:module animated:YES];
+    CourseViewController *courseView= [[CourseViewController alloc]init];
+    [self.navigationController pushViewController:courseView animated:YES];
+
   
 }
 
