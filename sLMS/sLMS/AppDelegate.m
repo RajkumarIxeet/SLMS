@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "FeedViewController.h"
 #import "CourseViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface AppDelegate (){
     UIView *spinnerView;
@@ -53,9 +54,17 @@
 
 //    return [[FBSDKApplicationDelegate sharedInstance] application:application
 //                                    didFinishLaunchingWithOptions:launchOptions];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
    return YES;
 }
-
+-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (self.allowRotation) {
+        return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -93,7 +102,12 @@
                   sourceApplication:sourceApplication];
 }
 
-
+- (void) moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+    self.allowRotation = YES;
+}
+- (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+    self.allowRotation = NO;
+}
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;

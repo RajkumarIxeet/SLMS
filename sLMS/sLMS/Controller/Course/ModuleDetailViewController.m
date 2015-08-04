@@ -12,6 +12,8 @@
 #import "AssignmentTableViewCell.h"
 #import "CommentTableViewCell.h"
 #import "AppEngine.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "VedioPlayViewController.h"
 @interface ModuleDetailViewController ()
 {
     NSMutableArray *contentList;
@@ -77,8 +79,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     step=0;
-   self.lastContentOffsetOfTable=tblViewContent.contentOffset.y;;
-
+    self.lastContentOffsetOfTable=tblViewContent.contentOffset.y;;
+    searchText=@"";
 }
 
 
@@ -122,7 +124,35 @@
    
 }
 #pragma mark - Comment and like on Resource
-
+- (IBAction)btnPlayResourceClick:(id)sender {
+   
+//    NSString *filepath   =   [[NSBundle mainBundle] pathForResource:@"big-buck-bunny-clip" ofType:@"m4v"];
+    
+//    NSURL    *fileURL    =   [NSURL  fileURLWithPath:selectedResource.resourceUrl];
+//    MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(moviePlaybackComplete:)
+//                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+//                                               object:moviePlayerController];
+//    
+//    [self.view addSubview:moviePlayerController.view];
+//    moviePlayerController.fullscreen = YES;
+//    [moviePlayerController play];
+    VedioPlayViewController *vedioView= [[VedioPlayViewController alloc]init];
+    vedioView.filePath=selectedResource.resourceUrl;
+    [self.navigationController pushViewController:vedioView animated:YES];
+}
+- (void)moviePlaybackComplete:(NSNotification *)notification
+{
+    MPMoviePlayerController *moviePlayerController = [notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:moviePlayerController];
+    
+    [moviePlayerController.view removeFromSuperview];
+   
+}
 - (IBAction)btnCommentOnResourceClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
     selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
@@ -422,6 +452,10 @@
         [customView.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         customView.btnComment.tag=[resource.resourceId integerValue];
         customView.btnLike.tag=[resource.resourceId integerValue];
+        // add vedio play
+        selectedResource=resource;
+        [customView.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+
         // set comment for the content
         // check if comment is available
         if([resource.comments  count]>0)
@@ -524,7 +558,7 @@
     
     }
     }else if( scrollView.tag==10){
-            if (self.lastContentOffsetOfTable <-10)
+            if (self.lastContentOffsetOfTable <-50)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -704,20 +738,34 @@
         [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnLike addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         
+        cell.btnMore.hidden=YES;
+        cell.imgDevider.hidden=YES;
+        cell.lblRelatedVideo.hidden =YES;
         
-        if(indexPath.row!=([selectedResource.comments count]-1))
+        if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
         {
             cell.btnMore.hidden=YES;
-            cell.imgDevider.hidden=YES;
-            cell.lblRelatedVideo.hidden =YES;
-        }else{
-            if([selectedResource.comments count]>3)
+            cell.imgDevider.hidden=NO;
+            cell.lblRelatedVideo.hidden =NO;
+            
+        }
+        else if([selectedResource.comments count]>=3)
+        {
+            if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
-            [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
-            }else{
-                cell.btnMore.hidden=YES;
+                [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                cell.btnMore.hidden=NO;
+                cell.imgDevider.hidden=NO;
+                cell.lblRelatedVideo.hidden =NO;
+            }else if(indexPath.row==2 && !IsCommentExpended){
+                [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                cell.btnMore.hidden=NO;
+                cell.imgDevider.hidden=NO;
+                cell.lblRelatedVideo.hidden =NO;
             }
+            
         }
         return cell;
         
@@ -757,7 +805,7 @@
             cell.imgDevider.hidden=YES;
              cell.lblAssignment.hidden=YES;
         }else{
-            if([selectedResource.relatedResources count]>3)
+            if([selectedResource.relatedResources count]>=3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
@@ -895,10 +943,25 @@
         Comments *cmt=selectedResource.comments[indexPath.row];
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
-        if(indexPath.row==([selectedResource.comments count]-1))
+        NSLog(@"%d",indexPath.row);
+        if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
+        {
+           height=80.0f;
+                
+           
+            
+        }
+        else if([selectedResource.comments count]>=3)
+        {
+            if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
-                height=80.0f;
+                 height=80.0f;
+            }else if(indexPath.row==2 && !IsCommentExpended){
+             height=80.0f;
             }
+            
+        }
+        
         if(labelSize.height>39)
                 return   height=height+80+labelSize.height;
             else
@@ -910,6 +973,10 @@
         if(indexPath.row==([selectedResource.relatedResources count]-1))
         {
             height=75.0f;
+        }else if(([selectedResource.relatedResources count]-1==3 )&& indexPath.row==2)
+        {
+            height=75.0f;
+            
         }
        
         return  height=height+96.0f;

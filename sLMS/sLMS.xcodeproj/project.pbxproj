@@ -122,6 +122,9 @@
 		A88AB15E1B4BBA590011D32B /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB14C1B4BBA590011D32B /* UIRefreshControl+AFNetworking.m */; };
 		A88AB15F1B4BBA590011D32B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB14E1B4BBA590011D32B /* UIWebView+AFNetworking.m */; };
 		A88AB1621B4BBA8A0011D32B /* AppGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB1611B4BBA8A0011D32B /* AppGlobal.m */; };
+		A8B01E421B70C5A0002BA0EA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B01E401B70C56F002BA0EA /* MediaPlayer.framework */; };
+		A8B01E461B70DE04002BA0EA /* VedioPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8B01E441B70DE04002BA0EA /* VedioPlayViewController.m */; };
+		A8B01E471B70DE04002BA0EA /* VedioPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B01E451B70DE04002BA0EA /* VedioPlayViewController.xib */; };
 		A8B272131B5CC09500B3CDE7 /* icn_arrow-expand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B272071B5CC09500B3CDE7 /* icn_arrow-expand@2x.png */; };
 		A8B272141B5CC09500B3CDE7 /* icn_arrow-expand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B272081B5CC09500B3CDE7 /* icn_arrow-expand@3x.png */; };
 		A8B272151B5CC09500B3CDE7 /* icn_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B272091B5CC09500B3CDE7 /* icn_arrow@2x.png */; };
@@ -393,6 +396,10 @@
 		A88AB1601B4BBA8A0011D32B /* AppGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppGlobal.h; sourceTree = "<group>"; };
 		A88AB1611B4BBA8A0011D32B /* AppGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppGlobal.m; sourceTree = "<group>"; };
 		A88AB1631B4BE0000011D32B /* AppConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstant.h; sourceTree = "<group>"; };
+		A8B01E401B70C56F002BA0EA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		A8B01E431B70DE04002BA0EA /* VedioPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VedioPlayViewController.h; sourceTree = "<group>"; };
+		A8B01E441B70DE04002BA0EA /* VedioPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VedioPlayViewController.m; sourceTree = "<group>"; };
+		A8B01E451B70DE04002BA0EA /* VedioPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VedioPlayViewController.xib; sourceTree = "<group>"; };
 		A8B272071B5CC09500B3CDE7 /* icn_arrow-expand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow-expand@2x.png"; sourceTree = "<group>"; };
 		A8B272081B5CC09500B3CDE7 /* icn_arrow-expand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow-expand@3x.png"; sourceTree = "<group>"; };
 		A8B272091B5CC09500B3CDE7 /* icn_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_arrow@2x.png"; sourceTree = "<group>"; };
@@ -504,6 +511,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8B01E421B70C5A0002BA0EA /* MediaPlayer.framework in Frameworks */,
 				A87B78B71B60F8A800B13B0C /* AssetsLibrary.framework in Frameworks */,
 				A87B78B51B60F8A200B13B0C /* AVFoundation.framework in Frameworks */,
 				A8D652F71B4FA67000F93197 /* Security.framework in Frameworks */,
@@ -722,6 +730,7 @@
 		A88AB02B1B4B96CB0011D32B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A8B01E401B70C56F002BA0EA /* MediaPlayer.framework */,
 				A87B78B61B60F8A800B13B0C /* AssetsLibrary.framework */,
 				A87B78B41B60F8A200B13B0C /* AVFoundation.framework */,
 				A8D653041B4FE1C000F93197 /* FacebookSDK.framework */,
@@ -893,6 +902,9 @@
 				A8B272221B5D05E800B3CDE7 /* ModuleDetailViewController.h */,
 				A8B272231B5D05E800B3CDE7 /* ModuleDetailViewController.m */,
 				A8B272241B5D05E800B3CDE7 /* ModuleDetailViewController.xib */,
+				A8B01E431B70DE04002BA0EA /* VedioPlayViewController.h */,
+				A8B01E441B70DE04002BA0EA /* VedioPlayViewController.m */,
+				A8B01E451B70DE04002BA0EA /* VedioPlayViewController.xib */,
 			);
 			name = Course;
 			path = Controller/Course;
@@ -1178,6 +1190,7 @@
 				A88AB03A1B4B96CB0011D32B /* Main.storyboard in Resources */,
 				A86B2C971B538082004392FD /* logo-lms@2x.png in Resources */,
 				A8B272141B5CC09500B3CDE7 /* icn_arrow-expand@3x.png in Resources */,
+				A8B01E471B70DE04002BA0EA /* VedioPlayViewController.xib in Resources */,
 				A84E72371B578E230097D0AD /* icn_course-defaultn@2x.png in Resources */,
 				A86B2C961B538082004392FD /* icn_menu@3x.png in Resources */,
 				A86B2CC11B53CFBD004392FD /* icn_droparrow@3x.png in Resources */,
@@ -1295,6 +1308,7 @@
 				A8CECCE61B590E1B00D7A7A2 /* Module.m in Sources */,
 				A8D87B4B1B5F8B9F003843A8 /* CustomContentView.m in Sources */,
 				A88AB1511B4BBA590011D32B /* AFHTTPSessionManager.m in Sources */,
+				A8B01E461B70DE04002BA0EA /* VedioPlayViewController.m in Sources */,
 				A88AB1521B4BBA590011D32B /* AFNetworkReachabilityManager.m in Sources */,
 				A88AB1281B4BB2410011D32B /* UserDetail.m in Sources */,
 				A88AB0DF1B4BA73E0011D32B /* CourseViewController.m in Sources */,

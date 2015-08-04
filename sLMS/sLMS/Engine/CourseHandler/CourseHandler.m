@@ -129,8 +129,8 @@
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
                     comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
-                  comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
-                   
+                    comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
+                    comment.isLike=[dicComment objectForKey:@"isLiked"];
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
                     [arrayComments addObject:comment];
                 }
