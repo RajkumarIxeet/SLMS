@@ -28,9 +28,9 @@
 @property (strong, nonatomic) IBOutlet UITableView *tblViewContent;
 
 
-- (IBAction)btnAssignmentClick:(id)sender;
-- (IBAction)btnCourseClick:(id)sender;
-- (IBAction)btnNotificationClick:(id)sender;
-- (IBAction)btnUpdateClick:(id)sender;
-- (IBAction)btnMoreClick:(id)sender;
+//- (IBAction)btnAssignmentClick:(id)sender;
+//- (IBAction)btnCourseClick:(id)sender;
+//- (IBAction)btnNotificationClick:(id)sender;
+//- (IBAction)btnUpdateClick:(id)sender;
+//- (IBAction)btnMoreClick:(id)sender;
 @end

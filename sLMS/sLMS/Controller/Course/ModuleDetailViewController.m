@@ -23,7 +23,7 @@
     BOOL IsCommentExpended;
     BOOL IsAsignmentExpended;
     BOOL IsRelatedConentExpended;
-    CGRect frame;
+    CGRect txtframe;
     ActionOn    actionOn;
     NSString    *selectedResourceId,*selectedCommentId;
     NSString    *searchText;
@@ -56,7 +56,11 @@
     // Do any additional setup after loading the view from its nib.
     // Set up the image we want to scroll & zoom and add it to the scroll view
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
+    [self.view addGestureRecognizer:tap];
     // Set up the array to hold the views for each page
     [self setSearchUI];
 
@@ -65,7 +69,7 @@
     
     CGRect frame1 = self.cmtview.frame;
     frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-     frame=frame1;
+     txtframe=frame1;
     self.cmtview.frame=frame1;
     [self.view addSubview:self.cmtview];
     btnCourses.selected=YES;
@@ -88,7 +92,11 @@
     self.lastContentOffsetOfTable=tblViewContent.contentOffset.y;;
     searchText=@"";
 }
-
+-(void)dismissKeyboard {
+    [txtSearchBar resignFirstResponder];
+    [txtViewCMT resignFirstResponder];
+    isSearching=NO;
+}
 
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -112,10 +120,10 @@
             NSLog(@"iPhone 5/5s");
         } else if ( screenHeight > 480 && screenHeight < 736 ){
             NSLog(@"iPhone 6");
-            [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+            [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn_6Small.png"]];
             
         } else if ( screenHeight > 480 ){
-            //[txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+           // [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
             
             NSLog(@"iPhone 6 Plus");
         } else {
@@ -385,7 +393,7 @@
     txtViewCMT.text=@"";
     CGRect frame1 = self.cmtview.frame;
     frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    frame=frame1;
+    txtframe=frame1;
    
 }
 
@@ -394,7 +402,7 @@
     txtViewCMT.text=@"";
     CGRect frame1 = self.cmtview.frame;
     frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
-    frame=frame1;
+    txtframe=frame1;
 
     step=0;
 }
@@ -463,7 +471,7 @@
         
         // Load the initial set of pages that are on screen
         [self loadVisiblePages];
-      //  [tblViewContent reloadData];
+       [tblViewContent reloadData];
       
         
         //Hide Indicator
@@ -597,23 +605,27 @@
         if([resource.comments  count]>0)
         {
             Comments *objComment=[resource.comments objectAtIndex:0];
-            [customView.imgViewCmtBy setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
-
             
             if(objComment.commentByImage!=nil){
+                if(objComment.commentByImageData==nil)
+                {
                 NSURL *imageURL = [NSURL URLWithString:objComment.commentByImage];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                    
+                    objComment.commentByImageData=imageData;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Update the UI
                         //customView.imgViewCmtBy.image= [UIImage imageWithData:imageData];
                         UIImage *img=[UIImage imageWithData:imageData];
                         if(img!=nil)
-                           customView.imgViewCmtBy.image= img;
-                    });
+                            [ customView.btnCmtBy setImage:img forState:UIControlStateNormal];
+                            
+                            });
                 });
+                }else{
+                 [ customView.btnCmtBy setImage:[UIImage imageWithData: objComment.commentByImageData ] forState:UIControlStateNormal];
+                }
             }
         
             customView.lblCmtBy.text=  objComment.commentBy;
@@ -621,10 +633,10 @@
             [customView.btnLikeCMT setTitle:objComment.likeCounts forState:UIControlStateNormal];
            // [customView.btnShareCMT    setTitle:objComment.shareCounts forState:UIControlStateNormal];
             [customView.btnCommentCMT setTitle:objComment.commentCounts forState:UIControlStateNormal];
-            customView.txtCmtView.text= objComment.commentDate;
+            customView.txtCmtView.text= objComment.commentTxt;
            
             customView.btnCommentCMT.tag=[objComment.commentId integerValue];
-            customView.btnLike.tag=[objComment.commentId integerValue];
+            customView.btnLikeCMT.tag=[objComment.commentId integerValue];
             
             //set action for reply and like on comment
        
@@ -632,7 +644,7 @@
             [customView.btnLikeCMT addTarget:self action:@selector(btnLikeOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
         }
         else{
-            [customView.imgViewCmtBy setHidden:YES];
+            [customView.btnCmtBy setHidden:YES];
             //[customView.imgViewCmtBy setImage:[UIImage imageWithData:[NSData ns] ]];
            [ customView.lblCmtBy setHidden:YES];
             [customView.lblCmtTime setHidden:YES];
@@ -671,7 +683,7 @@
         NSLog(@"running");
         ScrollDirection scrollDirection;
         if( scrollView.tag==20){
-            if (self.lastContentOffset > self.scrollView.contentOffset.y+2)
+            if (scrollView.contentOffset.y >10)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -702,7 +714,7 @@
                 
             }
         }else if( scrollView.tag==10){
-            if (self.lastContentOffsetOfTable <-20)
+            if (scrollView.contentOffset.y<-10)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -920,7 +932,7 @@
             }
         }
         [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-        if(selectedResource.islike)
+        if(selectedResource.islike==1)
         {
             cell.btnLike.selected=YES;
              [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateSelected];
@@ -961,11 +973,14 @@
         cell.lblCmtText.text=comment.commentTxt;
 
         if(comment.commentByImage!=nil){
+            if(comment.commentByImageData==nil)
+            {
+
             NSURL *imageURL = [NSURL URLWithString:comment.commentByImage];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                
+                comment.commentByImageData=imageData;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Update the UI
                     UIImage *img=[UIImage imageWithData:imageData];
@@ -974,8 +989,11 @@
                     
                 });
             });
+            }else{
+             [cell.btnCommentedBy setImage:[UIImage imageWithData:comment.commentByImageData] forState:UIControlStateNormal];
+            }
         }
-        if(comment.isLike)
+        if(comment.isLike==1)
         {
             cell.btnLike.selected=YES;
             [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
@@ -989,7 +1007,7 @@
         [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
       
         cell.btnCMT.tag=[comment.commentId integerValue];
-        cell.btnLike.tag=[selectedResource.resourceId integerValue];
+        cell.btnLike.tag=[comment.commentId integerValue];
        
         //set action for reply and like on comment
         [cell.btnCMT addTarget:self action:@selector(btnReplyOnCommentClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1369,7 +1387,7 @@
     //     frame1.origin.y = self.view.frame.size.height -310;
     //  frame1.origin.y = self.view.frame.size.height -258;
     self.cmtview.frame = frame1;
-     frame=frame1;
+     txtframe=frame1;
     [self.view bringSubviewToFront: self.cmtview];
     //271-
     }
@@ -1388,7 +1406,7 @@
         CGRect frame1 = self.cmtview.frame;
         frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
         self.cmtview.frame = frame1;
-     frame=frame1;
+     txtframe=frame1;
     }
     //
     //    [UIView commitAnimations];
@@ -1423,16 +1441,16 @@
     NSUInteger length = [str length];
     
     NSRange range1= [str rangeOfString:@"\n" options:NSBackwardsSearch];
-    if((range1.length+range1.location==length)&&[text isEqualToString:@""])
+    if((range1.length+range1.location==length)&&[text isEqualToString:@""]&& step>0)
     {
-        frame=CGRectMake(frame.origin.x, frame.origin.y+30, frame.size.width, frame.size.height-30);
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y+30, txtframe.size.width, txtframe.size.height-30);
         
         step=step-1;
     }
     
     if([text isEqualToString:@"\n"]&& step<2)
     {
-        frame=CGRectMake(frame.origin.x, frame.origin.y-30, frame.size.width, frame.size.height+30);
+        txtframe=CGRectMake(txtframe.origin.x, txtframe.origin.y-30, txtframe.size.width, txtframe.size.height+30);
         
         step=step+1;
         
@@ -1440,7 +1458,7 @@
     //    CGRect frame1 = frame;
     //    frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
     
-    self.cmtview.frame=frame;
+    self.cmtview.frame=txtframe;
     
     
     return YES;

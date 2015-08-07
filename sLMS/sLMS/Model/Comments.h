@@ -17,7 +17,8 @@
 @property (nonatomic,strong) NSString* parentCommentId;
 @property (nonatomic,strong) NSString* commentBy;
 @property (nonatomic,strong) NSString* commentByImage;
+@property (nonatomic,strong) NSData* commentByImageData;
 @property (nonatomic,strong) NSString* commentTxt;
 @property (nonatomic,strong) NSString* commentDate;
-@property (nonatomic,assign) BOOL isLike;
+@property (nonatomic,assign) int isLike;
 @end

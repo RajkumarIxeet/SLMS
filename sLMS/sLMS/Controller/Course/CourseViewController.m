@@ -67,21 +67,47 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
     [self setSearchUI];
 
      [self  getCourses:@""];
     btnCourses.selected=YES;
-
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 0.2; //seconds
+    lpgr.delegate = self;
+    [tableViewCourse  addGestureRecognizer:lpgr];
+  
     // Do any additional setup after loading the view from its nib.
    
     
+}
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    CGPoint p = [gestureRecognizer locationInView:tableViewCourse];
+    
+    NSIndexPath *indexPath = [tableViewCourse indexPathForRowAtPoint:p];
+    if (indexPath == nil) {
+        NSLog(@"long press on table view but not on a row");
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"long press on table view at row %d", indexPath.row);
+    } else {
+        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)dismissKeyboard {
+    [txtSearchBar resignFirstResponder];
+}
 /*
 #pragma mark - Navigation
 
@@ -141,16 +167,15 @@
   //  NSLog(@"Text change - %d");
     
     //Remove all objects first.
-//    [filteredContentList removeAllObjects];
-//    
-//    if([searchText length] != 0) {
-//        isSearching = YES;
-//        [self searchTableList];
-//    }
-//    else {
-//        isSearching = NO;
-//    }
-    // [self.tblContentList reloadData];
+    //[filteredContentList removeAllObjects];
+    
+    if([searchText length] == 0) {
+        
+       
+        [searchBar resignFirstResponder];
+      [self getCourses:@""];
+    }
+    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -192,14 +217,17 @@
                                          //Hide Indicator
                                          [appDelegate hideSpinner];
                                          NSLog(@"failure JsonData %@",[error description]);
-//                                         [self loginError:error];
+                                         [self loginError:error];
 //                                         [self loginViewShowingLoggedOutUser:loginView];
                                          
                                      }];
     
 
 }
-
+-(void)loginError:(NSError*)error{
+    
+    [AppGlobal showAlertWithMessage:[[error userInfo] objectForKey:NSLocalizedDescriptionKey] title:@""];
+}
 #pragma mark - Table view data source
 
 //- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -410,4 +438,17 @@ else {
 //    }
 }
 
+#pragma mark UIGestureRecognizerDelegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:tableViewCourse]) {
+        
+        // Don't let selections of auto-complete entries fire the
+        // gesture recognizer
+        return NO;
+    }
+    
+    return YES;
+}
 @end

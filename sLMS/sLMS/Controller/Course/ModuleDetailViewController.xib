@@ -27,7 +27,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hJ-X8-CQn" customClass="ScrollViewContainer">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="20" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYG-xR-6Tp">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="20" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fYG-xR-6Tp">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
@@ -297,16 +297,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgN-SR-1N8">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.76000000000000001" colorSpace="calibratedWhite"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="97C-gr-BIs"/>
-                    </connections>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mNs-em-ues">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -363,23 +353,42 @@
                         <action selector="btnCommentCancle:" destination="-1" eventType="touchUpInside" id="0ez-aU-rDD"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgN-SR-1N8">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.76000000000000001" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="97C-gr-BIs"/>
+                    </connections>
+                </textView>
             </subviews>
             <color key="backgroundColor" red="0.72941176470000002" green="0.0" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="z43-it-DlP" firstAttribute="leading" secondItem="Lex-bO-ABg" secondAttribute="leading" constant="8" id="3bR-5i-mjD"/>
-                <constraint firstItem="mNs-em-ues" firstAttribute="leading" secondItem="vgN-SR-1N8" secondAttribute="trailing" constant="8" id="Awr-M4-JDR"/>
-                <constraint firstAttribute="bottom" secondItem="z43-it-DlP" secondAttribute="bottom" constant="9" id="D94-37-r1v"/>
+                <constraint firstItem="mNs-em-ues" firstAttribute="leading" secondItem="vgN-SR-1N8" secondAttribute="trailing" constant="8" id="Awr-M4-JDR">
+                    <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="z43-it-DlP" secondAttribute="bottom" constant="9" id="D94-37-r1v">
+                    <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                </constraint>
                 <constraint firstItem="vgN-SR-1N8" firstAttribute="top" secondItem="Lex-bO-ABg" secondAttribute="top" constant="4" id="FeZ-v1-by7"/>
                 <constraint firstAttribute="bottom" secondItem="vgN-SR-1N8" secondAttribute="bottom" constant="4" id="It3-O0-lip"/>
                 <constraint firstAttribute="trailing" secondItem="mNs-em-ues" secondAttribute="trailing" constant="8" id="cDI-H7-zYH"/>
-                <constraint firstAttribute="bottom" secondItem="mNs-em-ues" secondAttribute="bottom" constant="9" id="rMb-O4-oVl"/>
-                <constraint firstItem="vgN-SR-1N8" firstAttribute="leading" secondItem="z43-it-DlP" secondAttribute="trailing" constant="8" id="scG-R2-MfF"/>
+                <constraint firstAttribute="bottom" secondItem="mNs-em-ues" secondAttribute="bottom" constant="9" id="rMb-O4-oVl">
+                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                </constraint>
+                <constraint firstItem="vgN-SR-1N8" firstAttribute="leading" secondItem="z43-it-DlP" secondAttribute="trailing" constant="8" id="scG-R2-MfF">
+                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                </constraint>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="vgN-SR-1N8"/>
                     <exclude reference="mNs-em-ues"/>
                     <exclude reference="z43-it-DlP"/>
+                    <exclude reference="vgN-SR-1N8"/>
                 </mask>
                 <mask key="constraints">
                     <exclude reference="Awr-M4-JDR"/>
@@ -394,9 +403,9 @@
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
                 <mask key="subviews">
-                    <include reference="vgN-SR-1N8"/>
                     <include reference="mNs-em-ues"/>
                     <include reference="z43-it-DlP"/>
+                    <include reference="vgN-SR-1N8"/>
                 </mask>
                 <mask key="constraints">
                     <include reference="Awr-M4-JDR"/>
@@ -409,6 +418,7 @@
                     <include reference="scG-R2-MfF"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="268" y="-483"/>
         </view>
     </objects>
     <resources>

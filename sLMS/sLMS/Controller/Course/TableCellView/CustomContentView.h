@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblCompletedon;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtBy;
-@property (strong, nonatomic) IBOutlet UIImageView *imgViewCmtBy;
+@property (strong, nonatomic) IBOutlet UIButton *btnCmtBy;
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtTime;
 @property (strong, nonatomic) IBOutlet UITextView *txtCmtView;
 
