@@ -11,7 +11,7 @@
 #import "CustomKeyboard.h"
 #import "ForgetPasswordViewController.h"
 #import "RegisterationViewController.h"
-#import "FeedViewController.h"
+#import "UpdateViewController.h"
 @interface LoginViewController() <CustomKeyboardDelegate>
 {
     //keyboard
@@ -27,10 +27,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //init the keyboard
-    if([AppGlobal getValueInDefault:key_UserId ]!=nil)
+    if([AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
-        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.tabBarController.tabBar setHidden:NO];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     UIColor *color = [UIColor whiteColor];
     txtUsername.attributedPlaceholder =
@@ -146,10 +146,10 @@
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-        [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-        [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-        [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+        [AppSingleton sharedInstance].userDetail=userDetail;
+        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
         [self loginSucessFullWithFB:userid];
         
         //Hide Indicator
@@ -174,11 +174,11 @@
 
 -(void)loginSucessFullWithFB:(NSString*)userid {
     // if FB Varification is done then navigate the main screen
-    
+   
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
     // self.lblLoginStatus.text = @"You are logged out";
@@ -221,10 +221,10 @@
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
         
         [[appDelegate _engine] loginWithUserName:loginID password:password  rememberMe:[btnRemember isSelected]
-                                         success:^(UserDetail *userDetail) {
-                                             [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-//                                             [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-//                                             [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+                                         success:^(UserDetails *userDetail) {
+                                             [AppSingleton sharedInstance].userDetail=userDetail;
+                                             [AppSingleton sharedInstance].isUserLoggedIn=YES;
+                                             [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
                                              [self loginSucessFull];
                                              
                                              //Hide Indicator
@@ -263,8 +263,8 @@
     [txtUsername setText:@""];
     [txtPassword setText:@""];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)loginError:(NSError*)error{

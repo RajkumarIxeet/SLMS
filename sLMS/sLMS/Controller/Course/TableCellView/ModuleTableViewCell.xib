@@ -40,7 +40,9 @@
                         <rect key="frame" x="239" y="14" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="hG6-jx-qnR"/>
-                            <constraint firstAttribute="width" constant="42" id="w5h-VA-TWT"/>
+                            <constraint firstAttribute="width" constant="42" id="w5h-VA-TWT">
+                                <variation key="heightClass=regular-widthClass=compact" constant="53"/>
+                            </constraint>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.72941176470588232" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,7 +120,9 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="bkg-PP-gEb" secondAttribute="trailing" constant="3" id="4R5-i2-GIP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="bkg-PP-gEb" secondAttribute="trailing" constant="3" id="4R5-i2-GIP">
+                        <variation key="heightClass=regular-widthClass=compact" constant="-4"/>
+                    </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="WZ0-9J-v3H" secondAttribute="trailing" constant="-9" id="NoW-Bh-Mmm">
                         <variation key="heightClass=regular-widthClass=compact" constant="-19"/>
                     </constraint>
@@ -126,7 +130,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="113"/>
                     </constraint>
                     <constraint firstItem="bkg-PP-gEb" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="trailing" constant="2" id="SHJ-7M-RbR">
-                        <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                     </constraint>
                     <constraint firstItem="hnm-QO-hox" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="TVP-tI-xYe">
                         <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
@@ -135,7 +139,7 @@
                         <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                     </constraint>
                     <constraint firstItem="hnm-QO-hox" firstAttribute="leading" secondItem="VVt-6A-Iqw" secondAttribute="trailing" constant="51" id="W90-PH-Nfl">
-                        <variation key="heightClass=regular-widthClass=compact" constant="49"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="43"/>
                     </constraint>
                     <constraint firstAttribute="trailingMargin" secondItem="WZ0-9J-v3H" secondAttribute="trailing" constant="-9" id="czA-LI-MHn">
                         <variation key="heightClass=regular-widthClass=compact" constant="-19"/>
@@ -145,7 +149,7 @@
                     <constraint firstItem="VV3-Si-adN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="uFn-cl-1iR"/>
                     <constraint firstItem="VVt-6A-Iqw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="wK4-FS-3wV"/>
                     <constraint firstItem="WZ0-9J-v3H" firstAttribute="leading" secondItem="hnm-QO-hox" secondAttribute="leading" id="yA1-8n-QQf">
-                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                        <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                     </constraint>
                     <constraint firstItem="VV3-Si-adN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-2" id="yPD-Sd-rro">
                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>

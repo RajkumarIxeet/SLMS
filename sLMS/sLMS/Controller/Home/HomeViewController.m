@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import "RegisterationViewController.h"
-#import "FeedViewController.h"
+#import "LoginViewController.h"
 @interface HomeViewController ()
 
 @end
@@ -17,33 +17,15 @@
 @synthesize _homeViewController,_navigationController_Login;
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-//    [self.navigationController pushViewController:viewController animated:YES];
-    // Do any additional setup after loading the view from its nib.
-//        FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-//        loginButton.center = self.view.center;
-//        [self.view addSubview:loginButton];
-//        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-//        [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//            if (error) {
-//                // Process error
-//            } else if (result.isCancelled) {
-//                // Handle cancellations
-//            } else {
-//                // If you ask for multiple permissions at once, you
-//                // should check if specific permissions missing
-//                if ([result.grantedPermissions containsObject:@"mayankkcnit@gmail.com"]) {
-//                    // Do work
-//                }
-//            }
-//        }];
-    if([AppGlobal getValueInDefault:key_UserId ]!=nil)
+
+    if(  [AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
-        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.tabBarController.tabBar setHidden:NO];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
         
-        
+    
+    
     [self toggleHiddenState:YES];
    // self.lblLoginStatus.text = @"";
     
@@ -110,10 +92,10 @@
         //Show Indicator
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
         
-        [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-            [AppGlobal setValueInDefault:key_UserId value:userDetail.userId];
-            [AppGlobal setValueInDefault:key_UserName value:userDetail.userFirstName];
-            [AppGlobal setValueInDefault:key_UserEmail value:userDetail.userEmail];
+        [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+        [AppSingleton sharedInstance].userDetail=userDetail;
+        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
                                              [self loginSucessFull];
                                              
                                              //Hide Indicator
@@ -138,8 +120,9 @@
     
    
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 -(void)loginError:(NSError*)error{

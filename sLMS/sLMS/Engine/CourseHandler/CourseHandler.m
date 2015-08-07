@@ -109,14 +109,14 @@
                 resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
                 resource.resourceId=[dicContent objectForKey:@"resourceId"];
                 
-                resource.resourceImageUrl=[dicContent objectForKey:@"resourceImageUrl"];
+                resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
                 resource.resourceDesc=[dicContent objectForKey:@"resourceDesc"];
                 resource.resourceUrl=[dicContent objectForKey:@"resourceUrl"];
                 
                 resource.startedOn=[dicContent objectForKey:@"startedOn"];
                 resource.completedOn=[dicContent objectForKey:@"completedOn"];
                 resource.authorName=[dicContent objectForKey:@"authorName"];
-                
+                   resource.authorImage=[dicContent objectForKey:@"authorImg"];
                 
                 NSMutableArray * arrayComments= [[NSMutableArray alloc]init];
                 for (NSDictionary *dicComment in [dicContent objectForKey:@"commentList"]) {
@@ -128,8 +128,9 @@
                     
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
-                    comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                    //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                     comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
+                    comment.isLike=[dicComment objectForKey:@"isLiked"];
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
                     [arrayComments addObject:comment];
                 }
@@ -142,8 +143,8 @@
                     Resourse *resource= [[Resourse alloc]init];
                     resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
-                    resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
-                    resource.startedOn=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    resource.resourceImageUrl=[dicRelatedResource objectForKey:@"thumbImg"];
+                    resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
                     [arrayRelatedResource addObject:resource];
                 }
                 
@@ -151,28 +152,33 @@
                 [resourceList addObject:resource];
             }
             //call Block function
-           
-            for (NSDictionary *dicAssign in [responseDic objectForKey:@"resourceList"]) {
-                Assignment  *assignment= [[Assignment   alloc]init];
-                assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
-                assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
-                assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
-                assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
+      
+        
+        
+            for (NSDictionary *dicAssign in [responseDic objectForKey:@"assignmentList"]) {
                 
-                assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
                 
-                NSMutableArray * arrayRelatedResource= [[NSMutableArray alloc]init];
-                for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResource"]) {
+                for (NSDictionary *dicRelatedResource in [dicAssign objectForKey:@"attachedResources"]) {
+                    Assignment  *assignment= [[Assignment   alloc]init];
+                    assignment.assignmentId=[dicAssign objectForKey:@"assignmentId"];
+                    assignment.assignmentName=[dicAssign objectForKey:@"assignmentName"];
+                    assignment.assignmentStatus=[dicAssign objectForKey:@"assignmentStatus"];
+                    assignment.assignmentSubmittedDate=[dicAssign objectForKey:@"assignmentSubmittedDate"];
+                    
+                    assignment.assignmentSubmittedBy=[dicAssign objectForKey:@"assignmentSubmittedBy"];
+                    
                     Resourse *resource= [[Resourse alloc]init];
                     resource.resourceId=[dicRelatedResource objectForKey:@"resourceId"];
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                     resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
-                    resource.startedOn=[dicRelatedResource objectForKey:@"uploadedDate"];
-                    [arrayRelatedResource addObject:resource];
+                    resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    assignment.resourceId= resource.resourceId;
+                    assignment.attachedResource=resource;
+                    [assignmentList addObject:assignment];
                 }
                 
-                assignment.attachedResource=arrayRelatedResource;
-                [assignmentList addObject:assignment];
+               
+                
             }
             NSMutableDictionary *moduleDetail=[[NSMutableDictionary alloc]init ];
             [moduleDetail setObject:resourceList forKey:@"resourceList"];
@@ -185,6 +191,153 @@
 //            //call Block function
 //            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
 //        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+#pragma Comment and Like on Resource
+//Comment and Like on Resource
+-(void)setCommentOnResource:(NSString*)resourceId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = @{@"userName":[AppSingleton sharedInstance].userDetail.userEmail,@"resourceId":resourceId,@"commentText":txtComment                                 };
+   
+    [manager POST:CMT_ON_RESOURCE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+-(void)setLikeOnResource:(NSString*)resourceId  success:(void (^)(BOOL logoutValue))success failure:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSString *useremail=[AppSingleton sharedInstance].userDetail.userEmail;
+     [manager GET:LIKE_ON_RESOURCE_URL(useremail,resourceId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+   
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+        
+    }];
+    
+}
+
+#pragma Comment and Like on Comment
+//Comment and Like on Comment
+-(void)setCommentOnComment:(NSString*)commentId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure
+{
+AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+manager.requestSerializer = [AFJSONRequestSerializer serializer];
+manager.responseSerializer = [AFJSONResponseSerializer serializer];
+
+    NSDictionary *parameters = @{@"userName":[AppSingleton sharedInstance].userDetail.userEmail,@"commentId":commentId,@"commentText":txtComment                                 };
+
+
+[manager POST:CMT_ON_RESOURCE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    
+    
+    
+    NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+    //Success Full Logout
+    if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+        
+        //call Block function
+        success(YES);
+    }
+    else {
+        //call Block function
+        failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+    }
+    
+    
+    
+    
+} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    
+    failure([AppGlobal createErrorObjectWithDescription:ERROR_DEFAULT_MSG errorCode:1000]);
+    
+}];
+
+}
+
+-(void)setLikeOnComment:(NSString*)commentId  success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSString *useremail=[AppSingleton sharedInstance].userDetail.userEmail;
+    [manager GET:LIKE_ON_CMT_URL(useremail, commentId) parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+        
+        
+        NSDictionary *responseDic=[NSDictionary dictionaryWithDictionary:(NSDictionary*)responseObject];
+        //Success Full Logout
+        if ([[responseDic objectForKey:key_severRespond_Status] integerValue] == 1001) { //Success
+            
+            //call Block function
+            success(YES);
+        }
+        else {
+            //call Block function
+            failure([AppGlobal createErrorObjectWithDescription:[responseDic objectForKey:@"statusMessage"] errorCode:[[responseDic objectForKey:[responseDic objectForKey:@"status"] ] integerValue]]);
+        }
+        
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

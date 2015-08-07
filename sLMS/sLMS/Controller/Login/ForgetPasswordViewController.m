@@ -7,8 +7,9 @@
 //
 
 #import "ForgetPasswordViewController.h"
-#import "FeedViewController.h"
 #import "RegisterationViewController.h"
+#import "LoginViewController.h"
+
 @interface ForgetPasswordViewController ()
 
 @end
@@ -183,8 +184,10 @@
     //Show Indicator
     [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
     
-    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetail *userDetail) {
-        
+    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+        [AppSingleton sharedInstance].userDetail=userDetail;
+        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
         [self loginSucessFullWithFB:userid];
         
         //Hide Indicator
@@ -220,8 +223,8 @@
     
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)loginError:(NSError*)error{
     

@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self._mainViewController=[[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
-    [self.view addSubview:self._mainViewController.view];
+//    self._mainViewController=[[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+//    [self.view addSubview:self._mainViewController.view];
 
 }
 

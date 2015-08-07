@@ -249,22 +249,22 @@
                         </mask>
                         <mask key="constraints">
                             <exclude reference="cSs-To-WvW"/>
-                            <exclude reference="p51-ok-AcC"/>
-                            <exclude reference="jhP-yR-Pgm"/>
-                            <exclude reference="XMm-6d-FrQ"/>
-                            <exclude reference="7HI-zZ-y7B"/>
-                            <exclude reference="QCF-mp-0sn"/>
-                            <exclude reference="cbz-BI-tuq"/>
-                            <exclude reference="5Mt-ak-dUX"/>
-                            <exclude reference="Y7u-Mt-ytN"/>
-                            <exclude reference="uVD-zl-HNn"/>
-                            <exclude reference="5lt-t8-rQt"/>
-                            <exclude reference="bMe-Ns-kbs"/>
-                            <exclude reference="yUa-Ih-qvM"/>
-                            <exclude reference="1Yi-Qb-KfK"/>
-                            <exclude reference="lbS-dC-eOO"/>
                             <exclude reference="CNX-bL-gu9"/>
                             <exclude reference="DC1-ih-yQO"/>
+                            <exclude reference="5lt-t8-rQt"/>
+                            <exclude reference="bMe-Ns-kbs"/>
+                            <exclude reference="uVD-zl-HNn"/>
+                            <exclude reference="1Yi-Qb-KfK"/>
+                            <exclude reference="lbS-dC-eOO"/>
+                            <exclude reference="yUa-Ih-qvM"/>
+                            <exclude reference="5Mt-ak-dUX"/>
+                            <exclude reference="7HI-zZ-y7B"/>
+                            <exclude reference="QCF-mp-0sn"/>
+                            <exclude reference="Y7u-Mt-ytN"/>
+                            <exclude reference="cbz-BI-tuq"/>
+                            <exclude reference="XMm-6d-FrQ"/>
+                            <exclude reference="jhP-yR-Pgm"/>
+                            <exclude reference="p51-ok-AcC"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -277,22 +277,22 @@
                         </mask>
                         <mask key="constraints">
                             <include reference="cSs-To-WvW"/>
-                            <include reference="p51-ok-AcC"/>
-                            <include reference="jhP-yR-Pgm"/>
-                            <include reference="XMm-6d-FrQ"/>
-                            <include reference="7HI-zZ-y7B"/>
-                            <include reference="QCF-mp-0sn"/>
-                            <include reference="cbz-BI-tuq"/>
-                            <include reference="5Mt-ak-dUX"/>
-                            <include reference="Y7u-Mt-ytN"/>
-                            <include reference="uVD-zl-HNn"/>
-                            <include reference="5lt-t8-rQt"/>
-                            <include reference="bMe-Ns-kbs"/>
-                            <include reference="yUa-Ih-qvM"/>
-                            <include reference="1Yi-Qb-KfK"/>
-                            <include reference="lbS-dC-eOO"/>
                             <include reference="CNX-bL-gu9"/>
                             <include reference="DC1-ih-yQO"/>
+                            <include reference="5lt-t8-rQt"/>
+                            <include reference="bMe-Ns-kbs"/>
+                            <include reference="uVD-zl-HNn"/>
+                            <include reference="1Yi-Qb-KfK"/>
+                            <include reference="lbS-dC-eOO"/>
+                            <include reference="yUa-Ih-qvM"/>
+                            <include reference="5Mt-ak-dUX"/>
+                            <include reference="7HI-zZ-y7B"/>
+                            <include reference="QCF-mp-0sn"/>
+                            <include reference="Y7u-Mt-ytN"/>
+                            <include reference="cbz-BI-tuq"/>
+                            <include reference="XMm-6d-FrQ"/>
+                            <include reference="jhP-yR-Pgm"/>
+                            <include reference="p51-ok-AcC"/>
                         </mask>
                     </variation>
                 </view>
@@ -321,7 +321,7 @@
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                     <state key="normal" title="Validate Login With Facebook">
-                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -335,7 +335,7 @@
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                     <state key="normal" title="Logout">
-                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -379,6 +379,8 @@
                     <exclude reference="3oV-s4-EM8"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="3ig-nw-tw8"/>
+                    <exclude reference="HaI-Te-wd6"/>
                     <exclude reference="2WU-eD-Iat"/>
                     <exclude reference="8lz-86-9Ga"/>
                     <exclude reference="ih7-De-UUI"/>
@@ -386,14 +388,12 @@
                     <exclude reference="QSY-B5-mbh"/>
                     <exclude reference="dHo-Ed-teT"/>
                     <exclude reference="w0c-o8-Cl8"/>
-                    <exclude reference="3ig-nw-tw8"/>
-                    <exclude reference="HaI-Te-wd6"/>
-                    <exclude reference="4Kb-R2-91x"/>
-                    <exclude reference="euR-7k-WQx"/>
-                    <exclude reference="zcn-8j-nmc"/>
                     <exclude reference="1Kj-q9-767"/>
                     <exclude reference="1Vh-82-WUr"/>
                     <exclude reference="wTK-R5-ktQ"/>
+                    <exclude reference="4Kb-R2-91x"/>
+                    <exclude reference="euR-7k-WQx"/>
+                    <exclude reference="zcn-8j-nmc"/>
                     <exclude reference="9sU-AM-gqQ"/>
                     <exclude reference="PgO-ay-Dzo"/>
                     <exclude reference="raB-Li-nYd"/>
@@ -411,6 +411,8 @@
                     <include reference="3oV-s4-EM8"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="3ig-nw-tw8"/>
+                    <include reference="HaI-Te-wd6"/>
                     <include reference="2WU-eD-Iat"/>
                     <include reference="8lz-86-9Ga"/>
                     <include reference="ih7-De-UUI"/>
@@ -418,14 +420,12 @@
                     <include reference="QSY-B5-mbh"/>
                     <include reference="dHo-Ed-teT"/>
                     <include reference="w0c-o8-Cl8"/>
-                    <include reference="3ig-nw-tw8"/>
-                    <include reference="HaI-Te-wd6"/>
-                    <include reference="4Kb-R2-91x"/>
-                    <include reference="euR-7k-WQx"/>
-                    <include reference="zcn-8j-nmc"/>
                     <include reference="1Kj-q9-767"/>
                     <include reference="1Vh-82-WUr"/>
                     <include reference="wTK-R5-ktQ"/>
+                    <include reference="4Kb-R2-91x"/>
+                    <include reference="euR-7k-WQx"/>
+                    <include reference="zcn-8j-nmc"/>
                     <include reference="9sU-AM-gqQ"/>
                     <include reference="PgO-ay-Dzo"/>
                     <include reference="raB-Li-nYd"/>
