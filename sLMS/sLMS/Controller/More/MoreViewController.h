@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MoreViewController : UIViewController
-//@property (strong, nonatomic) IBOutlet UIButton *btnFB;
-//@property (strong, nonatomic) IBOutlet FBLoginView *fbview;
-//- (IBAction)btnFBClick:(id)sender;
-//- (IBAction)btnLogoutClick:(id)sender;
+
 
 @end

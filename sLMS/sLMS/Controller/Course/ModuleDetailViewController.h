@@ -35,11 +35,11 @@ IBOutlet UITableView *tblViewContent;
 
 - (IBAction)btnBackClicked:(id)sender;
 
-- (IBAction)btnAssignmentClick:(id)sender;
-- (IBAction)btnCourseClick:(id)sender;
-- (IBAction)btnNotificationClick:(id)sender;
-- (IBAction)btnUpdateClick:(id)sender;
-- (IBAction)btnMoreClick:(id)sender;
+//- (IBAction)btnAssignmentClick:(id)sender;
+//- (IBAction)btnCourseClick:(id)sender;
+//- (IBAction)btnNotificationClick:(id)sender;
+//- (IBAction)btnUpdateClick:(id)sender;
+//- (IBAction)btnMoreClick:(id)sender;
 - (IBAction)btnCommentDone:(id)sender;
 - (IBAction)btnCommentCancle:(id)sender;
 
