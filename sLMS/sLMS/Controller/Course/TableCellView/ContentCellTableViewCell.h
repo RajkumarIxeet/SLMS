@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblStartedon;
 @property (strong, nonatomic) IBOutlet UILabel *lblCompletedon;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *btnLike;

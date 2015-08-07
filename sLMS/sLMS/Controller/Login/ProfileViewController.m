@@ -8,7 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
-#import "CourseViewController.h"
+
 @interface ProfileViewController ()
 
 @end
@@ -173,20 +173,20 @@
     [self.navigationController pushViewController:viewCont animated:YES];
   
 }
-- (IBAction)btnAssignmentClick:(id)sender {
-}
-
-- (IBAction)btnCourseClick:(id)sender {
-       CourseViewController *courseView= [[CourseViewController alloc]init];
-       [self.navigationController pushViewController:courseView animated:YES];
-     
-}
-
-- (IBAction)btnNotificationClick:(id)sender {
-}
-
-- (IBAction)btnUpdateClick:(id)sender {
-}
-- (IBAction)btnMoreClick:(id)sender {
-}
+//- (IBAction)btnAssignmentClick:(id)sender {
+//}
+//
+//- (IBAction)btnCourseClick:(id)sender {
+//       CourseViewController *courseView= [[CourseViewController alloc]init];
+//       [self.navigationController pushViewController:courseView animated:YES];
+//     
+//}
+//
+//- (IBAction)btnNotificationClick:(id)sender {
+//}
+//
+//- (IBAction)btnUpdateClick:(id)sender {
+//}
+//- (IBAction)btnMoreClick:(id)sender {
+//}
 @end

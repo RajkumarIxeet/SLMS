@@ -109,7 +109,7 @@
                 resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
                 resource.resourceId=[dicContent objectForKey:@"resourceId"];
                 
-                resource.resourceImageUrl=[dicContent objectForKey:@"resourceImageUrl"];
+                resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
                 resource.resourceDesc=[dicContent objectForKey:@"resourceDesc"];
                 resource.resourceUrl=[dicContent objectForKey:@"resourceUrl"];
                 
@@ -128,7 +128,7 @@
                     
                     comment.parentCommentId=[dicComment objectForKey:@"parentCommentId"];
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
-                    comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
+                    //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                     comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
                     comment.isLike=[dicComment objectForKey:@"isLiked"];
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
@@ -172,6 +172,7 @@
                     resource.resourceDesc=[dicRelatedResource objectForKey:@"resourceDesc"];
                     resource.resourceUrl=[dicRelatedResource objectForKey:@"resourceUrl"];
                     resource.uploadedDate=[dicRelatedResource objectForKey:@"uploadedDate"];
+                    assignment.resourceId= resource.resourceId;
                     assignment.attachedResource=resource;
                     [assignmentList addObject:assignment];
                 }

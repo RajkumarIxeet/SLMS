@@ -10,13 +10,14 @@
 
 @interface Resourse : NSObject
 
-
+@property (nonatomic,assign) BOOL  islike;
 @property (nonatomic,strong) NSString * likeCounts;
 @property (nonatomic,strong) NSString * commentCounts;
 @property (nonatomic,strong) NSString* shareCounts;
 @property (nonatomic,strong) NSString* resourceId;
 @property (nonatomic,strong) NSString* resourceUrl;
 @property (nonatomic,strong) NSString* resourceImageUrl;
+@property (nonatomic,strong) NSData* resourceImageData;
 @property (nonatomic,strong) NSString* resourceDesc;
 @property (nonatomic,strong) NSString* startedOn;
 @property (nonatomic,strong) NSString* completedOn;

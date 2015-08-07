@@ -30,11 +30,45 @@
     if (self) {
         
         // Custom initialization
-    }
+            }
     return self;
+}
+-(void)setSearchUI
+{
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+        
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        if( screenHeight < screenWidth ){
+            screenHeight = screenWidth;
+        }
+        
+        if( screenHeight > 480 && screenHeight < 667 ){
+            NSLog(@"iPhone 5/5s");
+        } else if ( screenHeight > 480 && screenHeight < 736 ){
+            NSLog(@"iPhone 6");
+            [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn_6.png"]];
+            
+        } else if ( screenHeight > 480 ){
+           // [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+            
+            NSLog(@"iPhone 6 Plus");
+        } else {
+            NSLog(@"iPhone 4/4s");
+            
+        }
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        //  [txfSearchField setTextColor:[UIColor whiteColor]];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setSearchUI];
+
      [self  getCourses:@""];
     btnCourses.selected=YES;
 
@@ -84,19 +118,19 @@
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
-- (IBAction)btnAssignmentClick:(id)sender {
-}
-
-- (IBAction)btnCourseClick:(id)sender {
-}
-
-- (IBAction)btnNotificationClick:(id)sender {
-}
-
-- (IBAction)btnUpdateClick:(id)sender {
-}
-- (IBAction)btnMoreClick:(id)sender {
-}
+//- (IBAction)btnAssignmentClick:(id)sender {
+//}
+//
+//- (IBAction)btnCourseClick:(id)sender {
+//}
+//
+//- (IBAction)btnNotificationClick:(id)sender {
+//}
+//
+//- (IBAction)btnUpdateClick:(id)sender {
+//}
+//- (IBAction)btnMoreClick:(id)sender {
+//}
 #pragma mark - UISearchBar Delegate Method
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
@@ -104,7 +138,7 @@
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"Text change - %d");
+  //  NSLog(@"Text change - %d");
     
     //Remove all objects first.
 //    [filteredContentList removeAllObjects];

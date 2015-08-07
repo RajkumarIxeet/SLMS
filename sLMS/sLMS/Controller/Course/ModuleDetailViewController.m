@@ -14,6 +14,7 @@
 #import "AppEngine.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "VedioPlayViewController.h"
+
 @interface ModuleDetailViewController ()
 {
     NSMutableArray *contentList;
@@ -26,7 +27,8 @@
     ActionOn    actionOn;
     NSString    *selectedResourceId,*selectedCommentId;
     NSString    *searchText;
-   
+    NSString* relatedURL;
+    BOOL isSearching;
 }
 
 
@@ -48,6 +50,7 @@
 @synthesize pageViews = _pageViews;
 @synthesize pageImages = _pageImages;
 @synthesize step,title,txtViewCMT;
+@synthesize moviePlayer;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -55,7 +58,8 @@
     
     
     // Set up the array to hold the views for each page
-   
+    [self setSearchUI];
+
   self.scrollView.clipsToBounds=NO;
       [self getModuleDetail:@""];
     
@@ -65,7 +69,9 @@
     self.cmtview.frame=frame1;
     [self.view addSubview:self.cmtview];
     btnCourses.selected=YES;
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
 }
 
 
@@ -91,6 +97,38 @@
    
     [[NSNotificationCenter defaultCenter] removeObserver:self   name:UIKeyboardWillHideNotification object:nil];
  
+}
+-(void)setSearchUI
+{
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ){
+        
+        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        if( screenHeight < screenWidth ){
+            screenHeight = screenWidth;
+        }
+        
+        if( screenHeight > 480 && screenHeight < 667 ){
+            NSLog(@"iPhone 5/5s");
+        } else if ( screenHeight > 480 && screenHeight < 736 ){
+            NSLog(@"iPhone 6");
+            [txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+            
+        } else if ( screenHeight > 480 ){
+            //[txtSearchBar setBackgroundImage:[UIImage imageNamed:@"img_search-boxn.png"]];
+            
+            NSLog(@"iPhone 6 Plus");
+        } else {
+            NSLog(@"iPhone 4/4s");
+            
+        }
+        [txtSearchBar setBackgroundColor:[UIColor clearColor]];
+        UITextField *txfSearchField = [txtSearchBar valueForKey:@"_searchField"];
+        [txfSearchField setBackgroundColor:[UIColor clearColor]];
+        //[txfSearchField setLeftView:UITextFieldViewModeNever];
+        [txfSearchField setBorderStyle:UITextBorderStyleNone];
+        //  [txfSearchField setTextColor:[UIColor whiteColor]];
+    }
 }
 /*
 #pragma mark - Navigation
@@ -124,24 +162,60 @@
    
 }
 #pragma mark - Comment and like on Resource
+
+- (IBAction)btnPlayAssignmentClick:(id)sender {
+    UIButton *btn=(UIButton *)sender;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"resourceId == %@", btn.tag];
+    NSArray *filteredArray = [assignmentList filteredArrayUsingPredicate:predicate];
+    Assignment *assignment =[filteredArray objectAtIndex:0];
+    [self PlayTheVideo:assignment.attachedResource.resourceUrl];
+
+}
+- (IBAction)btnPlayRelatedResourceClick:(id)sender {
+    
+    UIButton *btn=(UIButton *)sender;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"resourceId == %@", btn.tag];
+    NSArray *filteredArray = [assignmentList filteredArrayUsingPredicate:predicate];
+    Resourse *resource =[filteredArray objectAtIndex:0];
+    [self PlayTheVideo:resource.resourceUrl];
+    
+}
 - (IBAction)btnPlayResourceClick:(id)sender {
    
-//    NSString *filepath   =   [[NSBundle mainBundle] pathForResource:@"big-buck-bunny-clip" ofType:@"m4v"];
+//    VedioPlayViewController *vedioView= [[VedioPlayViewController alloc]init];
+//    NSInteger currentpage=  self.pageControl.currentPage;
+//    selectedResource=[contentList objectAtIndex:currentpage];
+//    vedioView.filePath=selectedResource.resourceUrl;
+//    [self.navigationController pushViewController:vedioView animated:YES];
+ 
+    NSInteger currentpage=  self.pageControl.currentPage;
+    // get the current Content
+    selectedResource=[contentList objectAtIndex:currentpage];
+    [self PlayTheVideo:selectedResource.resourceUrl];
+}
+-(void)PlayTheVideo:(NSString *)stringUrl
+{
     
-//    NSURL    *fileURL    =   [NSURL  fileURLWithPath:selectedResource.resourceUrl];
-//    MPMoviePlayerController *moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(moviePlaybackComplete:)
-//                                                 name:MPMoviePlayerPlaybackDidFinishNotification
-//                                               object:moviePlayerController];
-//    
-//    [self.view addSubview:moviePlayerController.view];
-//    moviePlayerController.fullscreen = YES;
-//    [moviePlayerController play];
-    VedioPlayViewController *vedioView= [[VedioPlayViewController alloc]init];
-    vedioView.filePath=selectedResource.resourceUrl;
-    [self.navigationController pushViewController:vedioView animated:YES];
+    NSURL *url = [NSURL URLWithString:stringUrl];
+    self.moviePlayer =  [[MPMoviePlayerController alloc]initWithContentURL:url];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlaybackComplete:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object: self.moviePlayer];
+    
+    self.moviePlayer.controlStyle = MPMovieControlStyleDefault;
+    self.moviePlayer.shouldAutoplay = YES;
+    [ self.moviePlayer prepareToPlay];
+    [self.view addSubview: self.moviePlayer.view];
+    [ self.moviePlayer setFullscreen:YES animated:YES];
+    [ self.moviePlayer stop];
+    [ self.moviePlayer play];
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+    
+
 }
 - (void)moviePlaybackComplete:(NSNotification *)notification
 {
@@ -153,8 +227,31 @@
     [moviePlayerController.view removeFromSuperview];
    
 }
+- (void) moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+    [appDelegate self].allowRotation = YES;
+}
+- (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [appDelegate self].allowRotation = NO;
+    MPMoviePlayerController *moviePlayerController = [notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:moviePlayerController];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerWillExitFullscreenNotification
+                                                  object:moviePlayerController];
+    [self.moviePlayer stop];
+    //[self.moviePlayer stop];
+    [self.moviePlayer.view removeFromSuperview];
+    self.moviePlayer=nil;
+    
+}
 - (IBAction)btnCommentOnResourceClick:(id)sender {
     UIButton *btn=(UIButton *)sender;
+    NSInteger currentpage=  self.pageControl.currentPage;
+    // get the current Content
+    selectedResource=[contentList objectAtIndex:currentpage];
     selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
     actionOn=Resource;
     [txtViewCMT becomeFirstResponder];
@@ -164,6 +261,9 @@
 - (IBAction)btnLikeOnResourceClick:(id)sender {
     // call the service
     UIButton *btn=(UIButton *)sender;
+    NSInteger currentpage=  self.pageControl.currentPage;
+    // get the current Content
+    selectedResource=[contentList objectAtIndex:currentpage];
     selectedResourceId=[NSString stringWithFormat:@"%ld", (long)btn.tag];
 
         [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
@@ -226,19 +326,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)btnAssignmentClick:(id)sender {
-}
-
-- (IBAction)btnCourseClick:(id)sender {
-}
-
-- (IBAction)btnNotificationClick:(id)sender {
-}
-
-- (IBAction)btnUpdateClick:(id)sender {
-}
-- (IBAction)btnMoreClick:(id)sender {
-}
+//- (IBAction)btnAssignmentClick:(id)sender {
+//}
+//
+//- (IBAction)btnCourseClick:(id)sender {
+//}
+//
+//- (IBAction)btnNotificationClick:(id)sender {
+//}
+//
+//- (IBAction)btnUpdateClick:(id)sender {
+//}
+//- (IBAction)btnMoreClick:(id)sender {
+//}
 
 - (IBAction)btnCommentDone:(id)sender {
     [txtViewCMT resignFirstResponder];
@@ -301,11 +401,13 @@
 #pragma mark - UISearchBar Delegate Method
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    // isSearching = YES;
+   
+    [txtViewCMT resignFirstResponder];
+     isSearching = YES;
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"Text change - %d");
+  //  NSLog(@"Text change - %d");
     
     //Remove all objects first.
     //    [filteredContentList removeAllObjects];
@@ -322,6 +424,8 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"Cancel clicked");
+    isSearching=NO;
+    [searchBar resignFirstResponder];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -329,6 +433,7 @@
     searchText=searchBar.text;
   [self getModuleDetail:searchBar.text];
     // [self searchTableList];
+    isSearching=NO;
 }
 #pragma mark Course Private functions
 -(void) getModuleDetail:(NSString *) txtSearch
@@ -435,25 +540,56 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.startedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
+        resource.startedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
         
         components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
         monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.completedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
+        resource.completedOn=[NSString stringWithFormat:@"%@ %ld,%ld",monthName,(long)components.day,(long)components.year];
         }
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
-        [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateNormal];
+        if(resource.islike)
+        {
+            customView.btnLike.selected=YES;
+            [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateSelected];
+        }else
+            
+        {
+             customView.btnLike.selected=NO;
+            [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateNormal];
+        }
+        
        // [customView.btnShare    setTitle:resource.shareCounts forState:UIControlStateNormal];
         [customView.btnComment setTitle:resource.commentCounts forState:UIControlStateNormal];
-        [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
+      // gentrte thumbnail
+        // [customView.imgContent setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
        
+         if(resource.resourceImageUrl!=nil){
+             
+             if (resource.resourceImageData==nil) {
+                  NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        resource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            // Update the UI
+                           customView.imgContent.image= [UIImage imageWithData: resource.resourceImageData ];
+                          [customView.imgContent setBackgroundColor:[UIColor clearColor]];
+                        });
+                    });
+                 
+             }else{
+                 customView.imgContent.image= [UIImage imageWithData: resource.resourceImageData ];
+                 [customView.imgContent setBackgroundColor:[UIColor clearColor]];
+             }
+         }
+        
         [customView.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         [customView.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         customView.btnComment.tag=[resource.resourceId integerValue];
         customView.btnLike.tag=[resource.resourceId integerValue];
         // add vedio play
-        selectedResource=resource;
+        
         [customView.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
 
         // set comment for the content
@@ -462,16 +598,23 @@
         {
             Comments *objComment=[resource.comments objectAtIndex:0];
             [customView.imgViewCmtBy setImage:[AppGlobal generateThumbnail:resource.resourceUrl]];
-//            NSURL *imageURL = [NSURL URLWithString:objComment.commentByImage];
-//            
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-//                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-//                
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    // Update the UI
-//                    customView.imgViewCmtBy.image = [UIImage imageWithData:imageData];
-//                });
-//            });
+
+            
+            if(objComment.commentByImage!=nil){
+                NSURL *imageURL = [NSURL URLWithString:objComment.commentByImage];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // Update the UI
+                        //customView.imgViewCmtBy.image= [UIImage imageWithData:imageData];
+                        UIImage *img=[UIImage imageWithData:imageData];
+                        if(img!=nil)
+                           customView.imgViewCmtBy.image= img;
+                    });
+                });
+            }
         
             customView.lblCmtBy.text=  objComment.commentBy;
             customView.lblCmtTime.text= objComment.commentDate;
@@ -521,44 +664,45 @@
         [self.pageViews replaceObjectAtIndex:page withObject:[NSNull null]];
     }
 }
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-  
-    
-    ScrollDirection scrollDirection;
-    if( scrollView.tag==20){
-    if (self.lastContentOffset > self.scrollView.contentOffset.y+5)
+    if(decelerate==YES)
     {
-        scrollDirection = ScrollDirectionDown;
-
-    
-    self.lastContentOffset = scrollView.contentOffset.y;
-    
-    // get current page;
-    NSInteger currentpage=  self.pageControl.currentPage;
-    // get the current Content
-   selectedResource=[contentList objectAtIndex:currentpage];
-       // CATransition *animation = [CATransition animation];
-//        animation.type = kCATransitionFade;
-//        animation.duration = 0.0;
-//        [scrollView.layer addAnimation:animation forKey:nil];
-//        
-//        scrollView.hidden = YES;
-        [UIView transitionWithView:scrollView
-                          duration:0.4
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:NULL
-                        completion:NULL];
-        self.scrollView.hidden=YES;
-        [tblViewContent reloadData];
-        tblViewContent.hidden =NO;
-        //button.layer.shouldRasterize = YES;
-    }else {
-     self.lastContentOffset = scrollView.contentOffset.y;
-    
-    }
-    }else if( scrollView.tag==10){
-            if (self.lastContentOffsetOfTable <-50)
+        NSLog(@"running");
+        ScrollDirection scrollDirection;
+        if( scrollView.tag==20){
+            if (self.lastContentOffset > self.scrollView.contentOffset.y+2)
+            {
+                scrollDirection = ScrollDirectionDown;
+                
+                
+                self.lastContentOffset = scrollView.contentOffset.y;
+                
+                // get current page;
+                NSInteger currentpage=  self.pageControl.currentPage;
+                // get the current Content
+                selectedResource=[contentList objectAtIndex:currentpage];
+                // CATransition *animation = [CATransition animation];
+                //        animation.type = kCATransitionFade;
+                //        animation.duration = 0.0;
+                //        [scrollView.layer addAnimation:animation forKey:nil];
+                //
+                //        scrollView.hidden = YES;
+                [UIView transitionWithView:scrollView
+                                  duration:0.4
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:NULL
+                                completion:NULL];
+                self.scrollView.hidden=YES;
+                [tblViewContent reloadData];
+                tblViewContent.hidden =NO;
+                //button.layer.shouldRasterize = YES;
+            }else {
+                self.lastContentOffset = scrollView.contentOffset.y;
+                
+            }
+        }else if( scrollView.tag==10){
+            if (self.lastContentOffsetOfTable <-20)
             {
                 scrollDirection = ScrollDirectionDown;
                 
@@ -570,8 +714,8 @@
                                    options:UIViewAnimationOptionTransitionCrossDissolve
                                 animations:NULL
                                 completion:NULL];
-                 self.scrollView.hidden=NO;
-               // [tblViewContent reloadData];
+                self.scrollView.hidden=NO;
+                // [tblViewContent reloadData];
                 
                 tblViewContent.hidden =YES;
                 NSInteger pageCount = [contentList count];
@@ -594,7 +738,83 @@
                 
             }
         }
+
+    }
 }
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//  
+//    
+//    ScrollDirection scrollDirection;
+//    if( scrollView.tag==20){
+//    if (self.lastContentOffset > self.scrollView.contentOffset.y+5)
+//    {
+//        scrollDirection = ScrollDirectionDown;
+//
+//    
+//    self.lastContentOffset = scrollView.contentOffset.y;
+//    
+//    // get current page;
+//    NSInteger currentpage=  self.pageControl.currentPage;
+//    // get the current Content
+//   selectedResource=[contentList objectAtIndex:currentpage];
+//       // CATransition *animation = [CATransition animation];
+////        animation.type = kCATransitionFade;
+////        animation.duration = 0.0;
+////        [scrollView.layer addAnimation:animation forKey:nil];
+////        
+////        scrollView.hidden = YES;
+//        [UIView transitionWithView:scrollView
+//                          duration:0.4
+//                           options:UIViewAnimationOptionTransitionCrossDissolve
+//                        animations:NULL
+//                        completion:NULL];
+//        self.scrollView.hidden=YES;
+//        [tblViewContent reloadData];
+//        tblViewContent.hidden =NO;
+//        //button.layer.shouldRasterize = YES;
+//    }else {
+//     self.lastContentOffset = scrollView.contentOffset.y;
+//    
+//    }
+//    }else if( scrollView.tag==10){
+//            if (self.lastContentOffsetOfTable <-50)
+//            {
+//                scrollDirection = ScrollDirectionDown;
+//                
+//                
+//                self.lastContentOffsetOfTable = scrollView.contentOffset.y;
+//                
+//                [UIView transitionWithView:scrollView
+//                                  duration:0.4
+//                                   options:UIViewAnimationOptionTransitionCrossDissolve
+//                                animations:NULL
+//                                completion:NULL];
+//                 self.scrollView.hidden=NO;
+//               // [tblViewContent reloadData];
+//                
+//                tblViewContent.hidden =YES;
+//                NSInteger pageCount = [contentList count];
+//                
+//                // Set up the page control
+//                self.pageControl.currentPage = 0;
+//                self.pageControl.numberOfPages = pageCount;
+//                // Set up the content size of the scroll view
+//                // Set up the array to hold the views for each page
+//                self.pageViews = [[NSMutableArray alloc] init];
+//                for (NSInteger i = 0; i < pageCount; ++i) {
+//                    [self.pageViews addObject:[NSNull null]];
+//                }
+//                CGSize pagesScrollViewSize = self.scrollView.frame.size;
+//                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
+//                [self loadVisiblePages];
+//                //button.layer.shouldRasterize = YES;
+//            }else {
+//                self.lastContentOffsetOfTable = scrollView.contentOffset.y;
+//                
+//            }
+//        }
+//}
 #pragma mark - Table view data source
 
 //- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -657,9 +877,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//#import "ContentCellTableViewCell.h"
-//#import "AssignmentTableViewCell.h"
-//#import "CommentTableViewCell.h"
+
     
     if(indexPath.section==0)
     {
@@ -676,36 +894,52 @@
 
         cell.lblAutherName.text=selectedResource.authorName;
         
-//        NSDate *dateSatrtedOn = [AppGlobal convertStringDateToNSDate:selectedResource.startedOn];
-//        NSDate *dateCompletedOn = [AppGlobal convertStringDateToNSDate:selectedResource.completedOn];
-//
-//        NSCalendar* calendar = [NSCalendar currentCalendar];
-//        NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateSatrtedOn]; // Get necessary date components
-//        
-//        
-//        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-//        NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-//        selectedResource.startedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
         cell.lblStartedon.text=selectedResource.startedOn;
        
+        cell.lblCompletedon.text=selectedResource.completedOn;
+        if(selectedResource.resourceImageUrl!=nil){
+            
+            if (selectedResource.resourceImageData==nil) {
+                NSURL *imageURL = [NSURL URLWithString:selectedResource.resourceImageUrl];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    selectedResource.resourceImageData  = [NSData dataWithContentsOfURL:imageURL];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    UIImage *img=[UIImage imageWithData:selectedResource.resourceImageData];
+                    if(img!=nil)
+                    {
+                        cell.imgContent.image= img;
+                        [cell.imgContent setBackgroundColor:[UIColor clearColor]];
+                    }
+                });
+            });
+            }else{
+                UIImage *img=[UIImage imageWithData:selectedResource.resourceImageData];
+                cell.imgContent.image= img;
+                [cell.imgContent setBackgroundColor:[UIColor clearColor]];
+            }
+        }
+        [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+        if(selectedResource.islike)
+        {
+            cell.btnLike.selected=YES;
+             [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateSelected];
+        }else
+            
+        {
+            cell.btnLike.selected=NO;
+          [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
+        }
         
-//        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  dateCompletedOn]; // Get necessary date components
-//        monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-//        selectedResource.completedOn=[NSString stringWithFormat:@"%@ %d,%d",monthName,components.day,components.year];
-       cell.lblCompletedon.text=selectedResource.completedOn;
-        
-        [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateNormal];
         cell.btnComment.tag=[selectedResource.resourceId integerValue];
         cell.btnLike.tag=[selectedResource.resourceId integerValue];
         cell.btnShare.tag=[selectedResource.resourceId integerValue];
-//set action for comment and like on resource
+        //set action for comment and like on resource
         [cell.btnComment addTarget:self action:@selector(btnCommentOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnLike addTarget:self action:@selector(btnLikeOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btnShare addTarget:self action:@selector(btnShareOnResourceClick:) forControlEvents:UIControlEventTouchUpInside];
         
-       // [cell.btnShare    setTitle:selectedResource.shareCounts forState:UIControlStateNormal];
-        [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
-      //  [cell.imgContent setImage:[AppGlobal generateThumbnail:selectedResource.resourceUrl]];
+       [cell.btnComment setTitle:selectedResource.commentCounts forState:UIControlStateNormal];
         
         return cell;
     }else if(indexPath.section==1){
@@ -725,10 +959,33 @@
         cell.lblCmtBy.text= comment.commentBy;
         cell.lblCmtDate.text=comment.commentDate;
         cell.lblCmtText.text=comment.commentTxt;
-//        if(indexPath.row/2==0){
-//            cell.lblCmtText.text=@"nxlsjldjfldksjflkdsjfl";
-//        }
-        [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+
+        if(comment.commentByImage!=nil){
+            NSURL *imageURL = [NSURL URLWithString:comment.commentByImage];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    UIImage *img=[UIImage imageWithData:imageData];
+                    if(img!=nil)
+                       [cell.btnCommentedBy setImage:img forState:UIControlStateNormal];
+                    
+                });
+            });
+        }
+        if(comment.isLike)
+        {
+            cell.btnLike.selected=YES;
+            [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
+        }else
+            
+        {
+            cell.btnLike.selected=NO;
+            [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateNormal];
+        }
+       
         [cell.btnCMT setTitle:comment.commentCounts forState:UIControlStateNormal];
       
         cell.btnCMT.tag=[comment.commentId integerValue];
@@ -754,13 +1011,13 @@
             if(IsCommentExpended && (indexPath.row==[selectedResource.comments count]-1))
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
-                cell.btnMore.hidden=NO;
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                cell.btnMore.hidden=YES;
                 cell.imgDevider.hidden=NO;
                 cell.lblRelatedVideo.hidden =NO;
             }else if(indexPath.row==2 && !IsCommentExpended){
                 [cell.btnMore addTarget:self action:@selector(btnMoreCommentClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.comments count ]-3]  forState:UIControlStateNormal];
                 cell.btnMore.hidden=NO;
                 cell.imgDevider.hidden=NO;
                 cell.lblRelatedVideo.hidden =NO;
@@ -788,6 +1045,24 @@
         cell.lblContentby.text=resource.authorName;
        // cell.lblSubmittedDate.text=resource.uploadedDate;
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:resource.uploadedDate];
+       
+        if(resource.resourceImageUrl!=nil){
+            NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    
+                    UIImage *img=[UIImage imageWithData:imageData];
+                    if(img!=nil)
+                       cell.imgContentURL.image= img;
+
+                });
+            });
+        }
+        
         if(submittedDate!=nil){
         NSCalendar* calendar = [NSCalendar currentCalendar];
         NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:  submittedDate]; // Get necessary date components
@@ -795,9 +1070,11 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-        resource.uploadedDate=[NSString stringWithFormat:@"%@ %d",monthName,components.day];
+        resource.uploadedDate=[NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day];
         }
-        
+        cell.btnPlay.tag= [resource.resourceId integerValue];
+        [cell.btnPlay  addTarget:self action:@selector(btnPlayRelatedResourceClick:) forControlEvents:UIControlEventTouchUpInside];
+
         cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Uploaded on %@",resource.uploadedDate ];
         if(indexPath.row!=([selectedResource.relatedResources count]-1))
         {
@@ -808,10 +1085,40 @@
             if([selectedResource.relatedResources count]>=3)
             {
                 [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
-                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%u More",[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
             }else{
                 cell.btnMore.hidden=YES;
             }
+        }
+
+        cell.btnMore.hidden=YES;
+        cell.imgDevider.hidden=YES;
+        cell.lblAssignment.hidden =YES;
+        
+        if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
+        {
+            cell.btnMore.hidden=YES;
+            cell.imgDevider.hidden=NO;
+            cell.lblAssignment.hidden =NO;
+            
+        }
+        else if([selectedResource.relatedResources count]>=3)
+        {
+            if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
+            {
+                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                cell.btnMore.hidden=YES;
+                cell.imgDevider.hidden=NO;
+                cell.lblAssignment.hidden =NO;
+            }else if(indexPath.row==2 && !IsRelatedConentExpended){
+                [cell.btnMore addTarget:self action:@selector(btnMoreRelatedVideoClick:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnMore setTitle:[NSString stringWithFormat:@"+%ld More",(long)[selectedResource.relatedResources count ]-3]  forState:UIControlStateNormal];
+                cell.btnMore.hidden=NO;
+                cell.imgDevider.hidden=NO;
+                cell.lblAssignment.hidden =NO;
+            }
+            
         }
 
         return cell;
@@ -834,6 +1141,26 @@
         cell.lblContentName.text= assignment.assignmentName;
         cell.lblContentby.text=assignment.assignmentSubmittedBy;
         
+        
+        if(resource.resourceImageUrl!=nil){
+            NSURL *imageURL = [NSURL URLWithString:resource.resourceImageUrl];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                if (resource.resourceImageData==nil) {
+                     resource.resourceImageData = [NSData dataWithContentsOfURL:imageURL];
+                }
+               dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    //cell.imgContentURL.image= [UIImage imageWithData:imageData];
+                    UIImage *img=[UIImage imageWithData: resource.resourceImageData];
+                    if(img!=nil)
+                         cell.imgContentURL.image= img;
+
+                });
+            });
+        }
+        
+        
         NSDate * submittedDate=[AppGlobal convertStringDateToNSDate:assignment.assignmentSubmittedDate];
        if(submittedDate!=nil){
         NSCalendar* calendar = [NSCalendar currentCalendar];
@@ -842,8 +1169,10 @@
         
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
-      assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %d",monthName,components.day];
+      assignment.assignmentSubmittedDate=[NSString stringWithFormat:@"%@ %ld",monthName,(long)components.day];
        }
+        cell.btnPlay.tag= [resource.resourceId integerValue];
+        [cell.btnPlay  addTarget:self action:@selector(btnPlayAssignmentClick:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.lblSubmittedDate.text=[NSString stringWithFormat:@"Submitted on %@",assignment.assignmentSubmittedDate ];
         if(indexPath.row!=([assignmentList count]-1))
@@ -943,7 +1272,7 @@
         Comments *cmt=selectedResource.comments[indexPath.row];
         CGSize labelSize=[AppGlobal getTheExpectedSizeOfLabel:cmt.commentTxt];
         float height=0.0f;
-        NSLog(@"%d",indexPath.row);
+        NSLog(@"%ld",(long)indexPath.row);
         if(([selectedResource.comments count]<3) && (indexPath.row==[selectedResource.comments count]-1))
         {
            height=80.0f;
@@ -970,14 +1299,25 @@
     else if(indexPath.section==2 )
     {
         float height=0.0f;
-        if(indexPath.row==([selectedResource.relatedResources count]-1))
-        {
-            height=75.0f;
-        }else if(([selectedResource.relatedResources count]-1==3 )&& indexPath.row==2)
+       
+        if(([selectedResource.relatedResources count]<3) && (indexPath.row==[selectedResource.relatedResources count]-1))
         {
             height=75.0f;
             
+            
+            
         }
+        else if([selectedResource.relatedResources count]>=3)
+        {
+            if(IsRelatedConentExpended && (indexPath.row==[selectedResource.relatedResources count]-1))
+            {
+                height=75.0f;
+            }else if(indexPath.row==2 && !IsRelatedConentExpended){
+                height=75.0f;
+            }
+            
+        }
+
        
         return  height=height+96.0f;
     
@@ -987,10 +1327,7 @@
     {
 //        
         float height=0.0f;
-//        if(indexPath.row==([assignmentList count]-1))
-//        {
-//            height=40.0f;
-//        }
+
         
         return  height=height+96.0f;
 
@@ -1024,6 +1361,8 @@
     /* Move the toolbar to above the keyboard */
     //    [UIView beginAnimations:nil context:NULL];
     //    [UIView setAnimationDuration:0.0];
+    if(!isSearching)
+    {
     CGRect frame1 = self.cmtview.frame;
     frame1.size.width=keyboardFrameBeginRect.size.width;
     frame1.origin.y = self.view.frame.size.height- (keyboardFrameBeginRect.size.height+39);
@@ -1033,7 +1372,7 @@
      frame=frame1;
     [self.view bringSubviewToFront: self.cmtview];
     //271-
-    
+    }
     //  [UIView commitAnimations];
     
 }
@@ -1044,10 +1383,13 @@
     /* Move the toolbar back to bottom of the screen */
     //    [UIView beginAnimations:nil context:NULL];
     //    [UIView setAnimationDuration:0.3];
+    if(!isSearching)
+    {
         CGRect frame1 = self.cmtview.frame;
         frame1=CGRectMake(0, self.view.frame.size.height+30, 320, 40);
         self.cmtview.frame = frame1;
      frame=frame1;
+    }
     //
     //    [UIView commitAnimations];
 }

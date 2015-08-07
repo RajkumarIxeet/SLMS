@@ -19,5 +19,5 @@
 @property (nonatomic,strong) NSString* commentByImage;
 @property (nonatomic,strong) NSString* commentTxt;
 @property (nonatomic,strong) NSString* commentDate;
-@property (nonatomic,strong) NSString* isLike;
+@property (nonatomic,assign) BOOL isLike;
 @end

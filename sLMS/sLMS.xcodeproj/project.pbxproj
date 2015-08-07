@@ -95,8 +95,8 @@
 		A88AB0AD1B4BA4F90011D32B /* FeedHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0AC1B4BA4F90011D32B /* FeedHandler.m */; };
 		A88AB0BC1B4BA61C0011D32B /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0BA1B4BA61C0011D32B /* LoginViewController.m */; };
 		A88AB0BD1B4BA61C0011D32B /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88AB0BB1B4BA61C0011D32B /* LoginViewController.xib */; };
-		A88AB0C81B4BA6780011D32B /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0C61B4BA6780011D32B /* FeedViewController.m */; };
-		A88AB0C91B4BA6780011D32B /* FeedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88AB0C71B4BA6780011D32B /* FeedViewController.xib */; };
+		A88AB0C81B4BA6780011D32B /* UpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0C61B4BA6780011D32B /* UpdateViewController.m */; };
+		A88AB0C91B4BA6780011D32B /* UpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88AB0C71B4BA6780011D32B /* UpdateViewController.xib */; };
 		A88AB0D31B4BA6F10011D32B /* AssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0D11B4BA6F10011D32B /* AssignmentViewController.m */; };
 		A88AB0D41B4BA6F10011D32B /* AssignmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88AB0D21B4BA6F10011D32B /* AssignmentViewController.xib */; };
 		A88AB0DF1B4BA73E0011D32B /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A88AB0DD1B4BA73E0011D32B /* CourseViewController.m */; };
@@ -196,8 +196,15 @@
 		A8D87B4D1B5F8BC1003843A8 /* CustomContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D87B4C1B5F8BC1003843A8 /* CustomContentView.xib */; };
 		A8D87B501B5F957A003843A8 /* icn_like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D87B4E1B5F957A003843A8 /* icn_like@2x.png */; };
 		A8D87B511B5F957A003843A8 /* icn_like@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8D87B4F1B5F957A003843A8 /* icn_like@3x.png */; };
+		A8DB1AE11B74776B0003A2BA /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DB1ADF1B74776B0003A2BA /* NotificationViewController.m */; };
+		A8DB1AE21B74776B0003A2BA /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DB1AE01B74776B0003A2BA /* NotificationViewController.xib */; };
+		A8DB1AE61B748C800003A2BA /* img_search-boxn_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DB1AE51B748C800003A2BA /* img_search-boxn_6@2x.png */; };
+		A8DB1AE81B7491C60003A2BA /* img_search-boxn_Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8DB1AE71B7491C60003A2BA /* img_search-boxn_Small@2x.png */; };
 		A8DFEB161B69E9C000FE4BE2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8DFEB141B69E9C000FE4BE2 /* ProfileViewController.m */; };
 		A8DFEB171B69E9C000FE4BE2 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8DFEB151B69E9C000FE4BE2 /* ProfileViewController.xib */; };
+		A8E175D11B734549007BDCA0 /* UpdateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E175CF1B734549007BDCA0 /* UpdateTableViewCell.m */; };
+		A8E175D21B734549007BDCA0 /* UpdateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8E175D01B734549007BDCA0 /* UpdateTableViewCell.xib */; };
+		A8E175D51B735BF6007BDCA0 /* Update.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E175D41B735BF6007BDCA0 /* Update.m */; };
 		A8E419141B564A9C006D3B74 /* icn_notifi-count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E4190E1B564A9C006D3B74 /* icn_notifi-count@2x.png */; };
 		A8E419151B564A9C006D3B74 /* icn_notifi-count@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E4190F1B564A9C006D3B74 /* icn_notifi-count@3x.png */; };
 		A8E419281B564ABC006D3B74 /* icn_pause1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8E4191A1B564ABB006D3B74 /* icn_pause1@2x.png */; };
@@ -342,9 +349,9 @@
 		A88AB0B91B4BA61C0011D32B /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		A88AB0BA1B4BA61C0011D32B /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A88AB0BB1B4BA61C0011D32B /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		A88AB0C51B4BA6780011D32B /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
-		A88AB0C61B4BA6780011D32B /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
-		A88AB0C71B4BA6780011D32B /* FeedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedViewController.xib; sourceTree = "<group>"; };
+		A88AB0C51B4BA6780011D32B /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateViewController.h; sourceTree = "<group>"; };
+		A88AB0C61B4BA6780011D32B /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateViewController.m; sourceTree = "<group>"; };
+		A88AB0C71B4BA6780011D32B /* UpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateViewController.xib; sourceTree = "<group>"; };
 		A88AB0D01B4BA6F10011D32B /* AssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentViewController.h; sourceTree = "<group>"; };
 		A88AB0D11B4BA6F10011D32B /* AssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentViewController.m; sourceTree = "<group>"; };
 		A88AB0D21B4BA6F10011D32B /* AssignmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssignmentViewController.xib; sourceTree = "<group>"; };
@@ -484,9 +491,19 @@
 		A8D87B4C1B5F8BC1003843A8 /* CustomContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomContentView.xib; path = TableCellView/CustomContentView.xib; sourceTree = "<group>"; };
 		A8D87B4E1B5F957A003843A8 /* icn_like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_like@2x.png"; sourceTree = "<group>"; };
 		A8D87B4F1B5F957A003843A8 /* icn_like@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_like@3x.png"; sourceTree = "<group>"; };
+		A8DB1ADE1B74776B0003A2BA /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		A8DB1ADF1B74776B0003A2BA /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		A8DB1AE01B74776B0003A2BA /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		A8DB1AE51B748C800003A2BA /* img_search-boxn_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_search-boxn_6@2x.png"; sourceTree = "<group>"; };
+		A8DB1AE71B7491C60003A2BA /* img_search-boxn_Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_search-boxn_Small@2x.png"; sourceTree = "<group>"; };
 		A8DFEB131B69E9C000FE4BE2 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		A8DFEB141B69E9C000FE4BE2 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		A8DFEB151B69E9C000FE4BE2 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		A8E175CE1B734549007BDCA0 /* UpdateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateTableViewCell.h; path = tableViewCell/UpdateTableViewCell.h; sourceTree = "<group>"; };
+		A8E175CF1B734549007BDCA0 /* UpdateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateTableViewCell.m; path = tableViewCell/UpdateTableViewCell.m; sourceTree = "<group>"; };
+		A8E175D01B734549007BDCA0 /* UpdateTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UpdateTableViewCell.xib; path = tableViewCell/UpdateTableViewCell.xib; sourceTree = "<group>"; };
+		A8E175D31B735BF6007BDCA0 /* Update.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Update.h; path = Model/Update.h; sourceTree = "<group>"; };
+		A8E175D41B735BF6007BDCA0 /* Update.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Update.m; path = Model/Update.m; sourceTree = "<group>"; };
 		A8E4190E1B564A9C006D3B74 /* icn_notifi-count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_notifi-count@2x.png"; sourceTree = "<group>"; };
 		A8E4190F1B564A9C006D3B74 /* icn_notifi-count@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_notifi-count@3x.png"; sourceTree = "<group>"; };
 		A8E4191A1B564ABB006D3B74 /* icn_pause1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icn_pause1@2x.png"; sourceTree = "<group>"; };
@@ -605,6 +622,8 @@
 		A86B2C881B537FFF004392FD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				A8DB1AE71B7491C60003A2BA /* img_search-boxn_Small@2x.png */,
+				A8DB1AE51B748C800003A2BA /* img_search-boxn_6@2x.png */,
 				A8B2D9E31B6F404A00F6F9A5 /* icn_like_c@2x.png */,
 				A8B2D9E41B6F404A00F6F9A5 /* icn_like_c@3x.png */,
 				A8B2D9CB1B6F3FCC00F6F9A5 /* user_dummy@2x.png */,
@@ -838,9 +857,10 @@
 		A88AB0AE1B4BA51C0011D32B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A8DB1ADD1B74776B0003A2BA /* Notification */,
 				A88AB0DB1B4BA73E0011D32B /* Course */,
 				A88AB0CF1B4BA6F10011D32B /* Assignment */,
-				A88AB0C41B4BA6780011D32B /* Feed */,
+				A88AB0C41B4BA6780011D32B /* Update */,
 				A88AB0B81B4BA61C0011D32B /* Login */,
 				A8CB0A2C1B4D2CF70091A70C /* Home */,
 				A8B376321B66663F00783C7E /* More */,
@@ -868,14 +888,15 @@
 			path = Controller/Login;
 			sourceTree = "<group>";
 		};
-		A88AB0C41B4BA6780011D32B /* Feed */ = {
+		A88AB0C41B4BA6780011D32B /* Update */ = {
 			isa = PBXGroup;
 			children = (
-				A88AB0C51B4BA6780011D32B /* FeedViewController.h */,
-				A88AB0C61B4BA6780011D32B /* FeedViewController.m */,
-				A88AB0C71B4BA6780011D32B /* FeedViewController.xib */,
+				A8E175CD1B734508007BDCA0 /* TableViewCell */,
+				A88AB0C51B4BA6780011D32B /* UpdateViewController.h */,
+				A88AB0C61B4BA6780011D32B /* UpdateViewController.m */,
+				A88AB0C71B4BA6780011D32B /* UpdateViewController.xib */,
 			);
-			name = Feed;
+			name = Update;
 			path = Controller/Feed;
 			sourceTree = "<group>";
 		};
@@ -933,6 +954,8 @@
 				A85551301B5E46E900A153F9 /* Assignment.m */,
 				A85551321B5E4CEC00A153F9 /* Comments.h */,
 				A85551331B5E4CEC00A153F9 /* Comments.m */,
+				A8E175D31B735BF6007BDCA0 /* Update.h */,
+				A8E175D41B735BF6007BDCA0 /* Update.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1061,6 +1084,27 @@
 			name = CustomView;
 			sourceTree = "<group>";
 		};
+		A8DB1ADD1B74776B0003A2BA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A8DB1ADE1B74776B0003A2BA /* NotificationViewController.h */,
+				A8DB1ADF1B74776B0003A2BA /* NotificationViewController.m */,
+				A8DB1AE01B74776B0003A2BA /* NotificationViewController.xib */,
+			);
+			name = Notification;
+			path = ../../../Backup/SLMS_6Aug/sLMS/sLMS/Controller/Notification;
+			sourceTree = "<group>";
+		};
+		A8E175CD1B734508007BDCA0 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A8E175CE1B734549007BDCA0 /* UpdateTableViewCell.h */,
+				A8E175CF1B734549007BDCA0 /* UpdateTableViewCell.m */,
+				A8E175D01B734549007BDCA0 /* UpdateTableViewCell.xib */,
+			);
+			name = TableViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1163,6 +1207,7 @@
 				A84E72401B578ED50097D0AD /* icn_updates-defaultn@3x.png in Resources */,
 				A8E419151B564A9C006D3B74 /* icn_notifi-count@3x.png in Resources */,
 				A8B2D9DA1B6F3FDE00F6F9A5 /* profile-meu@3x.png in Resources */,
+				A8DB1AE21B74776B0003A2BA /* NotificationViewController.xib in Resources */,
 				A8D3A3121B54EF3100C7B454 /* fb_login_blue@3x.png in Resources */,
 				A8E4192D1B564ABC006D3B74 /* icn_search@3x.png in Resources */,
 				A8B2D9CD1B6F3FCC00F6F9A5 /* user_dummy@2x.png in Resources */,
@@ -1180,7 +1225,7 @@
 				A84E72351B578E230097D0AD /* icn_comment@2x.png in Resources */,
 				A8B2721A1B5CC09500B3CDE7 /* list_vertical_line@3x.png in Resources */,
 				A84B17FB1B4E834600A627A4 /* uncheckBox@2x.png in Resources */,
-				A88AB0C91B4BA6780011D32B /* FeedViewController.xib in Resources */,
+				A88AB0C91B4BA6780011D32B /* UpdateViewController.xib in Resources */,
 				A86B2CCD1B53EFF0004392FD /* first_nm@2x.png in Resources */,
 				A8E4192B1B564ABC006D3B74 /* icn_play1@3x.png in Resources */,
 				A84B17F91B4E834600A627A4 /* checkBox@2x.png in Resources */,
@@ -1226,6 +1271,7 @@
 				A86B2CB01B53AB21004392FD /* login_fb_red@2x.png in Resources */,
 				A84E72311B578E230097D0AD /* icn_assignment-selectedn@2x.png in Resources */,
 				A88AB03C1B4B96CB0011D32B /* Images.xcassets in Resources */,
+				A8DB1AE81B7491C60003A2BA /* img_search-boxn_Small@2x.png in Resources */,
 				A8B272191B5CC09500B3CDE7 /* list_vertical_line@2x.png in Resources */,
 				A86B2CD21B53EFF0004392FD /* school_drop@2x.png in Resources */,
 				A8B2D9E61B6F404A00F6F9A5 /* icn_like_c@3x.png in Resources */,
@@ -1253,6 +1299,7 @@
 				A86B2C951B538082004392FD /* icn_menu@2x.png in Resources */,
 				A8B2D9E11B6F404100F6F9A5 /* edit-profile@2x.png in Resources */,
 				A86B2CBB1B53CBCE004392FD /* login_white@2x.png in Resources */,
+				A8E175D21B734549007BDCA0 /* UpdateTableViewCell.xib in Resources */,
 				A8B272261B5D05E800B3CDE7 /* ModuleDetailViewController.xib in Resources */,
 				A8B2D9E51B6F404A00F6F9A5 /* icn_like_c@2x.png in Resources */,
 				A86B2C941B538082004392FD /* icn_back-header@3x.png in Resources */,
@@ -1263,6 +1310,7 @@
 				A85F09F21B623FE000DA33D0 /* AssignmentTableViewCell.xib in Resources */,
 				A86B2C931B538082004392FD /* icn_back-header@2x.png in Resources */,
 				A85F09ED1B622BF900DA33D0 /* CommentTableViewCell.xib in Resources */,
+				A8DB1AE61B748C800003A2BA /* img_search-boxn_6@2x.png in Resources */,
 				A84E72471B5790100097D0AD /* icn_more-defaultn@2x.png in Resources */,
 				A84E72391B578E230097D0AD /* icn_course-selectedn@2x.png in Resources */,
 				A8CB0A2B1B4D2CEF0091A70C /* HomeViewController.xib in Resources */,
@@ -1294,6 +1342,7 @@
 				A8D766231B678CC100B4EF31 /* ModuleDetailViewController.xib in Sources */,
 				A8D766201B678C9700B4EF31 /* ModuleDetailTableViewCell.h in Sources */,
 				A88AB1621B4BBA8A0011D32B /* AppGlobal.m in Sources */,
+				A8DB1AE11B74776B0003A2BA /* NotificationViewController.m in Sources */,
 				A8CECCEC1B5A308200D7A7A2 /* ModuleTableViewCell.m in Sources */,
 				A85F09EC1B622BF900DA33D0 /* CommentTableViewCell.m in Sources */,
 				A88AB1571B4BBA590011D32B /* AFURLSessionManager.m in Sources */,
@@ -1334,7 +1383,7 @@
 				A88AB15A1B4BBA590011D32B /* UIAlertView+AFNetworking.m in Sources */,
 				A88AB0371B4B96CB0011D32B /* ViewController.m in Sources */,
 				A8B376301B66663800783C7E /* MoreViewController.m in Sources */,
-				A88AB0C81B4BA6780011D32B /* FeedViewController.m in Sources */,
+				A88AB0C81B4BA6780011D32B /* UpdateViewController.m in Sources */,
 				A88AB0AA1B4BA4CC0011D32B /* AssignmentHandler.m in Sources */,
 				A88AB0D31B4BA6F10011D32B /* AssignmentViewController.m in Sources */,
 				A88AB09D1B4BA3E30011D32B /* LoginHandler.m in Sources */,
@@ -1349,11 +1398,13 @@
 				A88AB1581B4BBA590011D32B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				A88AB14F1B4BBA590011D32B /* AFHTTPRequestOperation.m in Sources */,
 				A88AB1591B4BBA590011D32B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				A8E175D11B734549007BDCA0 /* UpdateTableViewCell.m in Sources */,
 				A8D652FD1B4FA87A00F93197 /* NSString+AESCrypt.m in Sources */,
 				A855512E1B5E459700A153F9 /* Resourse.m in Sources */,
 				A88AB1561B4BBA590011D32B /* AFURLResponseSerialization.m in Sources */,
 				A855511E1B5E30F800A153F9 /* ModuleDetailTableViewCell.m in Sources */,
 				A8D3A3081B54DC5300C7B454 /* Schools.m in Sources */,
+				A8E175D51B735BF6007BDCA0 /* Update.m in Sources */,
 				A8D3A3151B54F61500C7B454 /* Response.m in Sources */,
 				A8CB0A2A1B4D2CEF0091A70C /* HomeViewController.m in Sources */,
 				A88AB0341B4B96CB0011D32B /* sLMS.xcdatamodeld in Sources */,
@@ -1484,7 +1535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mayank/Documents/FacebookSDK,
@@ -1496,7 +1547,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1061b530-0cc2-4b4e-9048-3eeceece8841";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1505,7 +1556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deepak Nagpal (48MW29D4CA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/mayank/Documents/FacebookSDK,
@@ -1517,7 +1568,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1061b530-0cc2-4b4e-9048-3eeceece8841";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

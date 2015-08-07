@@ -13,4 +13,5 @@
 - (IBAction)videoPlayClick:(id)sender;
 @property (strong, nonatomic) IBOutlet NSString *filePath;
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+@property (assign, nonatomic) BOOL allowRotation;
 @end

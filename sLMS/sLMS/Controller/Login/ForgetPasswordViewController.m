@@ -7,9 +7,8 @@
 //
 
 #import "ForgetPasswordViewController.h"
-#import "FeedViewController.h"
 #import "RegisterationViewController.h"
-#import "CourseViewController.h"
+#import "LoginViewController.h"
 
 @interface ForgetPasswordViewController ()
 
@@ -174,43 +173,43 @@
 }
 
 
-//-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
-//    
-//    NSLog(@"%@", user);
-//    //if user is already sign in Then validate with server.
-//    
-//    // get user id
-//    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
-//    
-//    //Show Indicator
-//    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
-//    
-//    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
-//        [AppSingleton sharedInstance].userDetail=userDetail;
-//        [AppSingleton sharedInstance].isUserLoggedIn=YES;
-//        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
-//        [self loginSucessFullWithFB:userid];
-//        
-//        //Hide Indicator
-//        [appDelegate hideSpinner];
-//    }
-//                                     failure:^(NSError *error) {
-//                                         //Hide Indicator
-//                                         [appDelegate hideSpinner];
-//                                         NSLog(@"failure JsonData %@",[error description]);
-//                                         [self loginViewShowingLoggedOutUser:loginView];
-//
-//                                         [self loginError:error];
-//                                         
-//                                     }];
-//    
-//    
-//    // if user valid then navigate to main screen.
-//    
-//    //    self.profilePicture.profileID = user.id;
-//    //    self.lblUsername.text = user.name;
-//    //    self.lblEmail.text = [user objectForKey:@"email"];
-//}
+-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user{
+    
+    NSLog(@"%@", user);
+    //if user is already sign in Then validate with server.
+    
+    // get user id
+    NSString *userid=[NSString  stringWithFormat:@"%@",[user objectForKey:@"id"]];
+    
+    //Show Indicator
+    [appDelegate showSpinnerWithMessage:DATA_LOADING_MSG];
+    
+    [[appDelegate _engine] FBloginWithUserID:userid success:^(UserDetails *userDetail) {
+        [AppSingleton sharedInstance].userDetail=userDetail;
+        [AppSingleton sharedInstance].isUserLoggedIn=YES;
+        [AppSingleton sharedInstance].isUserFBLoggedIn=YES;
+        [self loginSucessFullWithFB:userid];
+        
+        //Hide Indicator
+        [appDelegate hideSpinner];
+    }
+                                     failure:^(NSError *error) {
+                                         //Hide Indicator
+                                         [appDelegate hideSpinner];
+                                         NSLog(@"failure JsonData %@",[error description]);
+                                         [self loginViewShowingLoggedOutUser:loginView];
+
+                                         [self loginError:error];
+                                         
+                                     }];
+    
+    
+    // if user valid then navigate to main screen.
+    
+    //    self.profilePicture.profileID = user.id;
+    //    self.lblUsername.text = user.name;
+    //    self.lblEmail.text = [user objectForKey:@"email"];
+}
 -(void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView{
     // self.lblLoginStatus.text = @"You are logged out";
     [FBSession.activeSession closeAndClearTokenInformation];
@@ -224,10 +223,8 @@
     
     [AppGlobal  setValueInDefault:userid value:key_FBUSERID];
     [self dismissViewControllerAnimated:YES completion:^{}];
-    CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
-
-//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 -(void)loginError:(NSError*)error{
     

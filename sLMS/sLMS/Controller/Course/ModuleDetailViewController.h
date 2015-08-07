@@ -11,6 +11,7 @@
 #import "Assignment.h"
 #import "Comments.h"
 #import "ScrollViewContainer.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ModuleDetailViewController : ViewController<UIScrollViewDelegate>{
 IBOutlet UITableView *tblViewContent;
@@ -30,6 +31,8 @@ IBOutlet UITableView *tblViewContent;
 @property (nonatomic, strong) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet ScrollViewContainer *scollViewContainer;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
+@property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
+
 - (IBAction)btnBackClicked:(id)sender;
 
 - (IBAction)btnAssignmentClick:(id)sender;

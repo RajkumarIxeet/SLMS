@@ -97,8 +97,70 @@
 //    [moviePlayer prepareToPlay];
 //    [moviePlayer play];
    // [mpvc release];
+//    NSURL *url = [NSURL URLWithString:@"http://191.239.57.54:8080/resources/video/aa.mp4"];
+//    _moviePlayer =  [[MPMoviePlayerController alloc]initWithContentURL:url];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(moviePlaybackComplete:)
+//                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+//                                               object:_moviePlayer];
+//    //    [[NSNotificationCenter defaultCenter] addObserver:self
+//    //                                             selector:@selector(moviePlayerLoadStateChanged:)
+//    //                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+//    //                                               object:_moviePlayer];
+//    _moviePlayer.controlStyle = MPMovieControlStyleDefault;
+//    _moviePlayer.shouldAutoplay = YES;
+//    [_moviePlayer prepareToPlay];
+//    [self.view addSubview:_moviePlayer.view];
+//    [_moviePlayer setFullscreen:YES animated:YES];
+//    [_moviePlayer stop];
+//    [_moviePlayer play];
+   
+}
+- (void) moviePlayerWillEnterFullscreenNotification:(NSNotification*)notification {
+    [appDelegate self].allowRotation = YES;
+}
+- (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    [appDelegate self].allowRotation = NO;
+    MPMoviePlayerController *moviePlayerController = [notification object];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+//                                                  object:moviePlayerController];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerWillExitFullscreenNotification
+                                                  object:moviePlayerController];
+    [self.moviePlayer stop];
+    //[self.moviePlayer stop];
+     [moviePlayerController.view removeFromSuperview];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 - (void)moviePlaybackComplete:(NSNotification *)notification
+{
+    MPMoviePlayerController *moviePlayerController = [notification object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+                                                  object:moviePlayerController];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:MPMoviePlayerWillExitFullscreenNotification
+//                                                  object:moviePlayerController];
+    [moviePlayerController.view removeFromSuperview];
+   // [self.navigationController popViewControllerAnimated:YES];
+}
+//- (void)moviePlayerWillExitFullscreenNotification:(NSNotification *)notification
+//{
+//    MPMoviePlayerController *moviePlayerController = [notification object];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:MPMoviePlayerPlaybackDidFinishNotification
+//                                                  object:moviePlayerController];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:MPMoviePlayerWillExitFullscreenNotification
+//                                                  object:moviePlayerController];
+//    [moviePlayerController.view removeFromSuperview];
+//     [self.navigationController popViewControllerAnimated:YES];
+//}
+- (void)moviePlaybackSate:(NSNotification *)notification
 {
     MPMoviePlayerController *moviePlayerController = [notification object];
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -108,7 +170,16 @@
     [moviePlayerController.view removeFromSuperview];
     
 }
-
+//- (void)moviePlayerLoadStateChanged:(NSNotification *)notification{
+//    NSLog(@"State changed to: %d\n", self.moviePlayer.loadState);
+//    if(self.moviePlayer.loadState == MPMovieLoadStatePlayable){
+//        //if load state is ready to play
+//        [self.view addSubview:[self.moviePlayer view]];
+//        [self.moviePlayer setFullscreen:YES];
+//        [self.moviePlayer play];//play the video
+//    }
+//    
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -166,6 +237,14 @@
                                              selector:@selector(moviePlaybackComplete:)
                                                  name:MPMoviePlayerPlaybackDidFinishNotification
                                                object:_moviePlayer];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlaybackExitFromFullScreen:)
+                                                 name:MPMoviePlayerWillExitFullscreenNotification
+                                               object:_moviePlayer];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(moviePlayerLoadStateChanged:)
+//                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+//                                               object:_moviePlayer];
     _moviePlayer.controlStyle = MPMovieControlStyleDefault;
     _moviePlayer.shouldAutoplay = YES;
     [_moviePlayer prepareToPlay];
@@ -173,7 +252,8 @@
     [_moviePlayer setFullscreen:YES animated:YES];
     [_moviePlayer stop];
     [_moviePlayer play];
-    
+    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 
 }
 //- (void)moviePlayerWillEnterFullscreenNotification:(NSNotification *)notification

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *lblWelcome;
+@interface UpdateViewController : UIViewController
+
+
 - (IBAction)btnLogout:(id)sender;
 //@property (strong, nonatomic) IBOutlet UITabBarItem *tbAssignment;
 //@property (strong, nonatomic) IBOutlet UITabBarItem *tbUpdate;
@@ -23,6 +24,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnNotification;
 
 @property (strong, nonatomic) IBOutlet UISearchBar *txtSearchBar;
+
+@property (strong, nonatomic) IBOutlet UITableView *tblViewContent;
+
 
 - (IBAction)btnAssignmentClick:(id)sender;
 - (IBAction)btnCourseClick:(id)sender;

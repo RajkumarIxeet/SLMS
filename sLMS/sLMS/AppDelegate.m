@@ -9,9 +9,12 @@
 #import "AppDelegate.h"
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "FeedViewController.h"
+#import "UpdateViewController.h"
 #import "CourseViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "AssignmentViewController.h"
+#import "MoreViewController.h"
+#import "NotificationViewController.h"
 
 @interface AppDelegate (){
     UIView *spinnerView;
@@ -30,32 +33,83 @@
     // Override point for customization after application launch.
     //Allocate Engine
     _engine=[[AppEngine alloc] init];
-    self.window=[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds ];
-    self._homeViewController=[[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]
+                                                   bounds]];
     
+    [[UITabBar appearance] setTintColor:[UIColor grayColor]];
+    
+    // Add this code to change StateNormal text Color,
+    [UITabBarItem.appearance setTitleTextAttributes:
+     @{NSForegroundColorAttributeName : [UIColor colorWithRed:186.0/255 green:0.0/255 blue:50.0/255 alpha:1 ]}
+                                           forState:UIControlStateNormal];
+    
+    // then if StateSelected should be different, you should add this code
+    [UITabBarItem.appearance setTitleTextAttributes:
+     @{NSForegroundColorAttributeName : [UIColor grayColor]}
+                                           forState:UIControlStateSelected];
+    
+    UIViewController *viewController1 = [[UpdateViewController  alloc]
+                                         initWithNibName:@"UpdateViewController" bundle:nil];
+    UIViewController *viewController2 = [[AssignmentViewController alloc]
+                                         initWithNibName:@"AssignmentViewController" bundle:nil];
+    UIViewController *viewController3 = [[CourseViewController  alloc]
+                                         initWithNibName:@"CourseViewController" bundle:nil];
+    UIViewController *viewController4 = [[NotificationViewController alloc]
+                                         initWithNibName:@"NotificationViewController" bundle:nil];
+    UIViewController *viewController5 = [[MoreViewController alloc]
+                                         initWithNibName:@"MoreViewController" bundle:nil];
+    //UIViewController *uvButton1 = [self.tabBarController.viewControllers objectAtIndex:0];
+    viewController1.tabBarItem.title = @"Updates" ;
+    viewController1.tabBarItem.image =[ [UIImage imageNamed:@"icn_updates-defaultn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    viewController1.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_updates-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    
+   // UIViewController *uvButton2 = [self.tabBarController.viewControllers objectAtIndex:1];
+    viewController2.tabBarItem.title = @"Assignment" ;
+    viewController2.tabBarItem.image = [[UIImage imageNamed:@"icn_assignment-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    viewController2.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_assignment-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    //UIViewController *uvButton3 = [self.tabBarController.viewControllers objectAtIndex:2];
+    viewController3.tabBarItem.title = @"Courses" ;
+    viewController3.tabBarItem.image = [[UIImage imageNamed:@"icn_course-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    viewController3.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_course-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+   // UIViewController *uvButton4 = [self.tabBarController.viewControllers objectAtIndex:3];
+    viewController4.tabBarItem.title = @"Notifications" ;
+    viewController4.tabBarItem.image = [[UIImage imageNamed:@"icn_notification-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    viewController4.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_notification-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+   // UIViewController *uvButton5 = [self.tabBarController.viewControllers objectAtIndex:4];
+    viewController5.tabBarItem.title = @"More" ;
+    
+    viewController5.tabBarItem.image = [[UIImage imageNamed:@"icn_more-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    viewController5.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_more-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-
+    UINavigationController *navController1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
+    [navController1.navigationBar setHidden:YES];
     
-    self._navHomeViewController = [[UINavigationController alloc] initWithRootViewController:self._homeViewController];
-    [self._navHomeViewController.navigationBar setHidden:YES];
-   
-    
-    UIViewController *feedview = [[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil];
-    UIViewController *courseView = [[CourseViewController alloc] initWithNibName:@"CourseViewController" bundle:nil];
-    
+    UINavigationController *navController2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
+      [navController2.navigationBar setHidden:YES];
+    UINavigationController *navController3 = [[UINavigationController alloc] initWithRootViewController:viewController3];
+      [navController3.navigationBar setHidden:YES];
+    UINavigationController *navController4 = [[UINavigationController alloc] initWithRootViewController:viewController4];
+      [navController4.navigationBar setHidden:YES];
+    UINavigationController *navController5 = [[UINavigationController alloc] initWithRootViewController:viewController5];
+      [navController5.navigationBar setHidden:YES];
     self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:feedview,courseView, nil];
-   // self.window.rootViewController = self.tabBarController;
-   // [self._navHomeViewController.tabBarController setHidesBottomBarWhenPushed:YES    ];
-    self.window.rootViewController = self._navHomeViewController;
+    [[self.tabBarController tabBar]setBackgroundColor:[UIColor colorWithRed:170.0/255 green:170.0/255 blue:170.0/255 alpha:0.5 ]];
+ 
+    
+    self.tabBarController.viewControllers = @[  navController1,
+                                                navController2,navController3,navController4,navController5];
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
     [FBLoginView class];
     [FBProfilePictureView class];
 
-//    return [[FBSDKApplicationDelegate sharedInstance] application:application
-//                                    didFinishLaunchingWithOptions:launchOptions];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
+
    return YES;
 }
 -(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
@@ -107,6 +161,7 @@
 }
 - (void) moviePlayerWillExitFullscreenNotification:(NSNotification*)notification {
     self.allowRotation = NO;
+    
 }
 #pragma mark - Core Data stack
 

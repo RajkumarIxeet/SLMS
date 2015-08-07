@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CommentTableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *imgCMT;
+@property (strong, nonatomic) IBOutlet UIButton *btnCommentedBy;
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtBy;
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtDate;
 @property (strong, nonatomic) IBOutlet UILabel *lblCmtText;

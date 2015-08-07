@@ -26,11 +26,11 @@
 //Key For UserDefault
 //Comment and like URL
 #define CMT_ON_RESOURCE_URL APP_URL@"SLMS/rest/course/commentOnResourse"
-#define LIKE_ON_RESOURCE_URL(username,resourceid) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnResource/username/%@/resourceId/%@",username,resourceid]
+#define LIKE_ON_RESOURCE_URL(username,resourceid) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnResource/userName/%@/resourceId/%@",username,resourceid]
 
 #define CMT_ON_CMT_URL APP_URL@"/SLMS/rest/course/commentOnComment"
 
-#define LIKE_ON_CMT_URL(useremail,commentId) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnResource/username/%@/commentId/%@",useremail,commentId]
+#define LIKE_ON_CMT_URL(useremail,commentId) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnResource/userName/%@/commentId/%@",useremail,commentId]
 
 #define key_Custom_DateFormate @"yyyy-MM-dd HH:mm:ss.S"
 #define key_loginId @"LoginId"

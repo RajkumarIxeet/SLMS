@@ -9,5 +9,5 @@
 #import "Resourse.h"
 
 @implementation Resourse
-@synthesize likeCounts,shareCounts,startedOn,commentCounts,comments,completedOn,authorName,resourceDesc,relatedResources,resourceId,resourceUrl,resourceImageUrl,uploadedDate,authorImage;
+@synthesize likeCounts,shareCounts,startedOn,commentCounts,comments,completedOn,authorName,resourceDesc,relatedResources,resourceId,resourceUrl,resourceImageUrl,uploadedDate,authorImage,resourceImageData,islike;
 @end

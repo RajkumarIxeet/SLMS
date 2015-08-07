@@ -8,8 +8,7 @@
 
 #import "HomeViewController.h"
 #import "RegisterationViewController.h"
-#import "FeedViewController.h"
-#import "CourseViewController.h"
+#import "LoginViewController.h"
 @interface HomeViewController ()
 
 @end
@@ -18,32 +17,11 @@
 @synthesize _homeViewController,_navigationController_Login;
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-//    [self.navigationController pushViewController:viewController animated:YES];
-    // Do any additional setup after loading the view from its nib.
-//        FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-//        loginButton.center = self.view.center;
-//        [self.view addSubview:loginButton];
-//        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-//        [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-//            if (error) {
-//                // Process error
-//            } else if (result.isCancelled) {
-//                // Handle cancellations
-//            } else {
-//                // If you ask for multiple permissions at once, you
-//                // should check if specific permissions missing
-//                if ([result.grantedPermissions containsObject:@"mayankkcnit@gmail.com"]) {
-//                    // Do work
-//                }
-//            }
-//        }];
+
     if(  [AppSingleton sharedInstance].isUserLoggedIn==YES)
     {
-        CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
-
-//        FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.tabBarController.tabBar setHidden:NO];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
         
     
@@ -142,11 +120,9 @@
     
    
     [self dismissViewControllerAnimated:YES completion:^{}];
+    [self.tabBarController.tabBar setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
-    CourseViewController *viewController= [[CourseViewController alloc]initWithNibName:@"CourseViewController" bundle:nil];
-
-//    FeedViewController *viewController= [[FeedViewController alloc]initWithNibName:@"FeedViewController" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 -(void)loginError:(NSError*)error{
