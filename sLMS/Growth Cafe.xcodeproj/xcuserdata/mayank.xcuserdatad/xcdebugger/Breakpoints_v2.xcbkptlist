@@ -41,54 +41,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sLMS/Engine/LoginHandler/LoginHandler.m"
-            timestampString = "458202230.855943"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-loginWithUserName:password:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Engine/LoginHandler/LoginHandler.m"
-            timestampString = "458202232.294069"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-loginWithUserName:password:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/LoginViewController.m"
-            timestampString = "460621139.782694"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-btnLoginClick:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Login/RegisterationViewController.m"
             timestampString = "460621139.782694"
             startingColumnNumber = "9223372036854775807"
@@ -311,10 +263,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[LoginHandler getMasterData:failure:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641997.997072"
+                  timestampString = "460988667.508678"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "299"
@@ -326,10 +278,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__38-[LoginHandler getMasterData:failure:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641997.997271"
+                  timestampString = "460988667.508844"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "299"
@@ -673,6 +625,38 @@
             endingLineNumber = "86"
             landmarkName = "-registerWithUserDetail:success:failure:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[AppEngine registerWithUserDetail:success:failure:]"
+                  moduleName = "Growth Cafe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/AppEngine.m"
+                  timestampString = "460988667.518669"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[AppEngine registerWithUserDetail:success:failure:]_block_invoke"
+                  moduleName = "Growth Cafe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/AppEngine.m"
+                  timestampString = "460988667.518829"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "86"
+                  endingLineNumber = "86"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -695,10 +679,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[RegisterationViewController btnSubmitClick:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Login/RegisterationViewController.m"
-                  timestampString = "460641998.008768"
+                  timestampString = "460988667.519613"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "152"
@@ -710,10 +694,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__46-[RegisterationViewController btnSubmitClick:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Login/RegisterationViewController.m"
-                  timestampString = "460641998.009231"
+                  timestampString = "460988667.51977"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "152"
@@ -730,11 +714,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-searchBarCancelButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -762,11 +746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-searchBarSearchButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -778,11 +762,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -794,11 +778,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -810,11 +794,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "-btnLikeOnCommentClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -826,11 +810,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +826,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "-getModuleDetail:"
             landmarkType = "5">
          </BreakpointContent>
@@ -858,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
             landmarkName = "-getModuleDetail:"
             landmarkType = "5">
          </BreakpointContent>
@@ -874,11 +858,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
             landmarkName = "-btnBackClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -890,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -922,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -954,11 +938,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -970,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1063,10 +1047,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[LoginHandler ForgetPasswordWithUserName:success:failure:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.019902"
+                  timestampString = "460988667.529215"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
@@ -1078,10 +1062,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__59-[LoginHandler ForgetPasswordWithUserName:success:failure:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.020138"
+                  timestampString = "460988667.529377"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "119"
@@ -1159,10 +1143,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[LoginHandler registerWithUserDetail:success:failure:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.022669"
+                  timestampString = "460988667.53188"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
@@ -1174,10 +1158,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__55-[LoginHandler registerWithUserDetail:success:failure:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.022868"
+                  timestampString = "460988667.532039"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "157"
@@ -1185,22 +1169,6 @@
                   offsetFromSymbolStart = "80">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/LoginViewController.m"
-            timestampString = "460621139.782694"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "-btnLoginClick:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1226,11 +1194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
+            startingLineNumber = "699"
+            endingLineNumber = "699"
             landmarkName = "-purgePage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1242,11 +1210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1258,28 +1226,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "478"
-            endingLineNumber = "478"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "-getModuleDetail:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "460013394.712631"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-changeFrameAndBackgroundImg"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1306,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "460013394.712631"
+            timestampString = "460982465.83902"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "-setUserProfile"
             landmarkType = "5">
          </BreakpointContent>
@@ -1417,150 +1369,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "459951329.689346"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "459951654.156659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Engine/LoginHandler/LoginHandler.m"
-            timestampString = "460015453.865366"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "-SetFBloginWithUserID:FBID:success:failure:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LoginHandler SetFBloginWithUserID:FBID:success:failure:]"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.032663"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "261"
-                  endingLineNumber = "261"
-                  offsetFromSymbolStart = "860">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__58-[LoginHandler SetFBloginWithUserID:FBID:success:failure:]_block_invoke"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/LoginHandler/LoginHandler.m"
-                  timestampString = "460641998.032829"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "261"
-                  endingLineNumber = "261"
-                  offsetFromSymbolStart = "80">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Engine/LoginHandler/LoginHandler.m"
-            timestampString = "460015453.865366"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "-SetFBloginWithUserID:FBID:success:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "460013394.712631"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-btnLogoutClick:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "459955155.912373"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Login/ProfileViewController.m"
-            timestampString = "459955157.577227"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "-loginViewFetchedUserInfo:user:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "sLMS/Engine/LoginHandler/LoginHandler.m"
             timestampString = "460015679.12474"
             startingColumnNumber = "9223372036854775807"
@@ -1577,44 +1385,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Home/HomeViewController.m"
-            timestampString = "460621139.782694"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "-loginViewShowingLoggedOutUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Home/HomeViewController.m"
-            timestampString = "460621139.782694"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "-loginViewShowingLoggedOutUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1626,11 +1402,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "888"
-            endingLineNumber = "888"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1642,11 +1418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1360"
-            endingLineNumber = "1360"
+            startingLineNumber = "1387"
+            endingLineNumber = "1387"
             landmarkName = "@implementation ModuleDetailViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1690,11 +1466,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "-btnCommentDone:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1834,11 +1610,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/AppDelegate.m"
-            timestampString = "460622199.030535"
+            timestampString = "460898774.136156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "-moviePlayerWillEnterFullscreenNotification:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1882,11 +1658,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-btnPlayAssignmentClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1898,11 +1674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-btnPlayRelatedResourceClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1914,11 +1690,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "575"
-            endingLineNumber = "575"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
             landmarkName = "-loadPage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1930,23 +1706,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/AppDelegate.m"
-            timestampString = "460622199.030535"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-moviePlayerWillExitFullscreenNotification:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/AppDelegate.m"
-            timestampString = "460622199.030535"
+            timestampString = "460898774.136156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
@@ -1961,13 +1721,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Home/HomeViewController.m"
-            timestampString = "460620897.372164"
+            filePath = "sLMS/AppDelegate.m"
+            timestampString = "460898774.136156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "-moviePlayerWillExitFullscreenNotification:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1978,11 +1738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
             landmarkName = "-moviePlaybackComplete:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1994,125 +1754,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "914"
-            endingLineNumber = "914"
+            startingLineNumber = "941"
+            endingLineNumber = "941"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "584"
-            endingLineNumber = "584"
-            landmarkName = "-loadPage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
-            landmarkName = "-loadPage:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[ModuleDetailViewController loadPage:]_block_invoke"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.053005"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "582"
-                  endingLineNumber = "582"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[ModuleDetailViewController loadPage:]_block_invoke_2"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.053322"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "582"
-                  endingLineNumber = "582"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579"
-            landmarkName = "-loadPage:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ModuleDetailViewController loadPage:]"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.05424"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "579"
-                  endingLineNumber = "579"
-                  offsetFromSymbolStart = "2792">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[ModuleDetailViewController loadPage:]_block_invoke"
-                  moduleName = "sLMS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.054406"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "579"
-                  endingLineNumber = "579"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2135,10 +1783,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CourseHandler setLikeOnResource:success:failure:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "460641998.055971"
+                  timestampString = "460988667.553536"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -2150,10 +1798,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__51-[CourseHandler setLikeOnResource:success:failure:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "460641998.056132"
+                  timestampString = "460988667.553708"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "246"
@@ -2170,28 +1818,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
             landmarkName = "-loadVisiblePages"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "sLMS/NetworkHandler/AFNetworking/AFHTTPRequestOperationManager.m"
-            timestampString = "460628678.529749"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-GET:parameters:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2202,11 +1834,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "681"
-            endingLineNumber = "681"
+            startingLineNumber = "708"
+            endingLineNumber = "708"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2218,11 +1850,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "682"
-            endingLineNumber = "682"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2234,11 +1866,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1146"
-            endingLineNumber = "1146"
+            startingLineNumber = "1173"
+            endingLineNumber = "1173"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2250,11 +1882,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1050"
-            endingLineNumber = "1050"
+            startingLineNumber = "1077"
+            endingLineNumber = "1077"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2266,11 +1898,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
             landmarkName = "-btnLikeOnCommentClick:"
             landmarkType = "5">
             <Locations>
@@ -2279,14 +1911,14 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[ModuleDetailViewController btnLikeOnCommentClick:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.059917"
+                  timestampString = "460988667.557363"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "316"
-                  endingLineNumber = "316"
+                  startingLineNumber = "339"
+                  endingLineNumber = "339"
                   offsetFromSymbolStart = "340">
                </Location>
                <Location
@@ -2294,14 +1926,14 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__52-[ModuleDetailViewController btnLikeOnCommentClick:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Controller/Course/ModuleDetailViewController.m"
-                  timestampString = "460641998.06008"
+                  timestampString = "460988667.557546"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "316"
-                  endingLineNumber = "316"
+                  startingLineNumber = "339"
+                  endingLineNumber = "339"
                   offsetFromSymbolStart = "36">
                </Location>
             </Locations>
@@ -2314,11 +1946,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
             landmarkName = "-btnLikeOnCommentClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2343,10 +1975,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[CourseHandler setLikeOnComment:success:failure:]"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "460641998.061629"
+                  timestampString = "460988667.559397"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "321"
@@ -2358,10 +1990,10 @@
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__50-[CourseHandler setLikeOnComment:success:failure:]_block_invoke"
-                  moduleName = "sLMS"
+                  moduleName = "Growth Cafe"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/sLMS/Engine/CourseHandler/CourseHandler.m"
-                  timestampString = "460641998.061838"
+                  timestampString = "460988667.559569"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "321"
@@ -2378,11 +2010,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "685"
-            endingLineNumber = "685"
+            startingLineNumber = "712"
+            endingLineNumber = "712"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2394,11 +2026,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "680"
-            endingLineNumber = "680"
+            startingLineNumber = "707"
+            endingLineNumber = "707"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2410,11 +2042,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "610"
-            endingLineNumber = "610"
+            startingLineNumber = "633"
+            endingLineNumber = "633"
             landmarkName = "-loadPage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2426,11 +2058,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "635"
-            endingLineNumber = "635"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
             landmarkName = "-loadPage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2442,11 +2074,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "749"
-            endingLineNumber = "749"
+            startingLineNumber = "776"
+            endingLineNumber = "776"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2458,11 +2090,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1443"
-            endingLineNumber = "1443"
+            startingLineNumber = "1470"
+            endingLineNumber = "1470"
             landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2474,11 +2106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1406"
-            endingLineNumber = "1406"
+            startingLineNumber = "1433"
+            endingLineNumber = "1433"
             landmarkName = "-keyboardWillHide:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2490,11 +2122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1438"
-            endingLineNumber = "1438"
+            startingLineNumber = "1465"
+            endingLineNumber = "1465"
             landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2506,11 +2138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/ModuleDetailViewController.m"
-            timestampString = "460639375.934411"
+            timestampString = "460984713.350388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1451"
-            endingLineNumber = "1451"
+            startingLineNumber = "1478"
+            endingLineNumber = "1478"
             landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2522,11 +2154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "417"
+            endingLineNumber = "417"
             landmarkName = "-expandItemAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2538,11 +2170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2554,11 +2186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
             landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2570,11 +2202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2586,13 +2218,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "453"
-            endingLineNumber = "453"
-            landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
-            landmarkType = "5">
+            startingLineNumber = "475"
+            endingLineNumber = "475"
+            landmarkName = "@implementation CourseViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2602,11 +2234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460642222.005641"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "-searchBarCancelButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2618,11 +2250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460640558.759848"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "-handleLongPress:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2634,11 +2266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460640699.853262"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-handleLongPress:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2650,12 +2282,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sLMS/Controller/Course/CourseViewController.m"
-            timestampString = "460641989.084994"
+            timestampString = "460902719.186413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "-searchBar:textDidChange:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/Controller/Course/CourseViewController.m"
+            timestampString = "460902719.186413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-viewWillAppear:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/Engine/FeedHandler/FeedHandler.m"
+            timestampString = "460892078.880408"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-getUpdates:AndTextSearch:success:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/Controller/Feed/UpdateViewController.m"
+            timestampString = "460984713.350388"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/Controller/Course/CourseViewController.m"
+            timestampString = "460903543.821478"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-setSearchUI"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/NetworkHandler/AFNetworking/AFNetworkReachabilityManager.m"
+            timestampString = "460904182.296092"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "AFNetworkReachabilityCallback()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sLMS/Controller/Home/HomeViewController.m"
+            timestampString = "460910014.26549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-changeFrameAndBackgroundImg"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

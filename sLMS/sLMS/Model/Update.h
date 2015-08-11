@@ -16,11 +16,14 @@
 @property (nonatomic,strong) NSString*  updateCreatedByImage;
 @property (nonatomic,strong) NSData*    updateCreatedByImageData;
 @property (nonatomic,strong) NSString*  updateTitle;
+@property (nonatomic,strong) NSArray*   updateTitleArray;
 @property (nonatomic,strong) NSString*  updateDesc;
 @property (nonatomic,strong) Resourse*  resource;
 @property (nonatomic,strong) NSString*  likeCount;
+@property (nonatomic,strong) NSMutableArray*  comments;
 @property (nonatomic,strong) NSString*  commentCount;
 @property (nonatomic,strong) NSString*  shareCount;
-@property (nonatomic,assign) BOOL       isLike;
+@property (nonatomic,strong) NSString*  isLike;
+@property (nonatomic,assign) BOOL       isExpend;
 
 @end

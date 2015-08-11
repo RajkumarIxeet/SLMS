@@ -7,30 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "CustomProfileView.h"
 
 @interface UpdateViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *cmtview;
 
-- (IBAction)btnLogout:(id)sender;
-//@property (strong, nonatomic) IBOutlet UITabBarItem *tbAssignment;
-//@property (strong, nonatomic) IBOutlet UITabBarItem *tbUpdate;
-//@property (strong, nonatomic) IBOutlet UITabBarItem *tbCourses;
-//@property (strong, nonatomic) IBOutlet UITabBarItem *tbNotification;
-//@property (strong, nonatomic) IBOutlet UITabBarItem *tbMore;
-@property (strong, nonatomic) IBOutlet UIButton *btnUpdates;
-@property (strong, nonatomic) IBOutlet UIButton *btnAssignment;
-@property (strong, nonatomic) IBOutlet UIButton *btnCourses;
-@property (strong, nonatomic) IBOutlet UIButton *btnMore;
-@property (strong, nonatomic) IBOutlet UIButton *btnNotification;
 
 @property (strong, nonatomic) IBOutlet UISearchBar *txtSearchBar;
 
 @property (strong, nonatomic) IBOutlet UITableView *tblViewContent;
-
-
-//- (IBAction)btnAssignmentClick:(id)sender;
-//- (IBAction)btnCourseClick:(id)sender;
-//- (IBAction)btnNotificationClick:(id)sender;
-//- (IBAction)btnUpdateClick:(id)sender;
-//- (IBAction)btnMoreClick:(id)sender;
+@property (assign , nonatomic)  NSInteger  step;
+@property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
+@property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
+@property (strong, nonatomic)  CustomProfileView *objCustom;
+- (IBAction)btnCommentDone:(id)sender;
+- (IBAction)btnCommentCancle:(id)sender;
+- (IBAction)btnProfileClick:(id)sender;
 @end

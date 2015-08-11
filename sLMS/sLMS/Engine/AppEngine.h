@@ -46,6 +46,12 @@
 -(void)getModuleDetail:(NSString*)userid  AndTextSearch:(NSString*)txtSearch AndSelectModule:(Module*)module AndSelectCourse:(Courses*)course success:(void (^)(NSDictionary *moduleDetail))success  failure:(void (^)(NSError *error))failure;
 
 
+#pragma Comment and Like on Update
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure;
+//Comment and Like on Resource
+-(void)setCommentOnUpdate:(NSString*)updateId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;
+-(void)setLikeOnUpdate:(NSString*)updateId  success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;
+
 #pragma Comment and Like on Resource
 //Comment and Like on Resource
 -(void)setCommentOnResource:(NSString*)resourceId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure;

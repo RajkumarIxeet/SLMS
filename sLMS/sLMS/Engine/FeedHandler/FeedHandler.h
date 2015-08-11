@@ -9,5 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface FeedHandler : NSObject
+//get Updates Data
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure;
+
+
+#pragma Comment and Like on Update
+//Comment and Like on Update
+-(void)setCommentOnUpdate:(NSString*)updateId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
+-(void)setLikeOnUpdate:(NSString*)updateId  success:(void (^)(BOOL logoutValue))success  failure:(void (^)(NSError *error))failure;
+
 
 @end

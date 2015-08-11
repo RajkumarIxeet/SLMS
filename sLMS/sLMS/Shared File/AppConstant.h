@@ -28,9 +28,15 @@
 #define CMT_ON_RESOURCE_URL APP_URL@"SLMS/rest/course/commentOnResourse"
 #define LIKE_ON_RESOURCE_URL(username,resourceid) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnResource/userName/%@/resourceId/%@",username,resourceid]
 
-#define CMT_ON_CMT_URL APP_URL@"/SLMS/rest/course/commentOnComment"
+#define CMT_ON_CMT_URL APP_URL@"SLMS/rest/course/commentOnComment"
 
 #define LIKE_ON_CMT_URL(useremail,commentId) [NSString stringWithFormat:APP_URL@"SLMS/rest/course/likeOnComment/userName/%@/commentId/%@",useremail,commentId]
+
+//Comment and like URL  Update
+#define GET_UPDATE_URL APP_URL@"SLMS/rest/common/getFeeds"
+
+#define CMT_ON_UPDATE_URL APP_URL@"SLMS/rest/update/commentOnUpdate"
+#define LIKE_ON_UPDATE_URL(username,updateId) [NSString stringWithFormat:APP_URL@"SLMS/rest/update/likeOnU/userName/%@/updateId/%@",username,updateId]
 
 #define key_Custom_DateFormate @"yyyy-MM-dd HH:mm:ss.S"
 #define key_loginId @"LoginId"
@@ -99,6 +105,7 @@ typedef enum ScrollDirection {
 typedef enum ActionOn {
     Resource,
     Comment,
+    UpdateOn,
    
 } ActionOn;
 #endif

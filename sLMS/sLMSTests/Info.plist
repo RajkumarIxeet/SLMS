@@ -15,12 +15,10 @@
 	<string>SLMS</string>
 	<key>FacebookAppID</key>
 	<string>1468398020137758</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.soclere.slms</string>
+	<string>com.scolere.growthcafe</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

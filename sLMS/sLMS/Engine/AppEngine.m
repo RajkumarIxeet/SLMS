@@ -11,6 +11,7 @@
 #import "UserDetail.h"
 #import "NSString+AESCrypt.h"
 #import "CourseHandler.h"
+#import "FeedHandler.h"
 
 @implementation AppEngine
 
@@ -202,6 +203,41 @@
     }failure:^(NSError *error){
         failure(error);
     }];
+}
+#pragma Comment and Like on Update
+//Comment and Like on Update
+-(void)setCommentOnUpdate:(NSString*)updateId  AndCommentText:(NSString*)txtComment success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed setCommentOnUpdate:updateId AndCommentText:txtComment success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+}
+-(void)setLikeOnUpdate:(NSString*)resourceId success:(void (^)(BOOL logoutValue))success   failure:(void (^)(NSError *error))failure
+{
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed setLikeOnUpdate:resourceId success:^(BOOL logoutValue){
+        
+        success(logoutValue);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+    
+}
+-(void)getUpdates:(NSString*)userid  AndTextSearch:(NSString*)txtSearch success:(void (^)(NSMutableArray *updates))success   failure:(void (^)(NSError *error))failure{
+
+    FeedHandler *feed=[[FeedHandler alloc] init];
+    [feed getUpdates:userid  AndTextSearch:txtSearch success:^(NSMutableArray *updates){
+        success(updates);
+        
+    }failure:^(NSError *error){
+        failure(error);
+    }];
+    
 }
 
 @end

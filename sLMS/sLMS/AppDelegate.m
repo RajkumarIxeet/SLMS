@@ -61,12 +61,13 @@
     //UIViewController *uvButton1 = [self.tabBarController.viewControllers objectAtIndex:0];
     viewController1.tabBarItem.title = @"Updates" ;
     viewController1.tabBarItem.image =[ [UIImage imageNamed:@"icn_updates-defaultn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
+      //[viewController1.tabBarItem setEnabled:NO];
     viewController1.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_updates-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
    // UIViewController *uvButton2 = [self.tabBarController.viewControllers objectAtIndex:1];
     viewController2.tabBarItem.title = @"Assignment" ;
+   // [viewController2.tabBarItem setEnabled:NO];
     viewController2.tabBarItem.image = [[UIImage imageNamed:@"icn_assignment-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController2.tabBarItem.selectedImage = [ [UIImage imageNamed:@"icn_assignment-selectedn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -77,12 +78,13 @@
     
    // UIViewController *uvButton4 = [self.tabBarController.viewControllers objectAtIndex:3];
     viewController4.tabBarItem.title = @"Notifications" ;
+      [viewController4.tabBarItem setEnabled:NO];
     viewController4.tabBarItem.image = [[UIImage imageNamed:@"icn_notification-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController4.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_notification-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
    // UIViewController *uvButton5 = [self.tabBarController.viewControllers objectAtIndex:4];
     viewController5.tabBarItem.title = @"More" ;
-    
+      [viewController5.tabBarItem setEnabled:NO];
     viewController5.tabBarItem.image = [[UIImage imageNamed:@"icn_more-defaultn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     viewController5.tabBarItem.selectedImage = [[UIImage imageNamed:@"icn_more-selectedn.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
