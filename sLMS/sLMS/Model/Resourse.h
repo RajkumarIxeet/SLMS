@@ -10,7 +10,7 @@
 
 @interface Resourse : NSObject
 
-@property (nonatomic,assign) int  islike;
+@property (nonatomic,strong) NSString  *islike;
 @property (nonatomic,strong) NSString * likeCounts;
 @property (nonatomic,strong) NSString * commentCounts;
 @property (nonatomic,strong) NSString* shareCounts;

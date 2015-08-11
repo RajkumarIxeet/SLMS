@@ -25,20 +25,17 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="400" id="N9l-3u-3Rr"/>
                         <constraint firstAttribute="height" constant="60" id="ymA-Wk-TmB">
-                            <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                         </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="N9l-3u-3Rr"/>
                             <exclude reference="ymA-Wk-TmB"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
                         <mask key="constraints">
-                            <include reference="N9l-3u-3Rr"/>
                             <include reference="ymA-Wk-TmB"/>
                         </mask>
                     </variation>
@@ -48,7 +45,7 @@
                     <color key="backgroundColor" red="0.72941176470588232" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="rVg-pc-E49">
-                            <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -76,7 +73,7 @@
                     <color key="backgroundColor" red="0.72941176470588232" green="0.0" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="2tg-SK-Ai5">
-                            <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                            <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                         </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -106,7 +103,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4IT-Lo-xIO" secondAttribute="bottom" constant="-2" id="1os-nx-nYt">
-                    <variation key="heightClass=regular-widthClass=compact" constant="-2"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
                 <constraint firstItem="B3e-8s-orZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="37K-xU-ZVv"/>
                 <constraint firstAttribute="centerX" secondItem="iqb-9u-Wn6" secondAttribute="centerX" id="59N-66-RhX"/>

@@ -20,13 +20,14 @@
 @property (nonatomic,strong) NSString* userFBID;
 @property (nonatomic,strong) NSString* schoolId;
 @property (nonatomic,strong) NSString* schoolName;
-
 @property (nonatomic,strong) NSString* address;
 @property (nonatomic,strong) NSString* classId;
-
 @property (nonatomic,strong) NSString* className;
 @property (nonatomic,strong) NSString* adminEmailId;
 @property (nonatomic,strong) NSString* homeRoomId;
 @property (nonatomic,strong) NSString* homeRoomName;
+
+@property (nonatomic,strong) NSString* userImage;
+@property (nonatomic,strong) NSData* userImageData;
 @end
 

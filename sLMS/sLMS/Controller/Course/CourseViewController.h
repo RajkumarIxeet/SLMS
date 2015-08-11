@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CustomProfileView.h"
 @interface CourseViewController : UIViewController
 {
     IBOutlet UITableView *tableViewCourse;
@@ -18,7 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnMore;
 @property (strong, nonatomic) IBOutlet UIButton *btnNotification;
 @property (strong, nonatomic) IBOutlet UISearchBar *txtSearchBar;
-
+@property (strong, nonatomic)  CustomProfileView *objCustom;
 
 
 - (IBAction)btnMenuClick:(id)sender;

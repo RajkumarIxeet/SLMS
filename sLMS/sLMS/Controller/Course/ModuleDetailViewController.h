@@ -12,7 +12,7 @@
 #import "Comments.h"
 #import "ScrollViewContainer.h"
 #import <MediaPlayer/MediaPlayer.h>
-
+#import "CustomProfileView.h"
 @interface ModuleDetailViewController : ViewController<UIScrollViewDelegate>{
 IBOutlet UITableView *tblViewContent;
 
@@ -32,7 +32,7 @@ IBOutlet UITableView *tblViewContent;
 @property (strong, nonatomic) IBOutlet ScrollViewContainer *scollViewContainer;
 @property (strong, nonatomic) IBOutlet UITextView *txtViewCMT;
 @property (strong, nonatomic) IBOutlet MPMoviePlayerController *moviePlayer;
-
+@property (strong, nonatomic)  CustomProfileView *objCustom;
 - (IBAction)btnBackClicked:(id)sender;
 
 //- (IBAction)btnAssignmentClick:(id)sender;

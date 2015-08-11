@@ -14,6 +14,7 @@
 #import "AppEngine.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "VedioPlayViewController.h"
+#import "LoginViewController.h"
 
 @interface ModuleDetailViewController ()
 {
@@ -40,6 +41,7 @@
 - (void)loadVisiblePages;
 - (void)loadPage:(NSInteger)page;
 - (void)purgePage:(NSInteger)page;
+- (IBAction)btnProfileClick:(id)sender;
 
 @end
 
@@ -49,7 +51,7 @@
 @synthesize pageControl = _pageControl;
 @synthesize pageViews = _pageViews;
 @synthesize pageImages = _pageImages;
-@synthesize step,title,txtViewCMT;
+@synthesize step,title,txtViewCMT,objCustom;;
 @synthesize moviePlayer;
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,12 +78,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillEnterFullscreenNotification:) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerWillExitFullscreenNotification:) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    // Do any additional setup after loading the view from its nib.
+    objCustom = [[CustomProfileView alloc] init];
+    NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
+    objCustom.center = CGPointMake(200, 400);
+    CGRect profileFrame=objCustom.view.frame ;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    profileFrame.size.height=screenHeight-50;
+    profileFrame.size.width=screenWidth;//200;
+    objCustom.view.frame=profileFrame;
+   [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -91,11 +99,26 @@
     step=0;
     self.lastContentOffsetOfTable=tblViewContent.contentOffset.y;;
     searchText=@"";
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
+    
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [objCustom.view addGestureRecognizer:recognizer];    //set Profile
+    [objCustom setUserProfile];
+    
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 -(void)dismissKeyboard {
     [txtSearchBar resignFirstResponder];
     [txtViewCMT resignFirstResponder];
     isSearching=NO;
+    txtViewCMT.text=@"";
+    step=0;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -556,7 +579,7 @@
         }
         customView.lblStartedon.text=resource.startedOn;
         customView.lblCompletedon.text=resource.completedOn;
-        if(resource.islike)
+        if([resource.islike isEqualToString:@"1"])
         {
             customView.btnLike.selected=YES;
             [customView.btnLike setTitle:resource.likeCounts forState:UIControlStateSelected];
@@ -676,6 +699,10 @@
         [self.pageViews replaceObjectAtIndex:page withObject:[NSNull null]];
     }
 }
+
+- (IBAction)btnProfileClick:(id)sender {
+    [self fadeInAnimation:self.view];
+}
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if(decelerate==YES)
@@ -742,7 +769,7 @@
                     [self.pageViews addObject:[NSNull null]];
                 }
                 CGSize pagesScrollViewSize = self.scrollView.frame.size;
-                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height+10);
+                self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * [contentList count], pagesScrollViewSize.height);
                 [self loadVisiblePages];
                 //button.layer.shouldRasterize = YES;
             }else {
@@ -932,7 +959,7 @@
             }
         }
         [cell.btnPlay  addTarget:self action:@selector(btnPlayResourceClick:) forControlEvents:UIControlEventTouchUpInside];
-        if(selectedResource.islike==1)
+        if([selectedResource.islike isEqualToString:@"1"])
         {
             cell.btnLike.selected=YES;
              [cell.btnLike setTitle:selectedResource.likeCounts forState:UIControlStateSelected];
@@ -993,7 +1020,7 @@
              [cell.btnCommentedBy setImage:[UIImage imageWithData:comment.commentByImageData] forState:UIControlStateNormal];
             }
         }
-        if(comment.isLike==1)
+        if([comment.isLike  isEqualToString:@"1"])
         {
             cell.btnLike.selected=YES;
             [cell.btnLike setTitle:comment.likeCounts forState:UIControlStateSelected];
@@ -1469,6 +1496,74 @@
 
 - (void)textViewDidChangeSelection:(UITextView *)textView
 {
+    
+}
+
+
+-(void)fadeInAnimation:(UIView *)aView {
+    
+    
+    [CATransaction begin];
+    CATransition *animation = [CATransition animation];
+    // [self.view addSubview:objCustom.view];
+    [animation setDuration:0.5];
+    
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [[self.view layer] addAnimation:animation forKey:nil];
+    
+    [self.view addSubview:objCustom.view];
+    [CATransaction commit];
+}
+
+
+//code for gesture
+
+
+-(void)fadeInAnimation1:(UIView *)aView {
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.5];
+    [CATransaction setCompletionBlock:^{
+    }];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromLeft];
+    
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [[self.view layer] addAnimation:animation forKey:nil];
+    
+    
+}
+- (void)swipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    [self fadeInAnimation1:self.view];
+    [objCustom.view removeFromSuperview];
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        // [self.view removeFromSuperview];
+        // self.objCustom.view.hidden = NO;
+        
+        
+    }
+}
+- (IBAction)btnLogoutClick:(id)sender {
+    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
+    {
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [FBSession.activeSession close];
+        [FBSession setActiveSession:nil];
+        
+    }
+    [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+    [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    [self.tabBarController.tabBar setHidden:YES];
+    LoginViewController *viewCont= [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:viewCont animated:YES];
     
 }
 

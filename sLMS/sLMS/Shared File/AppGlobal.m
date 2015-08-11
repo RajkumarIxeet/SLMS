@@ -13,7 +13,7 @@
 
 //Show warning message
 +(void)showAlertWithMessage:(NSString*)msg title:(NSString*)title{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
@@ -487,5 +487,6 @@
    // yourLabel.frame = newFrame;
     return expectedLabelSize;
 }
+
 @end
 

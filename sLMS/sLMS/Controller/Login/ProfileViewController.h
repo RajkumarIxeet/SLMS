@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FacebookSDK/FacebookSDK.h>
 @interface ProfileViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIImageView *imgUser;
 @property (strong, nonatomic) IBOutlet UILabel *lblFirstName;
@@ -19,11 +18,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblHomeRoom;
 @property (strong, nonatomic) IBOutlet UIButton *btnLogout;
 
-@property (strong, nonatomic) IBOutlet FBLoginView *fbview;
-- (IBAction)btnAssignmentClick:(id)sender;
-- (IBAction)btnCourseClick:(id)sender;
-- (IBAction)btnNotificationClick:(id)sender;
-- (IBAction)btnUpdateClick:(id)sender;
-- (IBAction)btnMoreClick:(id)sender;
-- (IBAction)btnLogoutClick:(id)sender;
+@property (strong, nonatomic) IBOutlet NSString *userid;
 @end

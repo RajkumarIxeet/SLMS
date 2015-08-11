@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:sLMS.xcodeproj">
+      location = "self:/Users/mayank/Documents/iXeet/Projects/SaleLMS/SLMS/sLMS/Growth Cafe.xcodeproj">
    </FileRef>
 </Workspace>

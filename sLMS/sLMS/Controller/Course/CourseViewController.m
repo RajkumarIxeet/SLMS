@@ -13,6 +13,7 @@
 #import "Module.h"
 #import "ModuleDetailViewController.h"
 #import "ProfileViewController.h"
+#import "LoginViewController.h"
 @interface CourseViewController ()
 {
     NSMutableArray *coursesList;
@@ -24,7 +25,7 @@
 @end
 
 @implementation CourseViewController
-@synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar;
+@synthesize btnAssignment,btnCourses,btnMore,btnNotification,btnUpdates,txtSearchBar,objCustom;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -72,20 +73,39 @@
 
      [self  getCourses:@""];
     btnCourses.selected=YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
-    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
-                                          initWithTarget:self action:@selector(handleLongPress:)];
-    lpgr.minimumPressDuration = 0.2; //seconds
-    lpgr.delegate = self;
-    [tableViewCourse  addGestureRecognizer:lpgr];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self
+//                                   action:@selector(dismissKeyboard)];
+//    
+//    [self.view addGestureRecognizer:tap];
+    UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(dismissKeyboard)];
+    tap.minimumPressDuration = 0.2; //seconds
+ [self.view addGestureRecognizer:tap];
+    //    lpgr.delegate = self;
+   // [tableViewCourse  addGestureRecognizer:lpgr];
   
     // Do any additional setup after loading the view from its nib.
-   
+    objCustom = [[CustomProfileView alloc] init];
+    NSLog(@"%f,%f",self.view.frame.size.height,self.view.frame.size.width);
+    objCustom.center = CGPointMake(200, 400);
+    CGRect frame1=objCustom.view.frame ;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    frame1.size.height=screenHeight-50;
+    frame1.size.width=screenWidth;//200;
+    objCustom.view.frame=frame1;
+       [objCustom.btnLogout  addTarget:self action:@selector(btnLogoutClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+-(void)viewWillAppear:(BOOL)animated    {
     
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRecognizer:)];
+    
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [objCustom.view addGestureRecognizer:recognizer];    //set Profile
+    [objCustom setUserProfile];
+
 }
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
@@ -95,9 +115,9 @@
     if (indexPath == nil) {
         NSLog(@"long press on table view but not on a row");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"long press on table view at row %d", indexPath.row);
+        NSLog(@"long press on table view at row %ld", indexPath.row);
     } else {
-        NSLog(@"gestureRecognizer.state = %d", gestureRecognizer.state);
+        NSLog(@"gestureRecognizer.state = %ld", gestureRecognizer.state);
     }
 }
 
@@ -140,8 +160,9 @@
 //}
 #pragma mark - tab bar Action
 - (IBAction)btnMenuClick:(id)sender {
-    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
-    [self.navigationController pushViewController:profileViewController animated:YES];
+//    ProfileViewController *profileViewController=[[ProfileViewController alloc]init];
+//    [self.navigationController pushViewController:profileViewController animated:YES];
+    [self fadeInAnimation:self.view];
 }
 
 //- (IBAction)btnAssignmentClick:(id)sender {
@@ -247,7 +268,7 @@
 {
     NSLog(@"You are in: %s", __FUNCTION__);
     //return [coursesList count] ; // sum of title and detail content rows
-     int rowsCount=[coursesList count] + ((currentExpandedIndex > -1) ? [[moduleArray objectAtIndex:currentExpandedIndex] count] : 0);
+     int rowsCount=(int)[coursesList count] + ((int)(currentExpandedIndex > -1) ? (int)[[moduleArray objectAtIndex:currentExpandedIndex] count] : 0);
      NSLog(@"You are in: %s row count=%d", __FUNCTION__,rowsCount);
     return  rowsCount;
 }
@@ -331,7 +352,7 @@
         NSString *monthName = [[df monthSymbols] objectAtIndex:(components.month-1)];
         
        
-        [cell.lblDate setText: [NSString stringWithFormat:@"%@ %d",monthName,components.day]];
+        [cell.lblDate setText: [NSString stringWithFormat:@"%@ %ld",monthName,components.day]];
         
         [cell.lblModuleName setText: module.moduleName];
         [cell.progressBarModule setProgress:[module.completedPercentStatus floatValue]* stepSize animated:YES  ];
@@ -450,5 +471,72 @@ else {
     }
     
     return YES;
+}
+
+
+-(void)fadeInAnimation:(UIView *)aView {
+    
+    
+    [CATransaction begin];
+    CATransition *animation = [CATransition animation];
+    // [self.view addSubview:objCustom.view];
+    [animation setDuration:0.5];
+    
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromRight];
+    
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [[self.view layer] addAnimation:animation forKey:nil];
+    
+    [self.view addSubview:objCustom.view];
+    [CATransaction commit];
+}
+
+
+//code for gesture
+
+
+-(void)fadeInAnimation1:(UIView *)aView {
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.5];
+    [CATransaction setCompletionBlock:^{
+    }];
+    [animation setType:kCATransitionPush];
+    [animation setSubtype:kCATransitionFromLeft];
+    
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
+    [[self.view layer] addAnimation:animation forKey:nil];
+    
+    
+}
+- (void)swipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    
+    [self fadeInAnimation1:self.view];
+    [objCustom.view removeFromSuperview];
+    
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft)
+    {
+        // [self.view removeFromSuperview];
+        // self.objCustom.view.hidden = NO;
+        
+        
+    }
+}
+- (IBAction)btnLogoutClick:(id)sender {
+    if(  [AppSingleton sharedInstance].isUserFBLoggedIn==YES)
+    {
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [FBSession.activeSession close];
+        [FBSession setActiveSession:nil];
+        
+    }
+    [AppSingleton sharedInstance].isUserFBLoggedIn=NO;
+    [AppSingleton sharedInstance].isUserLoggedIn=NO;
+    LoginViewController *viewCont= [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:viewCont animated:YES];
+    
 }
 @end

@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="196" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="198" id="KGk-i7-Jjw" customClass="CommentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -327,7 +327,7 @@
                 <outlet property="lblCmtText" destination="mF9-K0-drP" id="dSR-j2-77Q"/>
                 <outlet property="lblRelatedVideo" destination="oES-EN-JZw" id="qpd-HE-HGQ"/>
             </connections>
-            <point key="canvasLocation" x="243" y="126"/>
+            <point key="canvasLocation" x="243" y="127"/>
         </tableViewCell>
     </objects>
     <resources>

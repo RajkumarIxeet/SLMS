@@ -108,7 +108,7 @@
                 resource.shareCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"shareCounts"]];
                 resource.commentCounts=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"commentCounts"]];
                 resource.resourceId=[dicContent objectForKey:@"resourceId"];
-                resource.islike=(int)[dicContent objectForKey:@"isLiked"];
+                resource.islike=[NSString stringWithFormat:@"%@",[dicContent objectForKey:@"isLiked"]];
                 resource.resourceImageUrl=[dicContent objectForKey:@"thumbImg"];
                 resource.resourceDesc=[dicContent objectForKey:@"resourceDesc"];
                 resource.resourceUrl=[dicContent objectForKey:@"resourceUrl"];
@@ -130,7 +130,7 @@
                     comment.commentBy=[dicComment objectForKey:@"commentBy"];
                     //comment.commentByImage=[dicComment objectForKey:@"commentByImage"];
                     comment.commentTxt=[dicComment objectForKey:@"commentTxt"];
-                    comment.isLike=(int)[dicComment objectForKey:@"isLiked"];
+                    comment.isLike= [NSString stringWithFormat:@"%@",[dicComment objectForKey:@"isLiked"]];
                     comment.commentDate=[dicComment objectForKey:@"commentDate"];
                     [arrayComments addObject:comment];
                 }
@@ -283,7 +283,7 @@ manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSDictionary *parameters = @{@"userName":[AppSingleton sharedInstance].userDetail.userEmail,@"commentId":commentId,@"commentText":txtComment                                 };
 
 
-[manager POST:CMT_ON_RESOURCE_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+[manager POST:CMT_ON_CMT_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
     
     
